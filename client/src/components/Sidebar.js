@@ -45,10 +45,13 @@ const Sidebar = () => {
 };
 
 const Wrapper = styled.div`
-    width: 200px;
+    min-width: 200px;
     height: 100vh;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
 `;
 
 const SideBarParentWrapper = styled.div`
