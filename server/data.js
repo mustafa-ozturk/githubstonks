@@ -1,4 +1,4 @@
-const Data = {
+const githubData = {
     react: {
         stars: 169000,
         forks: 34000,
@@ -21,3 +21,11 @@ const Data = {
         contributors: 399,
     },
 };
+
+const totalShares = {
+    react: 0,
+    angular: 0,
+    vue: 0,
+};
+
+module.exports = { githubData, totalShares };
