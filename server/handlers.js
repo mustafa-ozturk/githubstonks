@@ -7,7 +7,7 @@ const {
     percentIncreaseFromInitialPrice,
 } = require("./utils");
 
-buyOrSellShares("buy", "react", 10000);
+// buyOrSellShares("buy", "react", 10000);
 
 console.log(
     "React initial price: $",

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-
+import Content from "./components/Content";
 const App = () => {
     return (
         <>
@@ -11,15 +11,15 @@ const App = () => {
                 <Sidebar />
                 <NavAndContentContainer>
                     <Navbar />
-                    <Content>
+                    <ContentWrapper>
                         <Router>
                             <Switch>
                                 <Route exact path="/">
-                                    <p>test</p>
+                                    <Content />
                                 </Route>
                             </Switch>
                         </Router>
-                    </Content>
+                    </ContentWrapper>
                 </NavAndContentContainer>
             </Wrapper>
         </>
@@ -34,7 +34,7 @@ const NavAndContentContainer = styled.div`
     width: 100%;
 `;
 
-const Content = styled.div`
+const ContentWrapper = styled.div`
     margin-left: 201px;
     margin-top: 50px;
 `;
