@@ -32,7 +32,7 @@ const Wrapper = styled.div`
     width: 280px;
     height: 120px;
     padding: 20px;
-    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    box-shadow: 0 2px 1px -5px rgb(0 0 0 / 15%), 0 1px 1px 0 rgb(0 0 0 / 14%),
         0 1px 3px 0 rgb(0 0 0 / 12%);
     &:hover {
         background-color: rgba(0, 0, 0, 0.03);
