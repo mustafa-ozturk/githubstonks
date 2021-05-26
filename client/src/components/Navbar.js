@@ -1,10 +1,11 @@
 import react from "react";
 import styled from "styled-components";
-
 const Navbar = () => {
     return (
         <Wrapper>
-            <NavBarItem className="active">Home</NavBarItem>
+            <NavBarItem className="active" href="/">
+                Home
+            </NavBarItem>
             <NavBarItem>Portfolio</NavBarItem>
         </Wrapper>
     );
@@ -21,12 +22,16 @@ const Wrapper = styled.div`
     margin-left: 201px;
 `;
 
-const NavBarItem = styled.span`
+const NavBarItem = styled.a`
     margin-right: 14px;
-
-    &.active {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: black;
+    &:active {
+        color: rgb(14, 184, 239);
     }
+    /* &.active {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    } */
 `;
 
 export default Navbar;
