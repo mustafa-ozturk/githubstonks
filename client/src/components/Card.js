@@ -1,6 +1,9 @@
 import react from "react";
 import styled from "styled-components";
 
+import { RiStarSLine } from "react-icons/ri";
+import { AiOutlineBranches } from "react-icons/ai";
+import { BiGitCommit } from "react-icons/bi";
 const Card = () => {
     // add proper icons
     return (
@@ -18,9 +21,24 @@ const Card = () => {
                 </IncreaseWrapper>
             </PriceIncreasePast>
             <StatWrapper>
-                <Statbox>170k stars</Statbox>
-                <Statbox>34k forks</Statbox>
-                <Statbox>14k commits</Statbox>
+                <Statbox>
+                    170k
+                    <StatIcons>
+                        <RiStarSLine />
+                    </StatIcons>
+                </Statbox>
+                <Statbox>
+                    34k
+                    <StatIcons>
+                        <AiOutlineBranches />
+                    </StatIcons>
+                </Statbox>
+                <Statbox>
+                    14k
+                    <StatIcons>
+                        <BiGitCommit />
+                    </StatIcons>
+                </Statbox>
             </StatWrapper>
         </Wrapper>
     );
@@ -29,13 +47,13 @@ const Card = () => {
 const Wrapper = styled.div`
     margin: 1rem;
     border-radius: 7px;
-    width: 280px;
-    height: 120px;
-    padding: 20px;
-    box-shadow: 0 2px 1px -5px rgb(0 0 0 / 15%), 0 1px 1px 0 rgb(0 0 0 / 14%),
-        0 1px 3px 0 rgb(0 0 0 / 12%);
+    width: 300px;
+    height: 140px;
+    padding: 24px 32px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
+        0px 1px 3px rgba(0, 0, 0, 0.2);
     &:hover {
-        background-color: rgba(0, 0, 0, 0.03);
+        background-color: rgba(0, 0, 0, 0.05);
         cursor: pointer;
     }
 `;
@@ -43,8 +61,8 @@ const Wrapper = styled.div`
 const IconNameSymbol = styled.div`
     display: flex;
     position: relative;
-    right: 9px;
-    margin-bottom: 5px;
+    right: 10px;
+    margin-bottom: 10px;
 `;
 
 const StockIcon = styled.img`
@@ -56,8 +74,9 @@ const StockName = styled.span`
 `;
 const StockSymbol = styled.span`
     font-size: 1.5rem;
-    margin-left: 1rem;
-    font-weight: 500;
+    position: relative;
+    left: 160px;
+    color: rgba(0, 0, 0, 0.5);
 `;
 
 const Price = styled.p`
@@ -80,7 +99,7 @@ const Past24 = styled.span`
 `;
 
 const PriceIncreasePast = styled.div`
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 `;
 
 const StatWrapper = styled.div`
@@ -90,8 +109,18 @@ const StatWrapper = styled.div`
 
 const Statbox = styled.div`
     background-color: rgba(0, 0, 0, 0.1);
-    padding: 5px;
+    padding: 2px 10px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const StatIcons = styled.span`
+    font-size: 1.5rem;
+    position: relative;
+    top: 2px;
+    margin-left: 0.5rem;
 `;
 
 export default Card;
