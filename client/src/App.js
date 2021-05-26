@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import Content from "./components/Content";
+import CardContent from "./components/CardContent";
+import StonkContent from "./components/StonkContent";
 const App = () => {
     return (
         <>
@@ -15,7 +16,10 @@ const App = () => {
                         <Router>
                             <Switch>
                                 <Route exact path="/">
-                                    <Content />
+                                    <CardContent />
+                                </Route>
+                                <Route exact path="/stonk/:name">
+                                    <StonkContent />
                                 </Route>
                             </Switch>
                         </Router>

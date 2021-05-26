@@ -1,7 +1,7 @@
 import react from "react";
 import styled from "styled-components";
 import Card from "./Card";
-const Content = () => {
+const CardContent = () => {
     return (
         <Wrapper>
             <Card />
@@ -31,4 +31,4 @@ const Wrapper = styled.div`
     justify-content: center;
 `;
 
-export default Content;
+export default CardContent;

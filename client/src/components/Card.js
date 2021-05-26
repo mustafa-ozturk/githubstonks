@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
+
 const Card = () => {
     // add proper icons
     return (
@@ -16,7 +17,7 @@ const Card = () => {
             <PriceIncreasePast>
                 <Price>$420.00</Price>
                 <IncreaseWrapper>
-                    <Increase>$120.00 (40%)</Increase>
+                    <Increase>+$120.00 (40%)</Increase>
                     <Past24>past 24h</Past24>
                 </IncreaseWrapper>
             </PriceIncreasePast>
