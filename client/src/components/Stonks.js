@@ -47,11 +47,11 @@ const Stonks = () => {
                 <Chart />
                 <History>
                     <span className={"inactive"}>1H</span>
-                    <span className={"inactive"}>24H</span>
+                    <span className={"active"}>24H</span>
                     <span className={"inactive"}>1W</span>
                     <span className={"inactive"}>1M</span>
                     <span className={"inactive"}>1Y</span>
-                    <span className={"active"}>ALL</span>
+                    <span className={"inactive"}>ALL</span>
                 </History>
             </Container>
         </Wrapper>
@@ -134,7 +134,7 @@ const Statbox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 1rem;
+    margin-left: 24px;
 `;
 
 const StatIcons = styled.span`

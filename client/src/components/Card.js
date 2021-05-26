@@ -57,6 +57,9 @@ const Wrapper = styled.div`
         background-color: rgba(0, 0, 0, 0.05);
         cursor: pointer;
     }
+    &:active {
+        background-color: rgb(14, 184, 239, 0.05);
+    }
 `;
 
 const IconNameSymbol = styled.div`

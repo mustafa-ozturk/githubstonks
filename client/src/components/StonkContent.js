@@ -1,10 +1,12 @@
 import react from "react";
 import styled from "styled-components";
 import Stonks from "./Stonks";
+import Exchange from "./Exchange";
 const StonkContent = () => {
     return (
         <Wrapper>
             <Stonks />
+            <Exchange />
         </Wrapper>
     );
 };
