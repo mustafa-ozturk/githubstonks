@@ -38,7 +38,7 @@ const Account = () => {
 };
 
 const Wrapper = styled.div`
-    padding: 20px 20px 20px 40px;
+    padding: 25px 40px 20px 40px;
     & > div {
         padding: 1rem;
         box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14),
