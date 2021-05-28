@@ -6,7 +6,7 @@ const Navbar = () => {
             <NavBarItem className="active" href="/">
                 Home
             </NavBarItem>
-            <NavBarItem>Portfolio</NavBarItem>
+            <NavBarItem href="/account">Acount</NavBarItem>
         </Wrapper>
     );
 };

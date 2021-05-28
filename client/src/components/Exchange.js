@@ -18,9 +18,15 @@ const Exchange = () => {
             </DivSellContainer>
             <Input type="number" placeholder="0" />
             <CostContainer>
-                <p>Market Price: $420</p>
-                <p>Fee (0.10%): $420</p>
-                <p>Total Cost: $4,620</p>
+                <p>
+                    <CostLabel>Market Price</CostLabel> $420
+                </p>
+                <p>
+                    <CostLabel>Fee (0.10%)</CostLabel> $420
+                </p>
+                <p>
+                    <CostLabel>Total Cost</CostLabel> $4,620
+                </p>
             </CostContainer>
             <ButtonWrapper>
                 <Button>BUY RCT</Button>
@@ -62,7 +68,7 @@ const Input = styled.input`
 `;
 
 const ButtonWrapper = styled.div`
-    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 14px;
 `;
 
@@ -84,6 +90,10 @@ const CostContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+`;
+
+const CostLabel = styled.div`
+    color: rgba(0, 0, 0, 0.6);
 `;
 
 export default Exchange;
