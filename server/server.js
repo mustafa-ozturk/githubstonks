@@ -10,7 +10,7 @@ app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use(express.json());
 app.get("/test", handleTest);
 
-app.get("/api/cards", handleCards);
+app.get("/api/stonkData", handleCards);
 
 app.get("*", (req, res) => {
     res.status(404).json({

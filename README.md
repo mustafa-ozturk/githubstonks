@@ -18,7 +18,7 @@ There is unlimited amount of shares (might change)
 
 ## Api doc
 
-Get - /api/cards
+Get - /api/stonkInfo
 
 Response:
 Logo

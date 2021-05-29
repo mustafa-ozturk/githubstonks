@@ -11,7 +11,7 @@ const App = () => {
     const [cardData, setCardData] = useState([]);
 
     useEffect(() => {
-        fetch("/api/cards")
+        fetch("/api/stonkData")
             .then((response) => response.json())
             .then(({ data }) => setCardData(data));
     }, []);
