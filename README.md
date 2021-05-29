@@ -21,6 +21,8 @@ There is unlimited amount of shares (might change)
 Get - /api/stonkInfo
 
 Response:
+
+```json
 Logo
 Name
 Symbol
@@ -30,3 +32,4 @@ Increase percent
 stars
 forks
 commits
+```

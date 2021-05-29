@@ -5,7 +5,7 @@ import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import Chart from "./Chart";
-
+import Exchange from "./Exchange";
 function abbreviateNumber(value) {
     let newValue = value;
     const suffixes = ["", "K", "M", "B", "T"];
@@ -29,74 +29,85 @@ const Stonks = ({ cardData }) => {
                 if (elem.name === stonkname) {
                     return (
                         <Wrapper key={index}>
-                            <TitleStatWrapper>
-                                <IconNameSymbol>
-                                    <StockIcon src={elem.logo} />
-                                    <StockName>{elem.name}</StockName>
-                                    <StockSymbol>({elem.symbol})</StockSymbol>
-                                </IconNameSymbol>
-                                <StatWrapper>
-                                    <Statbox>
-                                        {abbreviateNumber(elem.stars)}
-                                        <StatIcons>
-                                            <RiStarSLine />
-                                        </StatIcons>
-                                    </Statbox>
-                                    <Statbox>
-                                        {abbreviateNumber(elem.forks)}
-                                        <StatIcons>
-                                            <AiOutlineBranches />
-                                        </StatIcons>
-                                    </Statbox>
-                                    <Statbox>
-                                        {abbreviateNumber(elem.commits)}
-                                        <StatIcons>
-                                            <BiGitCommit />
-                                        </StatIcons>
-                                    </Statbox>
-                                </StatWrapper>
-                            </TitleStatWrapper>
-                            <Container>
-                                <div>
-                                    <PriceIncreasePast>
-                                        <Price>
-                                            ${abbreviateNumber(elem.price)}
-                                        </Price>
-                                        <IncreaseWrapper>
-                                            <Increase>
-                                                +$
-                                                {abbreviateNumber(
-                                                    elem.increasePrice
-                                                )}
-                                                (
-                                                {abbreviateNumber(
-                                                    elem.increasePercent
-                                                )}
-                                                %)
-                                            </Increase>
-                                            <Past24>past 24h</Past24>
-                                        </IncreaseWrapper>
-                                    </PriceIncreasePast>
-                                </div>
-                                <Chart />
-                                <History>
-                                    <span className={"inactive"}>1H</span>
-                                    <span className={"inactive"}>24H</span>
-                                    <span className={"inactive"}>1W</span>
-                                    <span className={"inactive"}>1M</span>
-                                    <span className={"inactive"}>1Y</span>
-                                    <span className={"active"}>ALL</span>
-                                </History>
-                            </Container>
+                            <div>
+                                <TitleStatWrapper>
+                                    <IconNameSymbol>
+                                        <StockIcon src={elem.logo} />
+                                        <StockName>{elem.name}</StockName>
+                                        <StockSymbol>
+                                            ({elem.symbol})
+                                        </StockSymbol>
+                                    </IconNameSymbol>
+                                    <StatWrapper>
+                                        <Statbox>
+                                            {abbreviateNumber(elem.stars)}
+                                            <StatIcons>
+                                                <RiStarSLine />
+                                            </StatIcons>
+                                        </Statbox>
+                                        <Statbox>
+                                            {abbreviateNumber(elem.forks)}
+                                            <StatIcons>
+                                                <AiOutlineBranches />
+                                            </StatIcons>
+                                        </Statbox>
+                                        <Statbox>
+                                            {abbreviateNumber(elem.commits)}
+                                            <StatIcons>
+                                                <BiGitCommit />
+                                            </StatIcons>
+                                        </Statbox>
+                                    </StatWrapper>
+                                </TitleStatWrapper>
+                                <Container>
+                                    <div>
+                                        <PriceIncreasePast>
+                                            <Price>
+                                                ${abbreviateNumber(elem.price)}
+                                            </Price>
+                                            <IncreaseWrapper>
+                                                <Increase>
+                                                    +$
+                                                    {abbreviateNumber(
+                                                        elem.increasePrice
+                                                    )}
+                                                    (
+                                                    {abbreviateNumber(
+                                                        elem.increasePercent
+                                                    )}
+                                                    %)
+                                                </Increase>
+                                                <Past24>past 24h</Past24>
+                                            </IncreaseWrapper>
+                                        </PriceIncreasePast>
+                                    </div>
+                                    <Chart />
+                                    <History>
+                                        <span className={"inactive"}>1H</span>
+                                        <span className={"inactive"}>24H</span>
+                                        <span className={"inactive"}>1W</span>
+                                        <span className={"inactive"}>1M</span>
+                                        <span className={"inactive"}>1Y</span>
+                                        <span className={"active"}>ALL</span>
+                                    </History>
+                                </Container>
+                            </div>
+                            <Exchange />
                         </Wrapper>
                     );
                 }
+                return null;
             })}
         </>
     );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    padding: 1.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
 
 const Container = styled.div`
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
@@ -129,7 +140,8 @@ const StockName = styled.span`
 const StockSymbol = styled.span`
     font-size: 18px;
     position: relative;
-    left: 10px;
+    top: 5px;
+    left: 5px;
     color: rgba(0, 0, 0, 0.5);
 `;
 

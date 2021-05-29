@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { RiStarSLine } from "react-icons/ri";
@@ -74,7 +74,7 @@ const Wrapper = styled.div`
     margin: 1rem;
     border-radius: 7px;
     width: 300px;
-    height: 140px;
+    height: 160px;
     padding: 24px 32px;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
         0px 1px 3px rgba(0, 0, 0, 0.2);
@@ -115,6 +115,7 @@ const StockSymbol = styled.span`
 
 const Price = styled.p`
     margin: 0;
+    font-size: 1.5rem;
     font-weight: 500;
 `;
 const IncreaseWrapper = styled.div`
