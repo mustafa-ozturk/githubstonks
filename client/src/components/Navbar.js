@@ -1,12 +1,30 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 const Navbar = () => {
     return (
         <Wrapper>
-            <NavBarItem className="active" href="/">
+            <NavBarItem
+                className="active"
+                exact
+                to="/"
+                activeStyle={{
+                    fontWeight: "bold",
+                    color: "rgb(14, 184, 239)",
+                }}
+            >
                 Home
             </NavBarItem>
-            <NavBarItem href="/account">Acount</NavBarItem>
+            <NavBarItem
+                exact
+                to="/account"
+                activeStyle={{
+                    fontWeight: "bold",
+                    color: "rgb(14, 184, 239)",
+                }}
+            >
+                Acount
+            </NavBarItem>
         </Wrapper>
     );
 };
@@ -20,9 +38,10 @@ const Wrapper = styled.div`
     position: fixed;
     width: 100%;
     margin-left: 201px;
+    z-index: 10;
 `;
 
-const NavBarItem = styled.a`
+const NavBarItem = styled(NavLink)`
     margin-right: 14px;
     text-decoration: none;
     color: black;

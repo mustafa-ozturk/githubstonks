@@ -18,11 +18,11 @@ const App = () => {
     return (
         <>
             <Wrapper>
-                <Sidebar />
-                <NavAndContentContainer>
-                    <Navbar />
-                    <ContentWrapper>
-                        <Router>
+                <Router>
+                    <Sidebar />
+                    <NavAndContentContainer>
+                        <Navbar />
+                        <ContentWrapper>
                             <Switch>
                                 <Route exact path="/">
                                     <CardContent cardData={cardData} />
@@ -34,9 +34,9 @@ const App = () => {
                                     <Account />
                                 </Route>
                             </Switch>
-                        </Router>
-                    </ContentWrapper>
-                </NavAndContentContainer>
+                        </ContentWrapper>
+                    </NavAndContentContainer>
+                </Router>
             </Wrapper>
         </>
     );
