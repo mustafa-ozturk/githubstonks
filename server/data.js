@@ -2,7 +2,7 @@ const stocknames = ["react", "angular", "vue"];
 
 const githubData = {
     react: {
-        logo: "assets/react.svg",
+        logo: "/assets/react.svg",
         name: "React",
         symbol: "RCT",
         increase: 0,
@@ -11,7 +11,7 @@ const githubData = {
         commits: 14173,
     },
     angular: {
-        logo: "assets/angular.svg",
+        logo: "/assets/angular.svg",
         name: "Angular",
         symbol: "AGR",
         increase: 0,
@@ -20,7 +20,7 @@ const githubData = {
         commits: 21010,
     },
     vue: {
-        logo: "assets/vue.svg",
+        logo: "/assets/vue.svg",
         name: "Vue",
         symbol: "VUE",
         increase: 0,

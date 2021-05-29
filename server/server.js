@@ -1,11 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
 const path = require("path");
 
+const app = express();
 const { handleTest, handleCards } = require("./handlers");
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
+
 app.use(express.json());
 app.get("/test", handleTest);
 

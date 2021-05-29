@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import styled from "styled-components";
 import Card from "./Card";
-const CardContent = () => {
-    const [cardData, setCardData] = useState([]);
-
-    useEffect(() => {
-        fetch("/api/cards")
-            .then((response) => response.json())
-            .then(({ data }) => setCardData(data));
-    }, []);
-
-    console.log(cardData);
+const CardContent = ({ cardData }) => {
     return (
         <Wrapper>
             {cardData.length > 0 ? <Card cardData={cardData} /> : "loading"}

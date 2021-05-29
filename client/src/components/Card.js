@@ -21,7 +21,6 @@ function abbreviateNumber(value) {
 }
 
 const Card = ({ cardData }) => {
-    console.log(cardData);
     return (
         <>
             {cardData.map((elem, index) => {

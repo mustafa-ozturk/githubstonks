@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
@@ -8,6 +8,13 @@ import StonkContent from "./components/StonkContent";
 import Account from "./components/Account";
 
 const App = () => {
+    const [cardData, setCardData] = useState([]);
+
+    useEffect(() => {
+        fetch("/api/cards")
+            .then((response) => response.json())
+            .then(({ data }) => setCardData(data));
+    }, []);
     return (
         <>
             <Wrapper>
@@ -18,10 +25,10 @@ const App = () => {
                         <Router>
                             <Switch>
                                 <Route exact path="/">
-                                    <CardContent />
+                                    <CardContent cardData={cardData} />
                                 </Route>
-                                <Route exact path="/stonk/:name">
-                                    <StonkContent />
+                                <Route exact path="/stonk/:stonkname">
+                                    <StonkContent cardData={cardData} />
                                 </Route>
                                 <Route exact path="/account">
                                     <Account />

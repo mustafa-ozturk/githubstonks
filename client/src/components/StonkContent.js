@@ -2,11 +2,16 @@ import react from "react";
 import styled from "styled-components";
 import Stonks from "./Stonks";
 import Exchange from "./Exchange";
-const StonkContent = () => {
+const StonkContent = ({ cardData }) => {
     return (
         <Wrapper>
-            <Stonks />
-            <Exchange />
+            {cardData.length > 0 ? (
+                <>
+                    <Stonks cardData={cardData} /> <Exchange />
+                </>
+            ) : (
+                "loading"
+            )}
         </Wrapper>
     );
 };

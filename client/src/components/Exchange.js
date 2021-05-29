@@ -92,7 +92,8 @@ const CostContainer = styled.div`
     justify-content: flex-end;
 `;
 
-const CostLabel = styled.div`
+const CostLabel = styled.span`
+    display: block;
     color: rgba(0, 0, 0, 0.6);
 `;
 

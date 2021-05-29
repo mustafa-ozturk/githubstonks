@@ -1,60 +1,98 @@
-import react from "react";
+import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import Chart from "./Chart";
-const Stonks = () => {
+
+function abbreviateNumber(value) {
+    let newValue = value;
+    const suffixes = ["", "K", "M", "B", "T"];
+    let suffixNum = 0;
+    while (newValue >= 1000) {
+        newValue /= 1000;
+        suffixNum++;
+    }
+
+    newValue = newValue.toPrecision(3);
+
+    newValue += suffixes[suffixNum];
+    return newValue;
+}
+
+const Stonks = ({ cardData }) => {
+    let { stonkname } = useParams();
     return (
-        <Wrapper>
-            <TitleStatWrapper>
-                <IconNameSymbol>
-                    <StockIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png" />
-                    <StockName>React</StockName>
-                    <StockSymbol>(RCT)</StockSymbol>
-                </IconNameSymbol>
-                <StatWrapper>
-                    <Statbox>
-                        170k
-                        <StatIcons>
-                            <RiStarSLine />
-                        </StatIcons>
-                    </Statbox>
-                    <Statbox>
-                        34k
-                        <StatIcons>
-                            <AiOutlineBranches />
-                        </StatIcons>
-                    </Statbox>
-                    <Statbox>
-                        14k
-                        <StatIcons>
-                            <BiGitCommit />
-                        </StatIcons>
-                    </Statbox>
-                </StatWrapper>
-            </TitleStatWrapper>
-            <Container>
-                <div>
-                    <PriceIncreasePast>
-                        <Price>$420.00</Price>
-                        <IncreaseWrapper>
-                            <Increase>+$120.00 (40%)</Increase>
-                            <Past24>past 24h</Past24>
-                        </IncreaseWrapper>
-                    </PriceIncreasePast>
-                </div>
-                <Chart />
-                <History>
-                    <span className={"inactive"}>1H</span>
-                    <span className={"active"}>24H</span>
-                    <span className={"inactive"}>1W</span>
-                    <span className={"inactive"}>1M</span>
-                    <span className={"inactive"}>1Y</span>
-                    <span className={"inactive"}>ALL</span>
-                </History>
-            </Container>
-        </Wrapper>
+        <>
+            {cardData.map((elem, index) => {
+                if (elem.name === stonkname) {
+                    return (
+                        <Wrapper key={index}>
+                            <TitleStatWrapper>
+                                <IconNameSymbol>
+                                    <StockIcon src={elem.logo} />
+                                    <StockName>{elem.name}</StockName>
+                                    <StockSymbol>({elem.symbol})</StockSymbol>
+                                </IconNameSymbol>
+                                <StatWrapper>
+                                    <Statbox>
+                                        {abbreviateNumber(elem.stars)}
+                                        <StatIcons>
+                                            <RiStarSLine />
+                                        </StatIcons>
+                                    </Statbox>
+                                    <Statbox>
+                                        {abbreviateNumber(elem.forks)}
+                                        <StatIcons>
+                                            <AiOutlineBranches />
+                                        </StatIcons>
+                                    </Statbox>
+                                    <Statbox>
+                                        {abbreviateNumber(elem.commits)}
+                                        <StatIcons>
+                                            <BiGitCommit />
+                                        </StatIcons>
+                                    </Statbox>
+                                </StatWrapper>
+                            </TitleStatWrapper>
+                            <Container>
+                                <div>
+                                    <PriceIncreasePast>
+                                        <Price>
+                                            ${abbreviateNumber(elem.price)}
+                                        </Price>
+                                        <IncreaseWrapper>
+                                            <Increase>
+                                                +$
+                                                {abbreviateNumber(
+                                                    elem.increasePrice
+                                                )}
+                                                (
+                                                {abbreviateNumber(
+                                                    elem.increasePercent
+                                                )}
+                                                %)
+                                            </Increase>
+                                            <Past24>past 24h</Past24>
+                                        </IncreaseWrapper>
+                                    </PriceIncreasePast>
+                                </div>
+                                <Chart />
+                                <History>
+                                    <span className={"inactive"}>1H</span>
+                                    <span className={"inactive"}>24H</span>
+                                    <span className={"inactive"}>1W</span>
+                                    <span className={"inactive"}>1M</span>
+                                    <span className={"inactive"}>1Y</span>
+                                    <span className={"active"}>ALL</span>
+                                </History>
+                            </Container>
+                        </Wrapper>
+                    );
+                }
+            })}
+        </>
     );
 };
 
@@ -80,8 +118,9 @@ const IconNameSymbol = styled.div`
 const StockIcon = styled.img`
     width: 60px;
     height: 60px;
-    object-fit: cover;
+    object-fit: scale-down;
     margin-right: 14px;
+    margin-left: 8px;
 `;
 const StockName = styled.span`
     font-size: 32px;
