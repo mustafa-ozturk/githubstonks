@@ -1,28 +1,20 @@
-import react from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
 import styled from "styled-components";
 import Card from "./Card";
 const CardContent = () => {
+    const [cardData, setCardData] = useState([]);
+
+    useEffect(() => {
+        fetch("/api/cards")
+            .then((response) => response.json())
+            .then(({ data }) => setCardData(data));
+    }, []);
+
+    console.log(cardData);
     return (
         <Wrapper>
-            <Links to="/stonk/react">
-                <Card />
-            </Links>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {cardData.length > 0 ? <Card cardData={cardData} /> : "loading"}
         </Wrapper>
     );
 };
@@ -32,11 +24,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-`;
-
-const Links = styled(Link)`
-    text-decoration: none;
-    color: black;
+    flex-direction: row;
 `;
 
 export default CardContent;

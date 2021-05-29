@@ -1,4 +1,4 @@
-const { githubData, totalShares } = require("./data");
+const { stocknames, githubData, totalShares } = require("./data");
 
 const stockShares = (stockname) => {
     return totalShares[stockname];
@@ -15,13 +15,9 @@ const buyOrSellShares = (type, stockname, newnum) => {
 
 const initialSharePrice = (stockname) => {
     return (
-        ((githubData[stockname].stars /
-            (githubData[stockname].forks *
-                (githubData[stockname].commits /
-                    githubData[stockname].closedIssues))) *
-            githubData[stockname].commits *
-            githubData[stockname].contributors) /
-        1000000
+        githubData[stockname].stars * 0.0003 +
+        githubData[stockname].forks * 0.0002 +
+        githubData[stockname].commits * 0.0001
     );
 };
 
@@ -40,11 +36,27 @@ const percentIncreaseFromInitialPrice = (stockname) => {
     );
 };
 
+const cardInfo = () => {
+    let cardArray = [];
+
+    stocknames.forEach((elem) => {
+        const cardObj = {
+            logo: githubData[elem].logo,
+            name: githubData[elem].name,
+            symbol: githubData[elem].symbol,
+            price: sharePriceAfterUserMarket(elem),
+            increasePrice: dollarIncreaseFromInitialPrice(elem),
+            increasePercent: percentIncreaseFromInitialPrice(elem),
+            stars: githubData[elem].stars,
+            forks: githubData[elem].forks,
+            commits: githubData[elem].commits,
+        };
+        cardArray.push(cardObj);
+    });
+
+    return cardArray;
+};
+
 module.exports = {
-    stockShares,
-    buyOrSellShares,
-    initialSharePrice,
-    sharePriceAfterUserMarket,
-    dollarIncreaseFromInitialPrice,
-    percentIncreaseFromInitialPrice,
+    cardInfo,
 };

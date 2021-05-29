@@ -1,47 +1,73 @@
 import react from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 
-const Card = () => {
-    // add proper icons
+function abbreviateNumber(value) {
+    let newValue = value;
+    const suffixes = ["", "K", "M", "B", "T"];
+    let suffixNum = 0;
+    while (newValue >= 1000) {
+        newValue /= 1000;
+        suffixNum++;
+    }
+
+    newValue = newValue.toPrecision(3);
+
+    newValue += suffixes[suffixNum];
+    return newValue;
+}
+
+const Card = ({ cardData }) => {
+    console.log(cardData);
     return (
-        <Wrapper>
-            <IconNameSymbol>
-                <StockIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png" />
-                <StockName>React</StockName>
-                <StockSymbol>RCT</StockSymbol>
-            </IconNameSymbol>
-            <PriceIncreasePast>
-                <Price>$420.00</Price>
-                <IncreaseWrapper>
-                    <Increase>+$120.00 (40%)</Increase>
-                    <Past24>past 24h</Past24>
-                </IncreaseWrapper>
-            </PriceIncreasePast>
-            <StatWrapper>
-                <Statbox>
-                    170k
-                    <StatIcons>
-                        <RiStarSLine />
-                    </StatIcons>
-                </Statbox>
-                <Statbox>
-                    34k
-                    <StatIcons>
-                        <AiOutlineBranches />
-                    </StatIcons>
-                </Statbox>
-                <Statbox>
-                    14k
-                    <StatIcons>
-                        <BiGitCommit />
-                    </StatIcons>
-                </Statbox>
-            </StatWrapper>
-        </Wrapper>
+        <>
+            {cardData.map((elem, index) => {
+                return (
+                    <Wrapper key={index}>
+                        <Links to={`/stonk/${elem.name}`}>
+                            <IconNameSymbol>
+                                <StockIcon src={elem.logo} />
+                                <StockName>{elem.name}</StockName>
+                                <StockSymbol>({elem.symbol})</StockSymbol>
+                            </IconNameSymbol>
+                            <PriceIncreasePast>
+                                <Price>${elem.price.toFixed(2)}</Price>
+                                <IncreaseWrapper>
+                                    <Increase>
+                                        +${elem.increasePrice} (
+                                        {elem.increasePercent}%)
+                                    </Increase>
+                                    <Past24>past 24h</Past24>
+                                </IncreaseWrapper>
+                            </PriceIncreasePast>
+                            <StatWrapper>
+                                <Statbox>
+                                    {abbreviateNumber(elem.stars)}
+                                    <StatIcons>
+                                        <RiStarSLine />
+                                    </StatIcons>
+                                </Statbox>
+                                <Statbox>
+                                    {abbreviateNumber(elem.forks)}
+                                    <StatIcons>
+                                        <AiOutlineBranches />
+                                    </StatIcons>
+                                </Statbox>
+                                <Statbox>
+                                    {abbreviateNumber(elem.commits)}
+                                    <StatIcons>
+                                        <BiGitCommit />
+                                    </StatIcons>
+                                </Statbox>
+                            </StatWrapper>
+                        </Links>
+                    </Wrapper>
+                );
+            })}
+        </>
     );
 };
 
@@ -70,16 +96,21 @@ const IconNameSymbol = styled.div`
 `;
 
 const StockIcon = styled.img`
-    width: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    object-fit: scale-down;
 `;
 const StockName = styled.span`
     font-size: 1.5rem;
     font-weight: 500;
 `;
 const StockSymbol = styled.span`
-    font-size: 1.5rem;
     position: relative;
-    left: 160px;
+    top: 5px;
+    left: 5px;
+    font-size: 1rem;
     color: rgba(0, 0, 0, 0.5);
 `;
 
@@ -125,6 +156,11 @@ const StatIcons = styled.span`
     position: relative;
     top: 2px;
     margin-left: 0.5rem;
+`;
+
+const Links = styled(Link)`
+    text-decoration: none;
+    color: black;
 `;
 
 export default Card;
