@@ -45,7 +45,7 @@ const data = [
         $: 340,
     },
     {
-        $: 360,
+        $: 100,
     },
     {
         $: 350,
@@ -84,7 +84,7 @@ const data = [
         $: 415,
     },
     {
-        $: 420,
+        $: 450,
     },
 ];
 
@@ -101,9 +101,9 @@ export default class Example extends PureComponent {
                     <Line
                         type="linear"
                         dataKey="$"
-                        stroke="black"
+                        stroke="rgb(14, 184, 239)"
                         dot={false}
-                        strokeWidth={2}
+                        strokeWidth={3}
                     />
                 </LineChart>
             </ResponsiveContainer>

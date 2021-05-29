@@ -64,7 +64,7 @@ const Container = styled.div`
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
         0px 1px 3px rgba(0, 0, 0, 0.2);
     width: 700px;
-    height: 500px;
+    height: 450px;
     margin: 12px 16px 16px 16px;
     padding: 24px 32px;
     border-radius: 8px;
@@ -97,7 +97,8 @@ const StockSymbol = styled.span`
 const Price = styled.p`
     margin: 0;
     font-weight: 500;
-    font-size: 1.5rem;
+    position: relative;
+    font-size: 2.5rem;
 `;
 const IncreaseWrapper = styled.div`
     margin: 0;
@@ -117,7 +118,8 @@ const Past24 = styled.span`
 
 const PriceIncreasePast = styled.div`
     width: 100%;
-    margin-bottom: 20px;
+    position: relative;
+    margin-bottom: -60px;
     margin-right: 160px;
 `;
 
@@ -156,7 +158,7 @@ const TitleStatWrapper = styled.div`
 
 const History = styled.div`
     position: relative;
-    bottom: 20px;
+    bottom: -12px;
 
     & > span {
         font-size: 12px;

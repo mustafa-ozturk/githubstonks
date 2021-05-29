@@ -60,7 +60,7 @@ const DivSellContainer = styled.div`
 const Input = styled.input`
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    width: 240px;
+    width: 210px;
     height: 150px;
     text-align: center;
     font-size: 3rem;
