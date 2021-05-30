@@ -1,37 +1,138 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+function abbreviateNumber(value) {
+    let newValue = value;
+    const suffixes = ["", "K", "M", "B", "T"];
+    let suffixNum = 0;
+    while (newValue >= 1000) {
+        newValue /= 1000;
+        suffixNum++;
+    }
 
+    newValue = newValue.toPrecision(3);
+
+    newValue += suffixes[suffixNum];
+    return newValue;
+}
 const Exchange = ({ elem }) => {
+    const [buyOrSell, setBuyOrSell] = useState("buy");
+    const [inputState, setInputState] = useState(0);
+    console.log(inputState);
+    console.log(buyOrSell);
     return (
         <Wrapper>
-            <DivSellContainer>
-                <span style={{ color: "rgb(14, 184, 239)" }}>Buy</span>
-                <span
-                    style={{
-                        margin: "0px 8px 0px 8px",
-                        color: "rgba(0, 0, 0, 0.1)",
-                    }}
-                >
-                    |
-                </span>
-                <span>Sell</span>
-            </DivSellContainer>
-            <Input type="number" placeholder="1" />
-            <CostContainer>
-                <p>
-                    <CostLabel>Market Price</CostLabel> ${elem.price.toFixed(2)}
-                </p>
-                <p>
-                    <CostLabel>Fee (0.10%)</CostLabel> $
-                    {(elem.price * 0.1).toFixed(2)}
-                </p>
-                <p>
-                    <CostLabel>Total Cost</CostLabel> $
-                    {(elem.price * 0.1 + elem.price).toFixed(2)}
-                </p>
-            </CostContainer>
+            {buyOrSell === "buy" ? (
+                <DivSellContainer>
+                    <span
+                        style={{
+                            color: "rgb(14, 184, 239)",
+                            cursor: "pointer",
+                        }}
+                        onClick={() => setBuyOrSell("buy")}
+                    >
+                        Buy
+                    </span>
+                    <span
+                        style={{
+                            margin: "0px 8px 0px 8px",
+                            color: "rgba(0, 0, 0, 0.1)",
+                        }}
+                    >
+                        |
+                    </span>
+                    <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setBuyOrSell("sell")}
+                    >
+                        Sell
+                    </span>
+                </DivSellContainer>
+            ) : (
+                <DivSellContainer>
+                    <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setBuyOrSell("buy")}
+                    >
+                        Buy
+                    </span>
+                    <span
+                        style={{
+                            margin: "0px 8px 0px 8px",
+                            color: "rgba(0, 0, 0, 0.1)",
+                        }}
+                    >
+                        |
+                    </span>
+                    <span
+                        style={{ color: "rgb(221,21,33)", cursor: "pointer" }}
+                        onClick={() => setBuyOrSell("sell")}
+                    >
+                        Sell
+                    </span>
+                </DivSellContainer>
+            )}
+            <Input
+                type="number"
+                min="0"
+                placeholder="0"
+                onChange={(ev) => setInputState(ev.target.value)}
+            />
+            {buyOrSell === "buy" ? (
+                <CostContainer>
+                    <p>
+                        <CostLabel>Price</CostLabel> $
+                        {abbreviateNumber(elem.price)}
+                    </p>
+                    <p>
+                        <CostLabel>Fee</CostLabel> $
+                        {abbreviateNumber(inputState * elem.price * 0.1)}
+                    </p>
+                    <p>
+                        <CostLabel>Total</CostLabel> $
+                        {abbreviateNumber(
+                            inputState * elem.price * 0.1 +
+                                inputState * elem.price
+                        )}
+                    </p>
+                </CostContainer>
+            ) : (
+                <CostContainer>
+                    <p>
+                        <CostLabel>Price</CostLabel> $
+                        {abbreviateNumber(elem.price)}
+                    </p>
+                    <p>
+                        <CostLabel>Total</CostLabel> $
+                        {abbreviateNumber(
+                            inputState * elem.price * 0.1 +
+                                inputState * elem.price
+                        )}
+                    </p>
+                </CostContainer>
+            )}
+            <CostLabel style={{ marginBottom: "1rem" }}>
+                Shares Owned: 0
+            </CostLabel>
             <ButtonWrapper>
-                <Button>BUY {elem.symbol}</Button>
+                {buyOrSell === "buy" ? (
+                    <Button
+                        style={{
+                            backgroundColor: "rgb(14, 184, 239)",
+                            border: "1px solid rgb(14, 184, 239)",
+                        }}
+                    >
+                        BUY {elem.symbol}
+                    </Button>
+                ) : (
+                    <Button
+                        style={{
+                            backgroundColor: "rgb(221,21,33)",
+                            border: "1px solid rgb(239, 14, 14)",
+                        }}
+                    >
+                        SELL {elem.symbol}
+                    </Button>
+                )}
             </ButtonWrapper>
         </Wrapper>
     );
@@ -40,7 +141,7 @@ const Exchange = ({ elem }) => {
 const Wrapper = styled.div`
     border-radius: 8px;
     width: 200px;
-    height: 300px;
+    height: 315px;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
         0px 1px 3px rgba(0, 0, 0, 0.2);
     padding: 24px 32px;
@@ -63,7 +164,7 @@ const Input = styled.input`
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 210px;
-    height: 150px;
+    height: 80px;
     text-align: center;
     font-size: 3rem;
     outline: none;
@@ -75,12 +176,16 @@ const ButtonWrapper = styled.div`
 `;
 
 const Button = styled.button`
-    background-color: rgb(14, 184, 239);
+    width: 218px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
     font-size: 16px;
+
     color: rgb(255, 255, 255);
     padding: 24px 72px;
-    border: 1px solid rgb(14, 184, 239);
     border-radius: 4px;
     cursor: pointer;
     white-space: nowrap;
@@ -90,8 +195,10 @@ const Button = styled.button`
 
 const CostContainer = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+
+    & > p {
+        margin: 1rem;
+    }
 `;
 
 const CostLabel = styled.span`
