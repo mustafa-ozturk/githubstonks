@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Exchange = () => {
+const Exchange = ({ elem }) => {
     return (
         <Wrapper>
             <DivSellContainer>
@@ -16,20 +16,22 @@ const Exchange = () => {
                 </span>
                 <span>Sell</span>
             </DivSellContainer>
-            <Input type="number" placeholder="0" />
+            <Input type="number" placeholder="1" />
             <CostContainer>
                 <p>
-                    <CostLabel>Market Price</CostLabel> $420
+                    <CostLabel>Market Price</CostLabel> ${elem.price.toFixed(2)}
                 </p>
                 <p>
-                    <CostLabel>Fee (0.10%)</CostLabel> $420
+                    <CostLabel>Fee (0.10%)</CostLabel> $
+                    {(elem.price * 0.1).toFixed(2)}
                 </p>
                 <p>
-                    <CostLabel>Total Cost</CostLabel> $4,620
+                    <CostLabel>Total Cost</CostLabel> $
+                    {(elem.price * 0.1 + elem.price).toFixed(2)}
                 </p>
             </CostContainer>
             <ButtonWrapper>
-                <Button>BUY RCT</Button>
+                <Button>BUY {elem.symbol}</Button>
             </ButtonWrapper>
         </Wrapper>
     );

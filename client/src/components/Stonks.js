@@ -92,7 +92,7 @@ const Stonks = ({ cardData }) => {
                                     </History>
                                 </Container>
                             </div>
-                            <Exchange />
+                            <Exchange elem={elem} />
                         </Wrapper>
                     );
                 }
