@@ -17,8 +17,7 @@ function abbreviateNumber(value) {
 const Exchange = ({ elem }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
-    console.log(inputState);
-    console.log(buyOrSell);
+
     return (
         <Wrapper>
             {buyOrSell === "buy" ? (

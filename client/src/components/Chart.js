@@ -1,20 +1,15 @@
 import React, { PureComponent } from "react";
 import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
 
-const data = [
-    {
-        $: 0,
-    },
-    {
-        $: 58.9,
-    },
-];
-
 export default class Example extends PureComponent {
     render() {
         return (
             <ResponsiveContainer width="100%" height="85%">
-                <LineChart width={500} height={300} data={data}>
+                <LineChart
+                    width={500}
+                    height={300}
+                    data={this.props.priceHistory}
+                >
                     <Tooltip
                         separator=""
                         cursor={false}

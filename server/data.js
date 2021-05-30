@@ -9,6 +9,14 @@ const githubData = {
         stars: 169000,
         forks: 34000,
         commits: 14173,
+        priceHistory: [
+            {
+                $: 0,
+            },
+            {
+                $: 58.9,
+            },
+        ],
     },
     angular: {
         logo: "/assets/angular.svg",
@@ -18,6 +26,14 @@ const githubData = {
         stars: 73400,
         forks: 19300,
         commits: 21010,
+        priceHistory: [
+            {
+                $: 0,
+            },
+            {
+                $: 28.0,
+            },
+        ],
     },
     vue: {
         logo: "/assets/vue.svg",
@@ -27,6 +43,14 @@ const githubData = {
         stars: 184000,
         forks: 29100,
         commits: 3175,
+        priceHistory: [
+            {
+                $: 0,
+            },
+            {
+                $: 61.34,
+            },
+        ],
     },
 };
 

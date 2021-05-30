@@ -36,11 +36,11 @@ const percentIncreaseFromInitialPrice = (stockname) => {
     );
 };
 
-const cardInfo = () => {
-    let cardArray = [];
+const stonkData = () => {
+    let stonkDataArray = [];
 
     stocknames.forEach((elem) => {
-        const cardObj = {
+        const stonkDataObj = {
             logo: githubData[elem].logo,
             name: githubData[elem].name,
             symbol: githubData[elem].symbol,
@@ -50,13 +50,14 @@ const cardInfo = () => {
             stars: githubData[elem].stars,
             forks: githubData[elem].forks,
             commits: githubData[elem].commits,
+            priceHistory: githubData[elem].priceHistory,
         };
-        cardArray.push(cardObj);
+        stonkDataArray.push(stonkDataObj);
     });
 
-    return cardArray;
+    return stonkDataArray;
 };
 
 module.exports = {
-    cardInfo,
+    stonkData,
 };

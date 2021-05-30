@@ -1,6 +1,6 @@
-const { cardInfo } = require("./utils");
+const { stonkData } = require("./utils");
 
-const cardInfoArr = cardInfo();
+const stonkDataArr = stonkData();
 
 const handleTest = (req, res) => {
     try {
@@ -15,7 +15,7 @@ const handleTest = (req, res) => {
 
 const handleCards = (req, res) => {
     try {
-        return res.status(200).json({ data: cardInfoArr });
+        return res.status(200).json({ data: stonkDataArr });
     } catch (error) {
         return res.status(404).json({
             status: 500,

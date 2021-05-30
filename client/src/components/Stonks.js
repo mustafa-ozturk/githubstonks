@@ -81,7 +81,8 @@ const Stonks = ({ cardData }) => {
                                             </IncreaseWrapper>
                                         </PriceIncreasePast>
                                     </div>
-                                    <Chart />
+                                    {/* chart */}
+                                    <Chart priceHistory={elem.priceHistory} />
                                     <History>
                                         <span className={"inactive"}>1H</span>
                                         <span className={"inactive"}>24H</span>
