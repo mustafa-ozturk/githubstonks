@@ -1,4 +1,4 @@
-const { stonkData } = require("./utils");
+const { stonkData, createUser } = require("./utils");
 
 const stonkDataArr = stonkData();
 

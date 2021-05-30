@@ -2,9 +2,19 @@ import React from "react";
 
 import Stonks from "./Stonks";
 
-const StonkContent = ({ cardData }) => {
+const StonkContent = ({ cardData, userStats, userStatsDispatch }) => {
     return (
-        <>{cardData.length > 0 ? <Stonks cardData={cardData} /> : "loading"}</>
+        <>
+            {cardData.length > 0 ? (
+                <Stonks
+                    cardData={cardData}
+                    userStats={userStats}
+                    userStatsDispatch={userStatsDispatch}
+                />
+            ) : (
+                "loading"
+            )}
+        </>
     );
 };
 

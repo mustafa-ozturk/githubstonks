@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 function abbreviateNumber(value) {
-    let newValue = value;
-    const suffixes = ["", "K", "M", "B", "T"];
-    let suffixNum = 0;
-    while (newValue >= 1000) {
-        newValue /= 1000;
-        suffixNum++;
+    let newVal = value.toFixed(2);
+    if (value >= 1000000000000) {
+        newVal = (value / 1000000000000).toFixed(2) + "T";
+    } else if (value >= 1000000000) {
+        newVal = (value / 1000000000).toFixed(2) + "B";
+    } else if (value >= 1000000) {
+        newVal = (value / 1000000).toFixed(2) + "M";
+    } else if (value >= 1000) {
+        newVal = (value / 1000).toFixed(2) + "K";
     }
-
-    newValue = newValue.toPrecision(3);
-
-    newValue += suffixes[suffixNum];
-    return newValue;
+    return newVal;
 }
-const Exchange = ({ elem }) => {
+const Exchange = ({ elem, userStats, userStatsDispatch }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
 

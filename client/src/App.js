@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
@@ -7,19 +7,48 @@ import CardContent from "./components/CardContent";
 import StonkContent from "./components/StonkContent";
 import Account from "./components/Account";
 
+const initialState = {
+    netWorth: 100000.0,
+    portfolioValue: 0.0,
+    balance: 100000.0,
+    profitLoss: 0.0,
+};
+
+function reducer(state, action) {
+    console.log(action);
+    switch (action.type) {
+        case "buy":
+            return {
+                ...state,
+            };
+        case "sell":
+            return {
+                ...state,
+            };
+        default:
+            throw new Error();
+    }
+}
+
 const App = () => {
     const [cardData, setCardData] = useState([]);
+    const [userStats, userStatsDispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
         fetch("/api/stonkData")
             .then((response) => response.json())
             .then(({ data }) => setCardData(data));
+
+        if (!localStorage.getItem("user")) {
+            localStorage.setItem("user", "test");
+        }
     }, []);
+
     return (
         <>
             <Wrapper>
                 <Router>
-                    <Sidebar />
+                    <Sidebar userStats={userStats} />
                     <NavAndContentContainer>
                         <Navbar />
                         <ContentWrapper>
@@ -28,7 +57,11 @@ const App = () => {
                                     <CardContent cardData={cardData} />
                                 </Route>
                                 <Route exact path="/stonk/:stonkname">
-                                    <StonkContent cardData={cardData} />
+                                    <StonkContent
+                                        cardData={cardData}
+                                        userStats={userStats}
+                                        userStatsDispatch={userStatsDispatch}
+                                    />
                                 </Route>
                                 <Route exact path="/account">
                                     <Account />

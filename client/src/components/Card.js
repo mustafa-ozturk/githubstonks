@@ -6,18 +6,17 @@ import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 
 function abbreviateNumber(value) {
-    let newValue = value;
-    const suffixes = ["", "K", "M", "B", "T"];
-    let suffixNum = 0;
-    while (newValue >= 1000) {
-        newValue /= 1000;
-        suffixNum++;
+    let newVal = value.toFixed(2);
+    if (value >= 1000000000000) {
+        newVal = value / 1000000000000 + "T";
+    } else if (value >= 1000000) {
+        newVal = value / 1000000 + "M";
+    } else if (value >= 1000000000) {
+        newVal = value / 1000000000 + "B";
+    } else if (value >= 1000) {
+        newVal = value / 1000 + "K";
     }
-
-    newValue = newValue.toPrecision(3);
-
-    newValue += suffixes[suffixNum];
-    return newValue;
+    return newVal;
 }
 
 const Card = ({ cardData }) => {

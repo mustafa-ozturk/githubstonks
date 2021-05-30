@@ -1,7 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-const Sidebar = () => {
+function abbreviateNumber(value) {
+    let newVal = value.toFixed(2);
+    if (value >= 1000000000000) {
+        newVal = value / 1000000000000 + "T";
+    } else if (value >= 1000000) {
+        newVal = value / 1000000 + "M";
+    } else if (value >= 1000000000) {
+        newVal = value / 1000000000 + "B";
+    } else if (value >= 1000) {
+        newVal = value / 1000 + "K";
+    }
+    return newVal;
+}
+
+const Sidebar = ({ userStats }) => {
     return (
         <Wrapper>
             <LogoWrapper>
@@ -14,28 +28,32 @@ const Sidebar = () => {
                         <SideBarIcon>🏦</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Net Worth</Description>
-                            <span>$100,000.00</span>
+                            <span>${abbreviateNumber(userStats.netWorth)}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>📁</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Portfolio Value</Description>
-                            <span>$0.00</span>
+                            <span>
+                                ${abbreviateNumber(userStats.portfolioValue)}
+                            </span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>💰</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Balance</Description>
-                            <span>$100,000.00</span>
+                            <span>${abbreviateNumber(userStats.balance)}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>📈</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Profit/Loss</Description>
-                            <span>$+0.00</span>
+                            <span>
+                                ${abbreviateNumber(userStats.profitLoss)}
+                            </span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                 </SideBarItemWrapper>

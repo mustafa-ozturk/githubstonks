@@ -58,6 +58,10 @@ const stonkData = () => {
     return stonkDataArray;
 };
 
+const buyStock = () => {};
+
+const sellStock = () => {};
+
 module.exports = {
     stonkData,
 };

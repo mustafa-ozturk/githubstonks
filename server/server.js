@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
-const { handleTest, handleCards } = require("./handlers");
+const { handleTest, handleCards, handleGuessUser } = require("./handlers");
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 
