@@ -2,14 +2,20 @@ import React from "react";
 
 import Stonks from "./Stonks";
 
-const StonkContent = ({ cardData, userStats, userStatsDispatch }) => {
+const StonkContent = ({
+    stonkData,
+    userStats,
+    userStatsDispatch,
+    totalShares,
+}) => {
     return (
         <>
-            {cardData.length > 0 ? (
+            {stonkData.length > 0 ? (
                 <Stonks
-                    cardData={cardData}
+                    stonkData={stonkData}
                     userStats={userStats}
                     userStatsDispatch={userStatsDispatch}
+                    totalShares={totalShares}
                 />
             ) : (
                 "loading"

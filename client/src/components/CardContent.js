@@ -2,10 +2,10 @@ import React from "react";
 
 import styled from "styled-components";
 import Card from "./Card";
-const CardContent = ({ cardData }) => {
+const CardContent = ({ stonkData }) => {
     return (
         <Wrapper>
-            {cardData.length > 0 ? <Card cardData={cardData} /> : "loading"}
+            {stonkData.length > 0 ? <Card stonkData={stonkData} /> : "loading"}
         </Wrapper>
     );
 };

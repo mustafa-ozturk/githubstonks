@@ -19,10 +19,10 @@ function abbreviateNumber(value) {
     return newVal;
 }
 
-const Card = ({ cardData }) => {
+const Card = ({ stonkData }) => {
     return (
         <>
-            {cardData.map((elem, index) => {
+            {stonkData.map((elem, index) => {
                 return (
                     <Wrapper key={index}>
                         <Links to={`/stonk/${elem.name}`}>

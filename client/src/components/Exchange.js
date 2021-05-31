@@ -13,10 +13,16 @@ function abbreviateNumber(value) {
     }
     return newVal;
 }
-const Exchange = ({ elem, userStats, userStatsDispatch }) => {
+const Exchange = ({
+    elem,
+    userStats,
+    userStatsDispatch,
+    guestUserPurchaseHistory,
+    setGuestUserPurchaseHistory,
+    totalShares,
+}) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
-
     return (
         <Wrapper>
             {buyOrSell === "buy" ? (
@@ -109,11 +115,25 @@ const Exchange = ({ elem, userStats, userStatsDispatch }) => {
                 </CostContainer>
             )}
             <CostLabel style={{ marginBottom: "1rem" }}>
-                Shares Owned: 0
+                Shares Owned: {totalShares[elem.name]}
             </CostLabel>
             <ButtonWrapper>
                 {buyOrSell === "buy" ? (
                     <Button
+                        onClick={() => {
+                            console.log("button clicked");
+                            userStatsDispatch({
+                                type: "buy",
+                                payload: {
+                                    stockName: elem.name,
+                                    quantity: inputState,
+                                    purchaseCost: (
+                                        inputState * elem.price * 0.1 +
+                                        inputState * elem.price
+                                    ).toFixed(2),
+                                },
+                            });
+                        }}
                         style={{
                             backgroundColor: "rgb(14, 184, 239)",
                             border: "1px solid rgb(14, 184, 239)",
@@ -123,6 +143,20 @@ const Exchange = ({ elem, userStats, userStatsDispatch }) => {
                     </Button>
                 ) : (
                     <Button
+                        onClick={() =>
+                            setGuestUserPurchaseHistory((prevArray) => [
+                                ...prevArray,
+                                {
+                                    type: "sell",
+                                    stockName: elem.name,
+                                    quantity: inputState,
+                                    purchaseCost: (
+                                        inputState * elem.price * 0.1 +
+                                        inputState * elem.price
+                                    ).toFixed(2),
+                                },
+                            ])
+                        }
                         style={{
                             backgroundColor: "rgb(221,21,33)",
                             border: "1px solid rgb(239, 14, 14)",

@@ -21,11 +21,11 @@ function abbreviateNumber(value) {
     return newVal;
 }
 
-const Stonks = ({ cardData, userStats, userStatsDispatch }) => {
+const Stonks = ({ stonkData, userStats, userStatsDispatch, totalShares }) => {
     let { stonkname } = useParams();
     return (
         <>
-            {cardData.map((elem, index) => {
+            {stonkData.map((elem, index) => {
                 if (elem.name === stonkname) {
                     return (
                         <Wrapper key={index}>
@@ -95,8 +95,9 @@ const Stonks = ({ cardData, userStats, userStatsDispatch }) => {
                             </div>
                             <Exchange
                                 elem={elem}
-                                serStats={userStats}
+                                userStats={userStats}
                                 userStatsDispatch={userStatsDispatch}
+                                totalShares={totalShares}
                             />
                         </Wrapper>
                     );
