@@ -122,18 +122,19 @@ const Exchange = ({
                     <Button
                         onClick={() => {
                             console.log("button clicked");
-                            userStatsDispatch({
-                                type: "PUSH-TO-BUYS-AND-SELLS",
-                                payload: {
-                                    type: "BUY",
-                                    stockName: elem.name,
-                                    quantity: inputState,
-                                    purchaseCost: (
-                                        inputState * elem.price * 0.1 +
-                                        inputState * elem.price
-                                    ).toFixed(2),
-                                },
-                            });
+                            inputState > 0 &&
+                                userStatsDispatch({
+                                    type: "PUSH-TO-BUYS-AND-SELLS",
+                                    payload: {
+                                        type: "BUY",
+                                        stockName: elem.name,
+                                        quantity: inputState,
+                                        purchaseCost: (
+                                            inputState * elem.price * 0.1 +
+                                            inputState * elem.price
+                                        ).toFixed(2),
+                                    },
+                                });
                         }}
                         style={{
                             backgroundColor: "rgb(14, 184, 239)",
@@ -146,18 +147,19 @@ const Exchange = ({
                     <Button
                         onClick={() => {
                             console.log("button clicked");
-                            userStatsDispatch({
-                                type: "PUSH-TO-BUYS-AND-SELLS",
-                                payload: {
-                                    type: "SELL",
-                                    stockName: elem.name,
-                                    quantity: inputState,
-                                    purchaseCost: (
-                                        inputState * elem.price * 0.1 +
-                                        inputState * elem.price
-                                    ).toFixed(2),
-                                },
-                            });
+                            inputState > 0 &&
+                                userStatsDispatch({
+                                    type: "PUSH-TO-BUYS-AND-SELLS",
+                                    payload: {
+                                        type: "SELL",
+                                        stockName: elem.name,
+                                        quantity: inputState,
+                                        purchaseCost: (
+                                            inputState * elem.price * 0.1 +
+                                            inputState * elem.price
+                                        ).toFixed(2),
+                                    },
+                                });
                         }}
                         style={{
                             backgroundColor: "rgb(221,21,33)",
