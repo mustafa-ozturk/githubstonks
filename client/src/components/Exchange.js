@@ -125,7 +125,7 @@ const Exchange = ({
                             userStatsDispatch({
                                 type: "PUSH-TO-BUYS-AND-SELLS",
                                 payload: {
-                                    type: "buy",
+                                    type: "BUY",
                                     stockName: elem.name,
                                     quantity: inputState,
                                     purchaseCost: (
@@ -149,7 +149,7 @@ const Exchange = ({
                             userStatsDispatch({
                                 type: "PUSH-TO-BUYS-AND-SELLS",
                                 payload: {
-                                    type: "sell",
+                                    type: "SELL",
                                     stockName: elem.name,
                                     quantity: inputState,
                                     purchaseCost: (

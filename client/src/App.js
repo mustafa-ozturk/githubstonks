@@ -8,7 +8,7 @@ import StonkContent from "./components/StonkContent";
 import Account from "./components/Account";
 
 const initialUserStatsState = {
-    startingBalance: 100000.0,
+    startingBalance: 1000,
     buysAndSells: [],
 };
 
@@ -51,7 +51,7 @@ const App = () => {
             Vue: 0,
         };
         userStats.buysAndSells.forEach((elem) => {
-            if (elem.type === "buy") {
+            if (elem.type === "BUY") {
                 stonksOwned[elem.stockName] += parseInt(elem.quantity);
             } else {
                 stonksOwned[elem.stockName] -= parseInt(elem.quantity);
@@ -66,11 +66,15 @@ const App = () => {
     };
 
     const getBalance = () => {
-        // acc = userStats.startingBalance starts
-        // then its the return
-        return userStats.buysAndSells.reduce((acc, elem) => {
-            return acc - parseFloat(elem.purchaseCost);
-        }, userStats.startingBalance);
+        let total = 0;
+        userStats.buysAndSells.forEach((elem) => {
+            if (elem.type === "BUY") {
+                total += parseFloat(elem.purchaseCost);
+            } else {
+                total -= parseFloat(elem.purchaseCost);
+            }
+        });
+        return userStats.startingBalance - total;
     };
 
     const getNetWorth = () => {
@@ -78,7 +82,6 @@ const App = () => {
     };
 
     const getProfitLoss = () => {
-        // totalcost at purchase - current value of stock
         let stonksOwned = {
             React: 0,
             Angular: 0,
@@ -86,7 +89,7 @@ const App = () => {
         };
         let totalCostAtPurchase = 0;
         userStats.buysAndSells.forEach((elem) => {
-            if (elem.type === "buy") {
+            if (elem.type === "BUY") {
                 stonksOwned[elem.stockName] += parseInt(elem.quantity);
                 totalCostAtPurchase += parseFloat(elem.purchaseCost);
             } else {
@@ -109,7 +112,7 @@ const App = () => {
             Vue: 0,
         };
         userStats.buysAndSells.forEach((elem) => {
-            if (elem.type === "buy") {
+            if (elem.type === "BUY") {
                 stonksOwned[elem.stockName] += parseInt(elem.quantity);
             } else {
                 stonksOwned[elem.stockName] -= parseInt(elem.quantity);
@@ -117,8 +120,6 @@ const App = () => {
         });
         return stonksOwned;
     };
-
-    // TODO: sell
 
     const balance = getBalance();
     const portfolioValue = getPortfolioValue();
