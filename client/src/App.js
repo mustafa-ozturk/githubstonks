@@ -149,6 +149,7 @@ const App = () => {
                                         userStats={userStats}
                                         userStatsDispatch={userStatsDispatch}
                                         totalShares={totalShares}
+                                        balance={balance}
                                     />
                                 </Route>
                                 <Route exact path="/account">

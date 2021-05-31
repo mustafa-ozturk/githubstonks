@@ -20,6 +20,7 @@ const Exchange = ({
     guestUserPurchaseHistory,
     setGuestUserPurchaseHistory,
     totalShares,
+    balance,
 }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
@@ -75,12 +76,22 @@ const Exchange = ({
                     </span>
                 </DivSellContainer>
             )}
-            <Input
-                type="number"
-                min="0"
-                placeholder="0"
-                onChange={(ev) => setInputState(ev.target.value)}
-            />
+            {buyOrSell === "buy" ? (
+                <Input
+                    type="number"
+                    min="0"
+                    placeholder="0"
+                    onChange={(ev) => setInputState(ev.target.value)}
+                />
+            ) : (
+                <Input
+                    type="number"
+                    min="0"
+                    max={totalShares[elem.name]}
+                    placeholder="0"
+                    onChange={(ev) => setInputState(ev.target.value)}
+                />
+            )}
             {buyOrSell === "buy" ? (
                 <CostContainer>
                     <p>
@@ -137,9 +148,16 @@ const Exchange = ({
                                 });
                         }}
                         style={{
-                            backgroundColor: "rgb(14, 184, 239)",
-                            border: "1px solid rgb(14, 184, 239)",
+                            backgroundColor:
+                                balance >= inputState
+                                    ? "rgb(14, 184, 239)"
+                                    : "rgba(0,0,0,0.1)",
+                            border:
+                                balance >= inputState
+                                    ? "1px solid rgb(14, 184, 239)"
+                                    : "1px solid rgba(0,0,0,0.1)",
                         }}
+                        disabled={balance >= inputState ? false : true}
                     >
                         BUY {elem.symbol}
                     </Button>
@@ -162,9 +180,18 @@ const Exchange = ({
                                 });
                         }}
                         style={{
-                            backgroundColor: "rgb(221,21,33)",
-                            border: "1px solid rgb(239, 14, 14)",
+                            backgroundColor:
+                                totalShares[elem.name] >= inputState
+                                    ? "rgb(221,21,33)"
+                                    : "rgba(0,0,0,0.1)",
+                            border:
+                                totalShares[elem.name] >= inputState
+                                    ? "1px solid rgb(239, 14, 14)"
+                                    : "1px solid rgba(0,0,0,0.1)",
                         }}
+                        disabled={
+                            totalShares[elem.name] >= inputState ? false : true
+                        }
                     >
                         SELL {elem.symbol}
                     </Button>

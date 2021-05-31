@@ -21,7 +21,13 @@ function abbreviateNumber(value) {
     return newVal;
 }
 
-const Stonks = ({ stonkData, userStats, userStatsDispatch, totalShares }) => {
+const Stonks = ({
+    stonkData,
+    userStats,
+    userStatsDispatch,
+    totalShares,
+    balance,
+}) => {
     let { stonkname } = useParams();
     return (
         <>
@@ -98,6 +104,7 @@ const Stonks = ({ stonkData, userStats, userStatsDispatch, totalShares }) => {
                                 userStats={userStats}
                                 userStatsDispatch={userStatsDispatch}
                                 totalShares={totalShares}
+                                balance={balance}
                             />
                         </Wrapper>
                     );

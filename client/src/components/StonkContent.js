@@ -7,6 +7,7 @@ const StonkContent = ({
     userStats,
     userStatsDispatch,
     totalShares,
+    balance,
 }) => {
     return (
         <>
@@ -16,6 +17,7 @@ const StonkContent = ({
                     userStats={userStats}
                     userStatsDispatch={userStatsDispatch}
                     totalShares={totalShares}
+                    balance={balance}
                 />
             ) : (
                 "loading"
