@@ -123,8 +123,9 @@ const Exchange = ({
                         onClick={() => {
                             console.log("button clicked");
                             userStatsDispatch({
-                                type: "buy",
+                                type: "PUSH-TO-BUYS-AND-SELLS",
                                 payload: {
+                                    type: "buy",
                                     stockName: elem.name,
                                     quantity: inputState,
                                     purchaseCost: (
@@ -143,10 +144,11 @@ const Exchange = ({
                     </Button>
                 ) : (
                     <Button
-                        onClick={() =>
-                            setGuestUserPurchaseHistory((prevArray) => [
-                                ...prevArray,
-                                {
+                        onClick={() => {
+                            console.log("button clicked");
+                            userStatsDispatch({
+                                type: "PUSH-TO-BUYS-AND-SELLS",
+                                payload: {
                                     type: "sell",
                                     stockName: elem.name,
                                     quantity: inputState,
@@ -155,8 +157,8 @@ const Exchange = ({
                                         inputState * elem.price
                                     ).toFixed(2),
                                 },
-                            ])
-                        }
+                            });
+                        }}
                         style={{
                             backgroundColor: "rgb(221,21,33)",
                             border: "1px solid rgb(239, 14, 14)",

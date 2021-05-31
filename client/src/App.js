@@ -15,14 +15,10 @@ const initialUserStatsState = {
 function userStatsReducer(state, action) {
     console.log(action);
     switch (action.type) {
-        case "buy":
+        case "PUSH-TO-BUYS-AND-SELLS":
             return {
                 ...state,
                 buysAndSells: [...state.buysAndSells, action.payload],
-            };
-        case "sell":
-            return {
-                ...state,
             };
         default:
             throw new Error();
@@ -45,6 +41,8 @@ const App = () => {
         }
     }, []);
 
+    console.log(userStats.buysAndSells);
+
     const getPortfolioValue = () => {
         // find what stocks we own and how many
         let stonksOwned = {
@@ -53,7 +51,11 @@ const App = () => {
             Vue: 0,
         };
         userStats.buysAndSells.forEach((elem) => {
-            stonksOwned[elem.stockName] += parseInt(elem.quantity);
+            if (elem.type === "buy") {
+                stonksOwned[elem.stockName] += parseInt(elem.quantity);
+            } else {
+                stonksOwned[elem.stockName] -= parseInt(elem.quantity);
+            }
         });
         // stock we own * its up to date price
         let portfolioValue = 0;
@@ -84,8 +86,13 @@ const App = () => {
         };
         let totalCostAtPurchase = 0;
         userStats.buysAndSells.forEach((elem) => {
-            stonksOwned[elem.stockName] += parseInt(elem.quantity);
-            totalCostAtPurchase += parseFloat(elem.purchaseCost);
+            if (elem.type === "buy") {
+                stonksOwned[elem.stockName] += parseInt(elem.quantity);
+                totalCostAtPurchase += parseFloat(elem.purchaseCost);
+            } else {
+                stonksOwned[elem.stockName] -= parseInt(elem.quantity);
+                totalCostAtPurchase -= parseFloat(elem.purchaseCost);
+            }
         });
         let currentTotalValueOfShares = 0;
         stonkData.forEach((elem) => {
@@ -102,10 +109,16 @@ const App = () => {
             Vue: 0,
         };
         userStats.buysAndSells.forEach((elem) => {
-            stonksOwned[elem.stockName] += parseInt(elem.quantity);
+            if (elem.type === "buy") {
+                stonksOwned[elem.stockName] += parseInt(elem.quantity);
+            } else {
+                stonksOwned[elem.stockName] -= parseInt(elem.quantity);
+            }
         });
         return stonksOwned;
     };
+
+    // TODO: sell
 
     const balance = getBalance();
     const portfolioValue = getPortfolioValue();
