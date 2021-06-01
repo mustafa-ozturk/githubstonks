@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { StonkProvider } from "./context/StonkContext";
 
 ReactDOM.render(
-    <React.StrictMode>
+    <StonkProvider>
         <App />
-    </React.StrictMode>,
+    </StonkProvider>,
     document.getElementById("root")
 );

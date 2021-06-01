@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import CardContent from "./components/CardContent";
 import StonkContent from "./components/StonkContent";
 import Account from "./components/Account";
+import { StonkContext } from "./context/StonkContext";
 
 const initialUserStatsState = {
     startingBalance: 1000,
@@ -26,20 +27,11 @@ function userStatsReducer(state, action) {
 }
 
 const App = () => {
-    const [stonkData, setstonkData] = useState([]);
+    const stonkData = useContext(StonkContext);
     const [userStats, userStatsDispatch] = useReducer(
         userStatsReducer,
         initialUserStatsState
     );
-    useEffect(() => {
-        fetch("/api/stonkData")
-            .then((response) => response.json())
-            .then(({ data }) => setstonkData(data));
-
-        if (!localStorage.getItem("user")) {
-            localStorage.setItem("user", "test");
-        }
-    }, []);
 
     console.log(userStats.buysAndSells);
 
