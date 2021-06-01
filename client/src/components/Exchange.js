@@ -81,8 +81,7 @@ const Exchange = ({
             <Input
                 type="number"
                 min="0"
-                // change max stocks you can buy based on balance
-                max={buyOrSell === "buy" ? 1000 : totalShares[elem.name]}
+                max={buyOrSell === "buy" ? "" : totalShares[elem.name]}
                 placeholder="0"
                 onChange={(ev) => handleInputState(ev.target.value)}
             />
