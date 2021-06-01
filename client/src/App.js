@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import CardContent from "./components/CardContent";
 import Account from "./components/Account";
 import Stonks from "./components/Stonks";
+import Card from "./components/Card";
 import { StonkContext } from "./context/StonkContext";
 import { GuestUserContext } from "./context/GuestUserContext";
 
@@ -35,7 +35,9 @@ const App = () => {
                         <ContentWrapper>
                             <Switch>
                                 <Route exact path="/">
-                                    <CardContent stonkData={stonkData} />
+                                    <CardWrapper>
+                                        <Card stonkData={stonkData} />
+                                    </CardWrapper>
                                 </Route>
                                 <Route exact path="/stonk/:stonkname">
                                     <Stonks
@@ -70,4 +72,13 @@ const ContentWrapper = styled.div`
     margin-left: 201px;
     margin-top: 50px;
 `;
+
+const CardWrapper = styled.div`
+    padding: 1.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+`;
+
 export default App;
