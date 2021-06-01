@@ -113,43 +113,41 @@ const Exchange = ({
             </span>
 
             <ButtonWrapper>
-                {buyOrSell === "buy" ? (
-                    <Button
-                        onClick={() => handleBuyDispatch()}
-                        style={{
-                            backgroundColor:
-                                balance >= inputState
-                                    ? "rgb(14, 184, 239)"
-                                    : "rgba(0,0,0,0.1)",
-                            border:
-                                balance >= inputState
-                                    ? "1px solid rgb(14, 184, 239)"
-                                    : "1px solid rgba(0,0,0,0.1)",
-                        }}
-                        disabled={balance >= inputState ? false : true}
-                    >
-                        BUY {elem.symbol}
-                    </Button>
-                ) : (
-                    <Button
-                        onClick={() => handleSellDispatch()}
-                        style={{
-                            backgroundColor:
-                                totalShares[elem.name] >= inputState
-                                    ? "rgb(221,21,33)"
-                                    : "rgba(0,0,0,0.1)",
-                            border:
-                                totalShares[elem.name] >= inputState
-                                    ? "1px solid rgb(239, 14, 14)"
-                                    : "1px solid rgba(0,0,0,0.1)",
-                        }}
-                        disabled={
-                            totalShares[elem.name] >= inputState ? false : true
-                        }
-                    >
-                        SELL {elem.symbol}
-                    </Button>
-                )}
+                <Button
+                    onClick={() =>
+                        buyOrSell === "buy"
+                            ? handleBuyDispatch()
+                            : handleSellDispatch()
+                    }
+                    className={
+                        buyOrSell === "buy"
+                            ? balance >=
+                              inputState * elem.price * 0.1 +
+                                  inputState * elem.price
+                                ? "buyBtn"
+                                : "buyBtnDisabled"
+                            : totalShares[elem.name] >= inputState &&
+                              totalShares[elem.name] > 0
+                            ? "sellBtn"
+                            : "sellBtnDisabled"
+                    }
+                    disabled={
+                        buyOrSell === "buy"
+                            ? balance >=
+                              inputState * elem.price * 0.1 +
+                                  inputState * elem.price
+                                ? false
+                                : true
+                            : totalShares[elem.name] >= inputState &&
+                              totalShares[elem.name] > 0
+                            ? false
+                            : true
+                    }
+                >
+                    {buyOrSell === "buy"
+                        ? `BUY ${elem.symbol}`
+                        : `SELL ${elem.symbol}`}
+                </Button>
             </ButtonWrapper>
         </Wrapper>
     );
@@ -213,6 +211,23 @@ const Input = styled.input`
 const ButtonWrapper = styled.div`
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 14px;
+
+    & > .buyBtn {
+        background-color: rgb(14, 184, 239);
+        border: 1px solid rgb(14, 184, 239);
+    }
+    & > .buyBtnDisabled {
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    & > .sellBtn {
+        background-color: rgb(221, 21, 33);
+        border: 1px solid rgb(239, 14, 14);
+    }
+    & > .sellBtnDisabled {
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
 `;
 
 const Button = styled.button`
@@ -223,7 +238,6 @@ const Button = styled.button`
     justify-content: center;
     font-weight: bold;
     font-size: 16px;
-
     color: rgb(255, 255, 255);
     padding: 24px 72px;
     border-radius: 4px;
