@@ -87,40 +87,30 @@ const Exchange = ({
                 onChange={(ev) => handleInputState(ev.target.value)}
             />
 
-            {buyOrSell === "buy" ? (
-                <CostContainer>
+            <CostContainer>
+                <p>
+                    <Label>Price</Label> ${abbreviateNumber(elem.price)}
+                </p>
+                {buyOrSell === "buy" && (
                     <p>
-                        <CostLabel>Price</CostLabel> $
-                        {abbreviateNumber(elem.price)}
-                    </p>
-                    <p>
-                        <CostLabel>Fee</CostLabel> $
+                        <Label>Fee</Label> $
                         {abbreviateNumber(inputState * elem.price * 0.1)}
                     </p>
-                    <p>
-                        <CostLabel>Total</CostLabel> $
-                        {abbreviateNumber(
-                            inputState * elem.price * 0.1 +
-                                inputState * elem.price
-                        )}
-                    </p>
-                </CostContainer>
-            ) : (
-                <CostContainer>
-                    <p>
-                        <CostLabel>Price</CostLabel> $
-                        {abbreviateNumber(elem.price)}
-                    </p>
-                    <p>
-                        <CostLabel>Total</CostLabel> $
-                        {abbreviateNumber(inputState * elem.price)}
-                    </p>
-                </CostContainer>
-            )}
+                )}
+                <p>
+                    <Label>Total</Label> $
+                    {buyOrSell === "buy"
+                        ? abbreviateNumber(
+                              inputState * elem.price * 0.1 +
+                                  inputState * elem.price
+                          )
+                        : abbreviateNumber(inputState * elem.price)}
+                </p>
+            </CostContainer>
 
-            <CostLabel style={{ marginBottom: "1rem" }}>
+            <Label style={{ marginBottom: "1rem" }}>
                 Shares Owned: {totalShares[elem.name]}
-            </CostLabel>
+            </Label>
             <ButtonWrapper>
                 {buyOrSell === "buy" ? (
                     <Button
@@ -244,7 +234,7 @@ const CostContainer = styled.div`
     }
 `;
 
-const CostLabel = styled.span`
+const Label = styled.span`
     display: block;
     color: rgba(0, 0, 0, 0.6);
 `;
