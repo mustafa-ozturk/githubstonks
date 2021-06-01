@@ -24,6 +24,45 @@ const Exchange = ({
 }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
+
+    const handleBuyOrSellState = (type) => {
+        setBuyOrSell(type);
+    };
+
+    const handleInputState = (value) => {
+        setInputState(value);
+    };
+
+    const handleBuyDispatch = () => {
+        inputState > 0 &&
+            userStatsDispatch({
+                type: "PUSH-TO-BUYS-AND-SELLS",
+                payload: {
+                    type: "BUY",
+                    stockName: elem.name,
+                    quantity: inputState,
+                    purchaseCost: (
+                        inputState * elem.price * 0.1 +
+                        inputState * elem.price
+                    ).toFixed(2),
+                },
+            });
+    };
+    const handleSellDispatch = () => {
+        inputState > 0 &&
+            userStatsDispatch({
+                type: "PUSH-TO-BUYS-AND-SELLS",
+                payload: {
+                    type: "SELL",
+                    stockName: elem.name,
+                    quantity: inputState,
+                    purchaseCost: (
+                        inputState * elem.price * 0.1 +
+                        inputState * elem.price
+                    ).toFixed(2),
+                },
+            });
+    };
     return (
         <Wrapper>
             {buyOrSell === "buy" ? (
@@ -33,7 +72,7 @@ const Exchange = ({
                             color: "rgb(14, 184, 239)",
                             cursor: "pointer",
                         }}
-                        onClick={() => setBuyOrSell("buy")}
+                        onClick={() => handleBuyOrSellState("buy")}
                     >
                         Buy
                     </span>
@@ -47,7 +86,7 @@ const Exchange = ({
                     </span>
                     <span
                         style={{ cursor: "pointer" }}
-                        onClick={() => setBuyOrSell("sell")}
+                        onClick={() => handleBuyOrSellState("sell")}
                     >
                         Sell
                     </span>
@@ -56,7 +95,7 @@ const Exchange = ({
                 <DivSellContainer>
                     <span
                         style={{ cursor: "pointer" }}
-                        onClick={() => setBuyOrSell("buy")}
+                        onClick={() => handleBuyOrSellState("buy")}
                     >
                         Buy
                     </span>
@@ -70,7 +109,7 @@ const Exchange = ({
                     </span>
                     <span
                         style={{ color: "rgb(221,21,33)", cursor: "pointer" }}
-                        onClick={() => setBuyOrSell("sell")}
+                        onClick={() => handleBuyOrSellState("sell")}
                     >
                         Sell
                     </span>
@@ -81,7 +120,7 @@ const Exchange = ({
                     type="number"
                     min="0"
                     placeholder="0"
-                    onChange={(ev) => setInputState(ev.target.value)}
+                    onChange={(ev) => handleInputState(ev.target.value)}
                 />
             ) : (
                 <Input
@@ -89,7 +128,7 @@ const Exchange = ({
                     min="0"
                     max={totalShares[elem.name]}
                     placeholder="0"
-                    onChange={(ev) => setInputState(ev.target.value)}
+                    onChange={(ev) => handleInputState(ev.target.value)}
                 />
             )}
             {buyOrSell === "buy" ? (
@@ -131,22 +170,7 @@ const Exchange = ({
             <ButtonWrapper>
                 {buyOrSell === "buy" ? (
                     <Button
-                        onClick={() => {
-                            console.log("button clicked");
-                            inputState > 0 &&
-                                userStatsDispatch({
-                                    type: "PUSH-TO-BUYS-AND-SELLS",
-                                    payload: {
-                                        type: "BUY",
-                                        stockName: elem.name,
-                                        quantity: inputState,
-                                        purchaseCost: (
-                                            inputState * elem.price * 0.1 +
-                                            inputState * elem.price
-                                        ).toFixed(2),
-                                    },
-                                });
-                        }}
+                        onClick={() => handleBuyDispatch()}
                         style={{
                             backgroundColor:
                                 balance >= inputState
@@ -163,22 +187,7 @@ const Exchange = ({
                     </Button>
                 ) : (
                     <Button
-                        onClick={() => {
-                            console.log("button clicked");
-                            inputState > 0 &&
-                                userStatsDispatch({
-                                    type: "PUSH-TO-BUYS-AND-SELLS",
-                                    payload: {
-                                        type: "SELL",
-                                        stockName: elem.name,
-                                        quantity: inputState,
-                                        purchaseCost: (
-                                            inputState * elem.price * 0.1 +
-                                            inputState * elem.price
-                                        ).toFixed(2),
-                                    },
-                                });
-                        }}
+                        onClick={() => handleSellDispatch()}
                         style={{
                             backgroundColor:
                                 totalShares[elem.name] >= inputState
