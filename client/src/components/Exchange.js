@@ -108,9 +108,10 @@ const Exchange = ({
                 </p>
             </CostContainer>
 
-            <Label style={{ marginBottom: "1rem" }}>
+            <span className="sharesOwned">
                 Shares Owned: {totalShares[elem.name]}
-            </Label>
+            </span>
+
             <ButtonWrapper>
                 {buyOrSell === "buy" ? (
                     <Button
@@ -168,6 +169,12 @@ const Wrapper = styled.div`
     position: relative;
     top: 72px;
     margin-left: 8px;
+
+    & .sharesOwned {
+        margin-bottom: 1rem;
+        display: block;
+        color: rgba(0, 0, 0, 0.6);
+    }
 `;
 
 const BuyOrSellTabContainer = styled.div`
