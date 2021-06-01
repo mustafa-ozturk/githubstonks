@@ -65,56 +65,22 @@ const Exchange = ({
     };
     return (
         <Wrapper>
-            {buyOrSell === "buy" ? (
-                <DivSellContainer>
-                    <span
-                        style={{
-                            color: "rgb(14, 184, 239)",
-                            cursor: "pointer",
-                        }}
-                        onClick={() => handleBuyOrSellState("buy")}
-                    >
-                        Buy
-                    </span>
-                    <span
-                        style={{
-                            margin: "0px 8px 0px 8px",
-                            color: "rgba(0, 0, 0, 0.1)",
-                        }}
-                    >
-                        |
-                    </span>
-                    <span
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleBuyOrSellState("sell")}
-                    >
-                        Sell
-                    </span>
-                </DivSellContainer>
-            ) : (
-                <DivSellContainer>
-                    <span
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleBuyOrSellState("buy")}
-                    >
-                        Buy
-                    </span>
-                    <span
-                        style={{
-                            margin: "0px 8px 0px 8px",
-                            color: "rgba(0, 0, 0, 0.1)",
-                        }}
-                    >
-                        |
-                    </span>
-                    <span
-                        style={{ color: "rgb(221,21,33)", cursor: "pointer" }}
-                        onClick={() => handleBuyOrSellState("sell")}
-                    >
-                        Sell
-                    </span>
-                </DivSellContainer>
-            )}
+            <BuyOrSellTabContainer>
+                <span
+                    className={buyOrSell === "buy" ? "buy onbuy" : "buy"}
+                    onClick={() => handleBuyOrSellState("buy")}
+                >
+                    Buy
+                </span>
+                <span className="seperator">|</span>
+                <span
+                    className={buyOrSell === "sell" ? "sell onsell" : "sell"}
+                    onClick={() => handleBuyOrSellState("sell")}
+                >
+                    Sell
+                </span>
+            </BuyOrSellTabContainer>
+
             {buyOrSell === "buy" ? (
                 <Input
                     type="number"
@@ -226,10 +192,27 @@ const Wrapper = styled.div`
     margin-left: 8px;
 `;
 
-const DivSellContainer = styled.div`
+const BuyOrSellTabContainer = styled.div`
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+
+    & > .buy {
+        cursor: pointer;
+    }
+    & > .onbuy {
+        color: rgb(14, 184, 239);
+    }
+    & > .sell {
+        cursor: pointer;
+    }
+    & > .onsell {
+        color: rgb(221, 21, 33);
+    }
+    & > .seperator {
+        margin: 0px 8px 0px 8px;
+        color: rgba(0, 0, 0, 0.1);
+    }
 `;
 
 const Input = styled.input`
