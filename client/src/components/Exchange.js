@@ -56,10 +56,7 @@ const Exchange = ({
                     type: "SELL",
                     stockName: elem.name,
                     quantity: inputState,
-                    purchaseCost: (
-                        inputState * elem.price * 0.1 +
-                        inputState * elem.price
-                    ).toFixed(2),
+                    purchaseCost: (inputState * elem.price).toFixed(2),
                 },
             });
     };
@@ -84,6 +81,7 @@ const Exchange = ({
             <Input
                 type="number"
                 min="0"
+                // change max stocks you can buy based on balance
                 max={buyOrSell === "buy" ? 1000 : totalShares[elem.name]}
                 placeholder="0"
                 onChange={(ev) => handleInputState(ev.target.value)}
@@ -115,13 +113,11 @@ const Exchange = ({
                     </p>
                     <p>
                         <CostLabel>Total</CostLabel> $
-                        {abbreviateNumber(
-                            inputState * elem.price * 0.1 +
-                                inputState * elem.price
-                        )}
+                        {abbreviateNumber(inputState * elem.price)}
                     </p>
                 </CostContainer>
             )}
+
             <CostLabel style={{ marginBottom: "1rem" }}>
                 Shares Owned: {totalShares[elem.name]}
             </CostLabel>
