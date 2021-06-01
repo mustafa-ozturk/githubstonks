@@ -81,22 +81,14 @@ const Exchange = ({
                 </span>
             </BuyOrSellTabContainer>
 
-            {buyOrSell === "buy" ? (
-                <Input
-                    type="number"
-                    min="0"
-                    placeholder="0"
-                    onChange={(ev) => handleInputState(ev.target.value)}
-                />
-            ) : (
-                <Input
-                    type="number"
-                    min="0"
-                    max={totalShares[elem.name]}
-                    placeholder="0"
-                    onChange={(ev) => handleInputState(ev.target.value)}
-                />
-            )}
+            <Input
+                type="number"
+                min="0"
+                max={buyOrSell === "buy" ? 1000 : totalShares[elem.name]}
+                placeholder="0"
+                onChange={(ev) => handleInputState(ev.target.value)}
+            />
+
             {buyOrSell === "buy" ? (
                 <CostContainer>
                     <p>
