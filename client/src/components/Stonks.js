@@ -101,7 +101,6 @@ const Stonks = ({
                             </div>
                             <Exchange
                                 elem={elem}
-                                userStats={userStats}
                                 userStatsDispatch={userStatsDispatch}
                                 totalShares={totalShares}
                                 balance={balance}

@@ -13,15 +13,7 @@ function abbreviateNumber(value) {
     }
     return newVal;
 }
-const Exchange = ({
-    elem,
-    userStats,
-    userStatsDispatch,
-    guestUserPurchaseHistory,
-    setGuestUserPurchaseHistory,
-    totalShares,
-    balance,
-}) => {
+const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
 
