@@ -111,7 +111,7 @@ const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
             </span>
 
             <ButtonWrapper>
-                <Button
+                <button
                     onClick={() =>
                         buyOrSell === "buy"
                             ? handleBuyDispatch()
@@ -141,7 +141,7 @@ const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
                     {buyOrSell === "buy"
                         ? `BUY ${elem.symbol}`
                         : `SELL ${elem.symbol}`}
-                </Button>
+                </button>
             </ButtonWrapper>
         </Wrapper>
     );
@@ -151,8 +151,7 @@ const Wrapper = styled.div`
     border-radius: 8px;
     width: 200px;
     height: 315px;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
-        0px 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--main-boxshadow);
     padding: 24px 32px;
     display: flex;
     flex-direction: column;
@@ -178,13 +177,13 @@ const BuyOrSellTabContainer = styled.div`
         cursor: pointer;
     }
     & > .onbuy {
-        color: rgb(14, 184, 239);
+        color: var(--main-blue);
     }
     & > .sell {
         cursor: pointer;
     }
     & > .onsell {
-        color: rgb(221, 21, 33);
+        color: var(--main-red);
     }
     & > .seperator {
         margin: 0px 8px 0px 8px;
@@ -206,6 +205,22 @@ const ButtonWrapper = styled.div`
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 14px;
 
+    & > button {
+        width: 218px;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 16px;
+        color: rgb(255, 255, 255);
+        padding: 24px 72px;
+        border-radius: 4px;
+        cursor: pointer;
+        white-space: nowrap;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14),
+            0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
+    }
     & > .buyBtn {
         background-color: rgb(14, 184, 239);
         border: 1px solid rgb(14, 184, 239);
@@ -222,23 +237,6 @@ const ButtonWrapper = styled.div`
         background-color: rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(0, 0, 0, 0.1);
     }
-`;
-
-const Button = styled.button`
-    width: 218px;
-    height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 16px;
-    color: rgb(255, 255, 255);
-    padding: 24px 72px;
-    border-radius: 4px;
-    cursor: pointer;
-    white-space: nowrap;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
-        0px 1px 3px rgba(0, 0, 0, 0.2);
 `;
 
 const CostContainer = styled.div`
