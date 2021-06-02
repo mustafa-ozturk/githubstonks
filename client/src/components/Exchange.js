@@ -21,6 +21,7 @@ const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
 
     const handleBuyOrSellState = (type) => {
         setBuyOrSell(type);
+        setInputState(0);
     };
 
     const handleInputState = (value) => {
@@ -86,6 +87,7 @@ const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
                 min="0"
                 max={buyOrSell === "buy" ? "" : totalShares[elem.name]}
                 placeholder="0"
+                value={inputState}
                 onChange={(ev) => handleInputState(ev.target.value)}
             />
 
