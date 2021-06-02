@@ -6,20 +6,7 @@ import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import Chart from "./Chart";
 import Exchange from "./Exchange";
-
-function abbreviateNumber(value) {
-    let newVal = value.toFixed(2);
-    if (value >= 1000000000000) {
-        newVal = value / 1000000000000 + "T";
-    } else if (value >= 1000000) {
-        newVal = value / 1000000 + "M";
-    } else if (value >= 1000000000) {
-        newVal = value / 1000000000 + "B";
-    } else if (value >= 1000) {
-        newVal = value / 1000 + "K";
-    }
-    return newVal;
-}
+import { abbreviateNumber } from "../utils";
 
 const Stonks = ({
     stonkData,

@@ -1,21 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-// function abbreviateNumber(value) {
-//     return 0;
-//     let newVal = value.toFixed(2);
-//     if (value >= 1000000000000) {
-//         newVal = value / 1000000000000 + "T";
-//     } else if (value >= 1000000) {
-//         newVal = value / 1000000 + "M";
-//     } else if (value >= 1000000000) {
-//         newVal = value / 1000000000 + "B";
-//     } else if (value >= 1000) {
-//         newVal = value / 1000 + "K";
-//     }
-//     return newVal;
-// }
-
 const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
     return (
         <Wrapper>

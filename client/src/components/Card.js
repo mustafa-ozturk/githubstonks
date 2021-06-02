@@ -4,20 +4,7 @@ import { Link } from "react-router-dom";
 import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
-
-function abbreviateNumber(value) {
-    let newVal = value.toFixed(2);
-    if (value >= 1000000000000) {
-        newVal = value / 1000000000000 + "T";
-    } else if (value >= 1000000) {
-        newVal = value / 1000000 + "M";
-    } else if (value >= 1000000000) {
-        newVal = value / 1000000000 + "B";
-    } else if (value >= 1000) {
-        newVal = value / 1000 + "K";
-    }
-    return newVal;
-}
+import { abbreviateNumber } from "../utils";
 
 const Card = ({ stonkData }) => {
     return (
