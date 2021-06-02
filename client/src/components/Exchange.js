@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 function abbreviateNumber(value) {
     let newVal = value.toFixed(2);
     if (value >= 1000000000000) {
@@ -13,6 +14,7 @@ function abbreviateNumber(value) {
     }
     return newVal;
 }
+
 const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
@@ -52,6 +54,15 @@ const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
                 },
             });
     };
+
+    const price = abbreviateNumber(elem.price);
+    const fee = abbreviateNumber(inputState * elem.price * 0.1);
+    const totalBuyCost = abbreviateNumber(
+        inputState * elem.price * 0.1 + inputState * elem.price
+    );
+    const totalSellCost = abbreviateNumber(inputState * elem.price);
+    const totalSharesOwned = totalShares[elem.name];
+
     return (
         <Wrapper>
             <BuyOrSellTabContainer>
@@ -80,27 +91,21 @@ const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
 
             <CostContainer>
                 <p>
-                    <Label>Price</Label> ${abbreviateNumber(elem.price)}
+                    <Label>Price</Label> ${price}
                 </p>
                 {buyOrSell === "buy" && (
                     <p>
-                        <Label>Fee</Label> $
-                        {abbreviateNumber(inputState * elem.price * 0.1)}
+                        <Label>Fee</Label> ${fee}
                     </p>
                 )}
                 <p>
                     <Label>Total</Label> $
-                    {buyOrSell === "buy"
-                        ? abbreviateNumber(
-                              inputState * elem.price * 0.1 +
-                                  inputState * elem.price
-                          )
-                        : abbreviateNumber(inputState * elem.price)}
+                    {buyOrSell === "buy" ? totalBuyCost : totalSellCost}
                 </p>
             </CostContainer>
 
             <span className="sharesOwned">
-                Shares Owned: {totalShares[elem.name]}
+                Shares Owned: {totalSharesOwned}
             </span>
 
             <ButtonWrapper>
@@ -112,25 +117,21 @@ const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
                     }
                     className={
                         buyOrSell === "buy"
-                            ? balance >=
-                              inputState * elem.price * 0.1 +
-                                  inputState * elem.price
+                            ? balance >= totalBuyCost
                                 ? "buyBtn"
                                 : "buyBtnDisabled"
-                            : totalShares[elem.name] >= inputState &&
-                              totalShares[elem.name] > 0
+                            : totalSharesOwned >= inputState &&
+                              totalSharesOwned > 0
                             ? "sellBtn"
                             : "sellBtnDisabled"
                     }
                     disabled={
                         buyOrSell === "buy"
-                            ? balance >=
-                              inputState * elem.price * 0.1 +
-                                  inputState * elem.price
+                            ? balance >= totalBuyCost
                                 ? false
                                 : true
-                            : totalShares[elem.name] >= inputState &&
-                              totalShares[elem.name] > 0
+                            : totalSharesOwned >= inputState &&
+                              totalSharesOwned > 0
                             ? false
                             : true
                     }
