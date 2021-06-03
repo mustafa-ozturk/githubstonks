@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -9,7 +9,7 @@ import Card from "./components/Card";
 import { StonkContext } from "./context/StonkContext";
 import { GuestUserContext } from "./context/GuestUserContext";
 
-const App = () => {
+const GuestApp = () => {
     const stonkData = useContext(StonkContext);
     const {
         userStats,
@@ -21,10 +21,6 @@ const App = () => {
         totalShares,
         accountStats,
     } = useContext(GuestUserContext);
-
-    // if(isRedirectToGuest) {
-    //     return <Redirect to="/guest"/>
-    // }
     return (
         <>
             <Wrapper>
@@ -38,7 +34,7 @@ const App = () => {
                     <Navbar />
                     <ContentWrapper>
                         <Switch>
-                            <Route path="/stonk/:stonkname">
+                            <Route path="/guest/stonk/:stonkname">
                                 <Stonks
                                     stonkData={stonkData}
                                     userStats={userStats}
@@ -47,7 +43,7 @@ const App = () => {
                                     balance={balance}
                                 />
                             </Route>
-                            <Route path="/account">
+                            <Route path="/guest/account">
                                 <Account
                                     stonkData={stonkData}
                                     userStats={userStats}
@@ -55,11 +51,11 @@ const App = () => {
                                     accountStats={accountStats}
                                 />
                             </Route>
-                            <Route path="/">
+                            <Route path="/guest">
                                 <CardWrapper>
                                     <Card
                                         stonkData={stonkData}
-                                        isGuest={false}
+                                        isGuest={true}
                                     />
                                 </CardWrapper>
                             </Route>
@@ -92,4 +88,4 @@ const CardWrapper = styled.div`
     flex-direction: row;
 `;
 
-export default App;
+export default GuestApp;

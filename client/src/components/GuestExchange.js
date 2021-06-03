@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { abbreviateNumber } from "../utils";
 
-const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
+const GuestExchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
 
@@ -60,7 +60,7 @@ const Exchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
                 >
                     Buy
                 </span>
-                <span className="seperator">|</span>
+                <span className="seperator">|guest exchange|</span>
                 <span
                     className={buyOrSell === "sell" ? "sell onsell" : "sell"}
                     onClick={() => handleBuyOrSellState("sell")}
@@ -239,4 +239,4 @@ const Label = styled.span`
     color: rgba(0, 0, 0, 0.6);
 `;
 
-export default Exchange;
+export default GuestExchange;

@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+
+// uselocation
 const Navbar = () => {
     return (
         <Wrapper>
             <NavBarItem
                 className="active"
                 exact
-                to="/"
+                to="/guest"
                 activeStyle={{
                     fontWeight: "bold",
                     color: "rgb(14, 184, 239)",
@@ -17,7 +19,7 @@ const Navbar = () => {
             </NavBarItem>
             <NavBarItem
                 exact
-                to="/account"
+                to="/guest/account"
                 activeStyle={{
                     fontWeight: "bold",
                     color: "rgb(14, 184, 239)",

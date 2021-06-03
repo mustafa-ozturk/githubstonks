@@ -6,13 +6,19 @@ import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import { abbreviateNumber } from "../utils";
 
-const Card = ({ stonkData }) => {
+const Card = ({ stonkData, isGuest }) => {
     return (
         <>
             {stonkData.map((elem, index) => {
                 return (
                     <Wrapper key={index}>
-                        <Links to={`/stonk/${elem.name}`}>
+                        <Links
+                            to={
+                                isGuest
+                                    ? `/guest/stonk/${elem.name}`
+                                    : `/stonk/${elem.name}`
+                            }
+                        >
                             <IconNameSymbol>
                                 <StockIcon src={elem.logo} />
                                 <StockName>{elem.name}</StockName>

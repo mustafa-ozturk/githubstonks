@@ -5,7 +5,7 @@ import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import Chart from "./Chart";
-import Exchange from "./Exchange";
+import Exchange from "./GuestExchange";
 import { abbreviateNumber } from "../utils";
 
 const Stonks = ({
