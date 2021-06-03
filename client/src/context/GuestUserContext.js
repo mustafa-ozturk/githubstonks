@@ -7,7 +7,6 @@ const initialUserStatsState = {
 };
 
 function userStatsReducer(state, action) {
-    console.log(action);
     switch (action.type) {
         case "PUSH-TO-BUYS-AND-SELLS":
             return {
@@ -122,7 +121,7 @@ export const GuestUserProvider = ({ children }) => {
         //     },
         userStats.buysAndSells.forEach((elem) => {
             stonksAndCost[elem.stockName].name = elem.stockName;
-            stonkData.find((e) => {
+            stonkData.forEach((e) => {
                 if (e.name === elem.stockName) {
                     // finding the symbol
                     stonksAndCost[elem.stockName].symbol = e.symbol;

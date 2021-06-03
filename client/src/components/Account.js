@@ -20,23 +20,22 @@ const Account = ({ stonkData, userStats, totalShares, accountStats }) => {
                     </Thead>
                     <tbody>
                         {Object.keys(accountStats).map((elem, index) => {
-                            if (accountStats[elem].name !== undefined) {
-                                return (
-                                    <tr key={index}>
-                                        <Td>{accountStats[elem].name}</Td>
-                                        <Td>{accountStats[elem].symbol}</Td>
-                                        <Td>${accountStats[elem].price}</Td>
-                                        <Td>{accountStats[elem].quantity}</Td>
-                                        <Td>${accountStats[elem].totalCost}</Td>
-                                        <Td>
-                                            ${accountStats[elem].gainLossDollar}
-                                        </Td>
-                                        <Td>
-                                            ${accountStats[elem].currentValue}
-                                        </Td>
-                                    </tr>
-                                );
+                            if (accountStats[elem].name === undefined) {
+                                return [];
                             }
+                            return (
+                                <tr key={index}>
+                                    <Td>{accountStats[elem].name}</Td>
+                                    <Td>{accountStats[elem].symbol}</Td>
+                                    <Td>${accountStats[elem].price}</Td>
+                                    <Td>{accountStats[elem].quantity}</Td>
+                                    <Td>${accountStats[elem].totalCost}</Td>
+                                    <Td>
+                                        ${accountStats[elem].gainLossDollar}
+                                    </Td>
+                                    <Td>${accountStats[elem].currentValue}</Td>
+                                </tr>
+                            );
                         })}
                     </tbody>
                 </Table>
