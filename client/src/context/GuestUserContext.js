@@ -106,14 +106,6 @@ export const GuestUserProvider = ({ children }) => {
         return stonksOwned;
     };
 
-    // name
-    // symbol
-    // current price
-    // quantity
-    // how much did they pay total (fee included) at the time
-    // how much did they gain/lose $
-    // how much did they gain/lose %
-    // total value
     const getAccountStat = () => {
         let stonksAndCost = {
             React: {},
@@ -122,11 +114,11 @@ export const GuestUserProvider = ({ children }) => {
         };
         //         name: ,
         //         symbol : ,
-        //         currentPrice: ,
+        //         price: ,
         //         quantity: ,
         //         totalCost: ,
         //         gainLossDollar: ,  totalCost -  price * quantity,
-        //         totalValue: ,
+        //         currentValue: ,
         //     },
         userStats.buysAndSells.forEach((elem) => {
             stonksAndCost[elem.stockName].name = elem.stockName;
@@ -171,16 +163,15 @@ export const GuestUserProvider = ({ children }) => {
                 stonksAndCost[elem.stockName].quantity;
         });
 
-        return console.log("stonksAndCost", stonksAndCost);
+        return stonksAndCost;
     };
-    getAccountStat();
 
     const balance = getBalance();
     const portfolioValue = getPortfolioValue();
     const netWorth = getNetWorth();
     const profitLoss = getProfitLoss();
     const totalShares = getTotalShares();
-
+    const accountStats = getAccountStat();
     return (
         <GuestUserContext.Provider
             value={{
@@ -191,6 +182,7 @@ export const GuestUserProvider = ({ children }) => {
                 netWorth,
                 profitLoss,
                 totalShares,
+                accountStats,
             }}
         >
             {children}

@@ -19,6 +19,7 @@ const App = () => {
         netWorth,
         profitLoss,
         totalShares,
+        accountStats,
     } = useContext(GuestUserContext);
     return (
         <>
@@ -53,6 +54,7 @@ const App = () => {
                                         stonkData={stonkData}
                                         userStats={userStats}
                                         totalShares={totalShares}
+                                        accountStats={accountStats}
                                     />
                                 </Route>
                             </Switch>

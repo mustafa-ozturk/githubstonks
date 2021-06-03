@@ -1,40 +1,43 @@
 import React from "react";
 import styled from "styled-components";
-const Account = ({ stonkData, userStats, totalShares }) => {
+const Account = ({ stonkData, userStats, totalShares, accountStats }) => {
     return (
         <Wrapper>
             <div>
                 <Table>
                     <Thead>
                         <tr>
-                            <Th>Logo</Th>
+                            {/* add logo  */}
+                            {/* <Th>Logo</Th> */}
                             <Th>Name</Th>
                             <Th>Symbol</Th>
                             <Th>Price</Th>
                             <Th>Quantity</Th>
                             <Th>Total Cost Basis</Th>
                             <Th>Total Gain/Loss ($)</Th>
-                            <Th>Total Gain/Loss (%)</Th>
                             <Th>Current Value</Th>
                         </tr>
                     </Thead>
                     <tbody>
-                        {/* {((elem, index) => {
-                            console.log(elem);
-                            elem.type === "buy" return (
-                                <tr key={index}>
-                                    <Td>⚛</Td>
-                                    <Td>React</Td>
-                                    <Td>RCT</Td>
-                                    <Td>$420</Td>
-                                    <Td>10</Td>
-                                    <Td>$4200</Td>
-                                    <Td>$0</Td>
-                                    <Td>%0</Td>
-                                    <Td>$420</Td>
-                                </tr>
-                            );
-                        })} */}
+                        {Object.keys(accountStats).map((elem, index) => {
+                            if (accountStats[elem].name !== undefined) {
+                                return (
+                                    <tr key={index}>
+                                        <Td>{accountStats[elem].name}</Td>
+                                        <Td>{accountStats[elem].symbol}</Td>
+                                        <Td>${accountStats[elem].price}</Td>
+                                        <Td>{accountStats[elem].quantity}</Td>
+                                        <Td>${accountStats[elem].totalCost}</Td>
+                                        <Td>
+                                            ${accountStats[elem].gainLossDollar}
+                                        </Td>
+                                        <Td>
+                                            ${accountStats[elem].currentValue}
+                                        </Td>
+                                    </tr>
+                                );
+                            }
+                        })}
                     </tbody>
                 </Table>
             </div>
