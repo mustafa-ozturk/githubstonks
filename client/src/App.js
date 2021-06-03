@@ -49,7 +49,11 @@ const App = () => {
                                     />
                                 </Route>
                                 <Route exact path="/account">
-                                    <Account />
+                                    <Account
+                                        stonkData={stonkData}
+                                        userStats={userStats}
+                                        totalShares={totalShares}
+                                    />
                                 </Route>
                             </Switch>
                         </ContentWrapper>

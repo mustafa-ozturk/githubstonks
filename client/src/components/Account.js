@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-const Account = () => {
+const Account = ({ stonkData, userStats, totalShares }) => {
     return (
         <Wrapper>
             <div>
@@ -19,17 +19,22 @@ const Account = () => {
                         </tr>
                     </Thead>
                     <tbody>
-                        <tr>
-                            <Td>⚛</Td>
-                            <Td>React</Td>
-                            <Td>RCT</Td>
-                            <Td>$420</Td>
-                            <Td>10</Td>
-                            <Td>$4200</Td>
-                            <Td>$0</Td>
-                            <Td>%0</Td>
-                            <Td>$420</Td>
-                        </tr>
+                        {/* {((elem, index) => {
+                            console.log(elem);
+                            elem.type === "buy" return (
+                                <tr key={index}>
+                                    <Td>⚛</Td>
+                                    <Td>React</Td>
+                                    <Td>RCT</Td>
+                                    <Td>$420</Td>
+                                    <Td>10</Td>
+                                    <Td>$4200</Td>
+                                    <Td>$0</Td>
+                                    <Td>%0</Td>
+                                    <Td>$420</Td>
+                                </tr>
+                            );
+                        })} */}
                     </tbody>
                 </Table>
             </div>

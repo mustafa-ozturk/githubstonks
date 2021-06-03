@@ -105,6 +105,76 @@ export const GuestUserProvider = ({ children }) => {
         });
         return stonksOwned;
     };
+
+    // name
+    // symbol
+    // current price
+    // quantity
+    // how much did they pay total (fee included) at the time
+    // how much did they gain/lose $
+    // how much did they gain/lose %
+    // total value
+    const getAccountStat = () => {
+        let stonksAndCost = {
+            React: {},
+            Angular: {},
+            Vue: {},
+        };
+        //         name: ,
+        //         symbol : ,
+        //         currentPrice: ,
+        //         quantity: ,
+        //         totalCost: ,
+        //         gainLossDollar: ,  totalCost -  price * quantity,
+        //         totalValue: ,
+        //     },
+        userStats.buysAndSells.forEach((elem) => {
+            stonksAndCost[elem.stockName].name = elem.stockName;
+            stonkData.find((e) => {
+                if (e.name === elem.stockName) {
+                    // finding the symbol
+                    stonksAndCost[elem.stockName].symbol = e.symbol;
+                    // finding the current price (up to date)
+                    stonksAndCost[elem.stockName].price = e.price;
+                }
+            });
+
+            if (elem.type === "BUY") {
+                stonksAndCost[elem.stockName].quantity === undefined
+                    ? (stonksAndCost[elem.stockName].quantity = parseInt(
+                          elem.quantity
+                      ))
+                    : (stonksAndCost[elem.stockName].quantity += parseInt(
+                          elem.quantity
+                      ));
+                stonksAndCost[elem.stockName].cost === undefined
+                    ? (stonksAndCost[elem.stockName].totalCost = parseFloat(
+                          elem.purchaseCost
+                      ))
+                    : (stonksAndCost[elem.stockName].totalCost += parseFloat(
+                          elem.purchaseCost
+                      ));
+            } else {
+                stonksAndCost[elem.stockName].quantity -= parseInt(
+                    elem.quantity
+                );
+                stonksAndCost[elem.stockName].totalCost -= parseFloat(
+                    elem.purchaseCost
+                );
+            }
+            stonksAndCost[elem.stockName].gainLossDollar =
+                stonksAndCost[elem.stockName].price *
+                    stonksAndCost[elem.stockName].quantity -
+                stonksAndCost[elem.stockName].totalCost;
+            stonksAndCost[elem.stockName].currentValue =
+                stonksAndCost[elem.stockName].price *
+                stonksAndCost[elem.stockName].quantity;
+        });
+
+        return console.log("stonksAndCost", stonksAndCost);
+    };
+    getAccountStat();
+
     const balance = getBalance();
     const portfolioValue = getPortfolioValue();
     const netWorth = getNetWorth();
