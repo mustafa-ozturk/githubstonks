@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
@@ -25,6 +25,30 @@ const App = () => {
     // if(isRedirectToGuest) {
     //     return <Redirect to="/guest"/>
     // }
+
+    useEffect(() => {
+        if (window.location.search) {
+            console.log("hey");
+            const params = new URLSearchParams(window.location.search);
+            const param = params.get("id");
+            localStorage.setItem("id", param);
+        }
+        console.log("local", localStorage.getItem("id"));
+        if (localStorage.getItem("id") !== undefined) {
+            fetch("http://localhost:8000/api/user/auth", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id: localStorage.getItem("id") }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                });
+        }
+    }, []);
+
     return (
         <>
             <Wrapper>

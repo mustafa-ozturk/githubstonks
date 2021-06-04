@@ -27,6 +27,9 @@ const Navbar = () => {
             >
                 Acount
             </NavBarItem>
+            <a href="http://localhost:8000/api/user/signin">
+                Sign in with Github
+            </a>
         </Wrapper>
     );
 };
