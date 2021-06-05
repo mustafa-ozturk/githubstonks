@@ -6,15 +6,15 @@ import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import { abbreviateNumber } from "../utils";
 
-const Card = ({ stonkData, isGuest }) => {
+const Card = ({ stonkData, userType }) => {
     return (
-        <>
+        <CardWrapper>
             {stonkData.map((elem, index) => {
                 return (
                     <Wrapper key={index}>
                         <Links
                             to={
-                                isGuest
+                                userType === "guest"
                                     ? `/guest/stonk/${elem.name}`
                                     : `/stonk/${elem.name}`
                             }
@@ -58,9 +58,17 @@ const Card = ({ stonkData, isGuest }) => {
                     </Wrapper>
                 );
             })}
-        </>
+        </CardWrapper>
     );
 };
+
+const CardWrapper = styled.div`
+    padding: 1.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+`;
 
 const Wrapper = styled.div`
     margin: 1rem;

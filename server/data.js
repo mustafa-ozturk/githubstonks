@@ -54,10 +54,10 @@ const githubData = {
     },
 };
 
-const totalShares = {
+const guestTotalShares = {
     react: 0,
     angular: 0,
     vue: 0,
 };
 
-module.exports = { stocknames, githubData, totalShares };
+module.exports = { stocknames, githubData, guestTotalShares };

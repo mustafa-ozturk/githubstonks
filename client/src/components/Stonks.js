@@ -5,15 +5,16 @@ import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import Chart from "./Chart";
-import Exchange from "./GuestExchange";
+import GuestExchange from "../guest/GuestExchange";
+import RealExchange from "./RealExchange";
 import { abbreviateNumber } from "../utils";
 
 const Stonks = ({
+    userType,
     stonkData,
-    userStats,
-    userStatsDispatch,
-    totalShares,
-    balance,
+    guestUserStatsDispatch,
+    guestTotalShares,
+    guestBalance,
 }) => {
     let { stonkname } = useParams();
     return (
@@ -86,12 +87,18 @@ const Stonks = ({
                                     </History>
                                 </Container>
                             </div>
-                            <Exchange
-                                elem={elem}
-                                userStatsDispatch={userStatsDispatch}
-                                totalShares={totalShares}
-                                balance={balance}
-                            />
+                            {userType === "guest" ? (
+                                <GuestExchange
+                                    elem={elem}
+                                    guestUserStatsDispatch={
+                                        guestUserStatsDispatch
+                                    }
+                                    guestTotalShares={guestTotalShares}
+                                    guestBalance={guestBalance}
+                                />
+                            ) : (
+                                <RealExchange elem={elem} />
+                            )}
                         </Wrapper>
                     );
                 }

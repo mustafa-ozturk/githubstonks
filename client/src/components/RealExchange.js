@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { abbreviateNumber } from "../utils";
 
-const GuestExchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
+const RealExchange = ({
+    elem,
+    guestUserStatsDispatch,
+    guestTotalShares,
+    guestBalance,
+}) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
 
@@ -15,41 +20,13 @@ const GuestExchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
         setInputState(value);
     };
 
-    const handleBuyDispatch = () => {
-        inputState > 0 &&
-            userStatsDispatch({
-                type: "PUSH-TO-BUYS-AND-SELLS",
-                payload: {
-                    type: "BUY",
-                    stockName: elem.name,
-                    quantity: inputState,
-                    purchaseCost: (
-                        inputState * elem.price * 0.1 +
-                        inputState * elem.price
-                    ).toFixed(2),
-                },
-            });
-    };
-    const handleSellDispatch = () => {
-        inputState > 0 &&
-            userStatsDispatch({
-                type: "PUSH-TO-BUYS-AND-SELLS",
-                payload: {
-                    type: "SELL",
-                    stockName: elem.name,
-                    quantity: inputState,
-                    purchaseCost: (inputState * elem.price).toFixed(2),
-                },
-            });
-    };
-
     const price = abbreviateNumber(elem.price);
     const fee = abbreviateNumber(inputState * elem.price * 0.1);
     const totalBuyCost = abbreviateNumber(
         inputState * elem.price * 0.1 + inputState * elem.price
     );
     const totalSellCost = abbreviateNumber(inputState * elem.price);
-    const totalSharesOwned = totalShares[elem.name];
+    const realUserTotalShares = 0;
 
     return (
         <Wrapper>
@@ -60,7 +37,7 @@ const GuestExchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
                 >
                     Buy
                 </span>
-                <span className="seperator">|guest exchange|</span>
+                <span className="seperator">|real exchange|</span>
                 <span
                     className={buyOrSell === "sell" ? "sell onsell" : "sell"}
                     onClick={() => handleBuyOrSellState("sell")}
@@ -72,7 +49,7 @@ const GuestExchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
             <Input
                 type="number"
                 min="0"
-                max={buyOrSell === "buy" ? "" : totalShares[elem.name]}
+                max={buyOrSell === "buy" ? "" : guestTotalShares[elem.name]}
                 placeholder="0"
                 value={inputState}
                 onChange={(ev) => handleInputState(ev.target.value)}
@@ -94,33 +71,33 @@ const GuestExchange = ({ elem, userStatsDispatch, totalShares, balance }) => {
             </CostContainer>
 
             <span className="sharesOwned">
-                Shares Owned: {totalSharesOwned}
+                Shares Owned: {realUserTotalShares}
             </span>
 
             <ButtonWrapper>
                 <button
-                    onClick={() =>
-                        buyOrSell === "buy"
-                            ? handleBuyDispatch()
-                            : handleSellDispatch()
-                    }
+                    // onClick={() =>
+                    //     buyOrSell === "buy"
+                    //         ? handleBuyDispatch()
+                    //         : handleSellDispatch()
+                    // }
                     className={
                         buyOrSell === "buy"
-                            ? balance >= totalBuyCost
+                            ? guestBalance >= totalBuyCost
                                 ? "buyBtn"
                                 : "buyBtnDisabled"
-                            : totalSharesOwned >= inputState &&
-                              totalSharesOwned > 0
+                            : realUserTotalShares >= inputState &&
+                              realUserTotalShares > 0
                             ? "sellBtn"
                             : "sellBtnDisabled"
                     }
                     disabled={
                         buyOrSell === "buy"
-                            ? balance >= totalBuyCost
+                            ? guestBalance >= totalBuyCost
                                 ? false
                                 : true
-                            : totalSharesOwned >= inputState &&
-                              totalSharesOwned > 0
+                            : realUserTotalShares >= inputState &&
+                              realUserTotalShares > 0
                             ? false
                             : true
                     }
@@ -239,4 +216,4 @@ const Label = styled.span`
     color: rgba(0, 0, 0, 0.6);
 `;
 
-export default GuestExchange;
+export default RealExchange;

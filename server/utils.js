@@ -1,15 +1,15 @@
-const { stocknames, githubData, totalShares } = require("./data");
+const { stocknames, githubData, guestTotalShares } = require("./data");
 
 const stockShares = (stockname) => {
-    return totalShares[stockname];
+    return guestTotalShares[stockname];
 };
 
 const buyOrSellShares = (type, stockname, newnum) => {
     if (type === "buy") {
-        totalShares[stockname] += newnum;
+        guestTotalShares[stockname] += newnum;
     }
     if (type === "sell") {
-        totalShares[stockname] -= newnum;
+        guestTotalShares[stockname] -= newnum;
     }
 };
 
@@ -22,7 +22,7 @@ const initialSharePrice = (stockname) => {
 };
 
 const sharePriceAfterUserMarket = (stockname) => {
-    return initialSharePrice(stockname) + totalShares[stockname] * 0.001;
+    return initialSharePrice(stockname) + guestTotalShares[stockname] * 0.001;
 };
 
 const dollarIncreaseFromInitialPrice = (stockname) => {

@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 // uselocation
-const Navbar = () => {
+const Navbar = ({ userType }) => {
     return (
         <Wrapper>
             <NavBarItem
                 className="active"
                 exact
-                to="/guest"
+                to={userType === "guest" ? "/guest" : "/"}
                 activeStyle={{
                     fontWeight: "bold",
                     color: "rgb(14, 184, 239)",
@@ -19,7 +19,7 @@ const Navbar = () => {
             </NavBarItem>
             <NavBarItem
                 exact
-                to="/guest/account"
+                to={userType === "guest" ? "/guest/account" : "/account"}
                 activeStyle={{
                     fontWeight: "bold",
                     color: "rgb(14, 184, 239)",
@@ -27,9 +27,19 @@ const Navbar = () => {
             >
                 Acount
             </NavBarItem>
-            <a href="http://localhost:8000/api/user/signin">
-                Sign in with Github
-            </a>
+            {userType === "guest" ? (
+                <a href="http://localhost:8000/api/user/signin">
+                    Sign in with Github
+                </a>
+            ) : (
+                <a
+                    href="http://localhost:3000/guest"
+                    onClick={() => localStorage.removeItem("id")}
+                >
+                    Logout
+                </a>
+            )}
+            <p>account type {userType}</p>
         </Wrapper>
     );
 };

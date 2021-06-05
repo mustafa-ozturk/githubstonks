@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-const Account = ({ guestAccountStats }) => {
+const GuestAccount = ({ guestAccountStats }) => {
     return (
         <Wrapper>
             <div>
@@ -19,7 +19,7 @@ const Account = ({ guestAccountStats }) => {
                         </tr>
                     </Thead>
                     <tbody>
-                        {/* {Object.keys(guestAccountStats).map((elem, index) => {
+                        {Object.keys(guestAccountStats).map((elem, index) => {
                             if (guestAccountStats[elem].name === undefined) {
                                 return [];
                             }
@@ -41,7 +41,7 @@ const Account = ({ guestAccountStats }) => {
                                     </Td>
                                 </tr>
                             );
-                        })} */}
+                        })}
                     </tbody>
                 </Table>
             </div>
@@ -76,4 +76,8 @@ const Th = styled.th`
     color: black;
 `;
 
-export default Account;
+const Td = styled.td`
+    padding: 1rem;
+`;
+
+export default GuestAccount;

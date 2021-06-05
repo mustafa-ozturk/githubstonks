@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
+const Sidebar = ({ Balance, PortfolioValue, NetWorth, ProfitLoss }) => {
     return (
         <Wrapper>
             <LogoWrapper>
@@ -14,28 +14,28 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                         <SideBarIcon>🏦</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Net Worth</Description>
-                            <span>${netWorth}</span>
+                            <span>${NetWorth}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>📁</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Portfolio Value</Description>
-                            <span>${portfolioValue}</span>
+                            <span>${PortfolioValue}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>💰</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Balance</Description>
-                            <span>${balance}</span>
+                            <span>${Balance}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>📈</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Profit/Loss</Description>
-                            <span>${profitLoss}</span>
+                            <span>${ProfitLoss}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                 </SideBarItemWrapper>

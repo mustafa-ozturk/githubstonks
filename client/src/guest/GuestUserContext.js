@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { StonkContext } from "./StonkContext";
+import { StonkContext } from "../context/StonkContext";
 
-const initialUserStatsState = {
-    startingBalance: 1000,
+const initialguestUserStatsState = {
+    startingguestBalance: 1000,
     buysAndSells: [],
 };
 
-function userStatsReducer(state, action) {
+function guestUserStatsReducer(state, action) {
     switch (action.type) {
         case "PUSH-TO-BUYS-AND-SELLS":
             return {
@@ -23,18 +23,18 @@ export const GuestUserContext = createContext();
 export const GuestUserProvider = ({ children }) => {
     const stonkData = useContext(StonkContext);
 
-    const [userStats, userStatsDispatch] = useReducer(
-        userStatsReducer,
-        initialUserStatsState
+    const [guestUserStats, guestUserStatsDispatch] = useReducer(
+        guestUserStatsReducer,
+        initialguestUserStatsState
     );
-    const getPortfolioValue = () => {
+    const getguestPortfolioValue = () => {
         // find what stocks we own and how many
         let stonksOwned = {
             React: 0,
             Angular: 0,
             Vue: 0,
         };
-        userStats.buysAndSells.forEach((elem) => {
+        guestUserStats.buysAndSells.forEach((elem) => {
             if (elem.type === "BUY") {
                 stonksOwned[elem.stockName] += parseInt(elem.quantity);
             } else {
@@ -42,37 +42,37 @@ export const GuestUserProvider = ({ children }) => {
             }
         });
         // stock we own * its up to date price
-        let portfolioValue = 0;
+        let guestPortfolioValue = 0;
         stonkData.forEach((elem) => {
-            portfolioValue += stonksOwned[elem.name] * elem.price;
+            guestPortfolioValue += stonksOwned[elem.name] * elem.price;
         });
-        return portfolioValue;
+        return guestPortfolioValue;
     };
 
-    const getBalance = () => {
+    const getguestBalance = () => {
         let total = 0;
-        userStats.buysAndSells.forEach((elem) => {
+        guestUserStats.buysAndSells.forEach((elem) => {
             if (elem.type === "BUY") {
                 total += parseFloat(elem.purchaseCost);
             } else {
                 total -= parseFloat(elem.purchaseCost);
             }
         });
-        return userStats.startingBalance - total;
+        return guestUserStats.startingguestBalance - total;
     };
 
-    const getNetWorth = () => {
-        return getPortfolioValue() + getBalance();
+    const getguestNetWorth = () => {
+        return getguestPortfolioValue() + getguestBalance();
     };
 
-    const getProfitLoss = () => {
+    const getguestProfitLoss = () => {
         let stonksOwned = {
             React: 0,
             Angular: 0,
             Vue: 0,
         };
         let totalCostAtPurchase = 0;
-        userStats.buysAndSells.forEach((elem) => {
+        guestUserStats.buysAndSells.forEach((elem) => {
             if (elem.type === "BUY") {
                 stonksOwned[elem.stockName] += parseInt(elem.quantity);
                 totalCostAtPurchase += parseFloat(elem.purchaseCost);
@@ -89,13 +89,13 @@ export const GuestUserProvider = ({ children }) => {
         return currentTotalValueOfShares - totalCostAtPurchase;
     };
 
-    const getTotalShares = () => {
+    const getguestTotalShares = () => {
         let stonksOwned = {
             React: 0,
             Angular: 0,
             Vue: 0,
         };
-        userStats.buysAndSells.forEach((elem) => {
+        guestUserStats.buysAndSells.forEach((elem) => {
             if (elem.type === "BUY") {
                 stonksOwned[elem.stockName] += parseInt(elem.quantity);
             } else {
@@ -119,7 +119,7 @@ export const GuestUserProvider = ({ children }) => {
         //         gainLossDollar: ,  totalCost -  price * quantity,
         //         currentValue: ,
         //     },
-        userStats.buysAndSells.forEach((elem) => {
+        guestUserStats.buysAndSells.forEach((elem) => {
             stonksAndCost[elem.stockName].name = elem.stockName;
             stonkData.forEach((e) => {
                 if (e.name === elem.stockName) {
@@ -165,23 +165,23 @@ export const GuestUserProvider = ({ children }) => {
         return stonksAndCost;
     };
 
-    const balance = getBalance();
-    const portfolioValue = getPortfolioValue();
-    const netWorth = getNetWorth();
-    const profitLoss = getProfitLoss();
-    const totalShares = getTotalShares();
-    const accountStats = getAccountStat();
+    const guestBalance = getguestBalance();
+    const guestPortfolioValue = getguestPortfolioValue();
+    const guestNetWorth = getguestNetWorth();
+    const guestProfitLoss = getguestProfitLoss();
+    const guestTotalShares = getguestTotalShares();
+    const guestAccountStats = getAccountStat();
     return (
         <GuestUserContext.Provider
             value={{
-                userStats,
-                userStatsDispatch,
-                balance,
-                portfolioValue,
-                netWorth,
-                profitLoss,
-                totalShares,
-                accountStats,
+                guestUserStats,
+                guestUserStatsDispatch,
+                guestBalance,
+                guestPortfolioValue,
+                guestNetWorth,
+                guestProfitLoss,
+                guestTotalShares,
+                guestAccountStats,
             }}
         >
             {children}
