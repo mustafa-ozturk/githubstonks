@@ -1,3 +1,4 @@
+// get this data from github
 const githubData = [
     {
         logo: "/assets/react.svg",
@@ -55,19 +56,21 @@ const githubData = [
     },
 ];
 const initialSharePrice = (stockname) => {
-    githubData.find((e) => {
-        if (e.name === stockname) {
-            return e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
-        }
-    });
+    const result = githubData.find((e) => e.name === stockname);
+    if (result) {
+        return (
+            result.stars * 0.0003 +
+            result.forks * 0.0002 +
+            result.commits * 0.0001
+        );
+    }
 };
 
 const sharePriceAfterUserMarket = (stockname) => {
-    githubData.find((e) => {
-        if (e.name === stockname) {
-            return initialSharePrice(stockname) + e.totalBoughtShares * 0.001;
-        }
-    });
+    const result = githubData.find((e) => e.name === stockname);
+    if (result) {
+        return initialSharePrice(stockname) + result.totalBoughtShares * 0.001;
+    }
 };
 
 const dollarIncreaseFromInitialPrice = (stockname) => {
@@ -88,9 +91,9 @@ const stonkData = () => {
             logo: elem.logo,
             name: elem.name,
             symbol: elem.symbol,
-            price: sharePriceAfterUserMarket(elem),
-            increasePrice: dollarIncreaseFromInitialPrice(elem),
-            increasePercent: percentIncreaseFromInitialPrice(elem),
+            price: sharePriceAfterUserMarket(elem.name),
+            increasePrice: dollarIncreaseFromInitialPrice(elem.name),
+            increasePercent: percentIncreaseFromInitialPrice(elem.name),
             stars: elem.stars,
             forks: elem.forks,
             commits: elem.commits,
@@ -98,7 +101,6 @@ const stonkData = () => {
             priceHistory: elem.priceHistory,
         };
     });
-
     return stonkDataArray;
 };
 
