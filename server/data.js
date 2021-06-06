@@ -1,5 +1,3 @@
-const stocknames = ["react", "angular", "vue"];
-
 const githubData = {
     react: {
         logo: "/assets/react.svg",
@@ -9,12 +7,13 @@ const githubData = {
         stars: 169000,
         forks: 34000,
         commits: 14173,
+        totalBoughtShares: 0,
         priceHistory: [
             {
-                $: 0,
+                Price: 0,
             },
             {
-                $: 58.9,
+                Price: 58.9,
             },
         ],
     },
@@ -26,12 +25,13 @@ const githubData = {
         stars: 73400,
         forks: 19300,
         commits: 21010,
+        totalBoughtShares: 0,
         priceHistory: [
             {
-                $: 0,
+                Price: 0,
             },
             {
-                $: 28.0,
+                Price: 28.0,
             },
         ],
     },
@@ -43,21 +43,18 @@ const githubData = {
         stars: 184000,
         forks: 29100,
         commits: 3175,
+        totalBoughtShares: 0,
         priceHistory: [
             {
-                $: 0,
+                Price: 0,
             },
             {
-                $: 61.34,
+                Price: 61.34,
             },
         ],
     },
 };
 
-const guestTotalShares = {
-    react: 0,
-    angular: 0,
-    vue: 0,
+module.exports = {
+    githubData,
 };
-
-module.exports = { stocknames, githubData, guestTotalShares };

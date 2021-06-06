@@ -7,7 +7,10 @@ export const StonkProvider = ({ children }) => {
     useEffect(() => {
         fetch("/api/stonkData")
             .then((response) => response.json())
-            .then(({ data }) => setstonkData(data));
+            .then(({ data }) => {
+                setstonkData(data);
+                console.log("got data from server", data);
+            });
     }, []);
 
     return (

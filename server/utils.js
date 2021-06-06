@@ -1,28 +1,73 @@
-const { stocknames, githubData, guestTotalShares } = require("./data");
-
-const stockShares = (stockname) => {
-    return guestTotalShares[stockname];
-};
-
-const buyOrSellShares = (type, stockname, newnum) => {
-    if (type === "buy") {
-        guestTotalShares[stockname] += newnum;
-    }
-    if (type === "sell") {
-        guestTotalShares[stockname] -= newnum;
-    }
-};
-
+const githubData = [
+    {
+        logo: "/assets/react.svg",
+        name: "React",
+        symbol: "RCT",
+        increase: 0,
+        stars: 169000,
+        forks: 34000,
+        commits: 14173,
+        totalBoughtShares: 0,
+        priceHistory: [
+            {
+                Price: 0,
+            },
+            {
+                Price: 58.9,
+            },
+        ],
+    },
+    {
+        logo: "/assets/angular.svg",
+        name: "Angular",
+        symbol: "AGR",
+        increase: 0,
+        stars: 73400,
+        forks: 19300,
+        commits: 21010,
+        totalBoughtShares: 0,
+        priceHistory: [
+            {
+                Price: 0,
+            },
+            {
+                Price: 28.0,
+            },
+        ],
+    },
+    {
+        logo: "/assets/vue.svg",
+        name: "Vue",
+        symbol: "VUE",
+        increase: 0,
+        stars: 184000,
+        forks: 29100,
+        commits: 3175,
+        totalBoughtShares: 0,
+        priceHistory: [
+            {
+                Price: 0,
+            },
+            {
+                Price: 61.34,
+            },
+        ],
+    },
+];
 const initialSharePrice = (stockname) => {
-    return (
-        githubData[stockname].stars * 0.0003 +
-        githubData[stockname].forks * 0.0002 +
-        githubData[stockname].commits * 0.0001
-    );
+    githubData.find((e) => {
+        if (e.name === stockname) {
+            return e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
+        }
+    });
 };
 
 const sharePriceAfterUserMarket = (stockname) => {
-    return initialSharePrice(stockname) + guestTotalShares[stockname] * 0.001;
+    githubData.find((e) => {
+        if (e.name === stockname) {
+            return initialSharePrice(stockname) + e.totalBoughtShares * 0.001;
+        }
+    });
 };
 
 const dollarIncreaseFromInitialPrice = (stockname) => {
@@ -37,30 +82,25 @@ const percentIncreaseFromInitialPrice = (stockname) => {
 };
 
 const stonkData = () => {
-    let stonkDataArray = [];
-
-    stocknames.forEach((elem) => {
-        const stonkDataObj = {
-            logo: githubData[elem].logo,
-            name: githubData[elem].name,
-            symbol: githubData[elem].symbol,
+    const stonkDataArray = githubData.map((elem, index) => {
+        return {
+            _id: index,
+            logo: elem.logo,
+            name: elem.name,
+            symbol: elem.symbol,
             price: sharePriceAfterUserMarket(elem),
             increasePrice: dollarIncreaseFromInitialPrice(elem),
             increasePercent: percentIncreaseFromInitialPrice(elem),
-            stars: githubData[elem].stars,
-            forks: githubData[elem].forks,
-            commits: githubData[elem].commits,
-            priceHistory: githubData[elem].priceHistory,
+            stars: elem.stars,
+            forks: elem.forks,
+            commits: elem.commits,
+            totalBoughtShares: elem.totalBoughtShares,
+            priceHistory: elem.priceHistory,
         };
-        stonkDataArray.push(stonkDataObj);
     });
 
     return stonkDataArray;
 };
-
-const buyStock = () => {};
-
-const sellStock = () => {};
 
 module.exports = {
     stonkData,
