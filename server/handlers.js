@@ -2,7 +2,6 @@ const { MongoClient } = require("mongodb");
 const ObjectID = require("mongodb").ObjectID;
 require("dotenv").config();
 const Axios = require("axios");
-const db = require("./db.json");
 const { stonkData } = require("./utils");
 const { v4: uuidv4 } = require("uuid");
 // uuidv4()
@@ -12,6 +11,7 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const { MONGO_URI } = process.env;
 const DBNAME = "githubstonks";
 const STOCKDATA_COLLECTION = "stock-data";
+const USER_COLLECTION = "user-data";
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -49,9 +49,11 @@ const handleTest = (req, res) => {
 const insertStockData = async (stockDataArr) => {
     let collection = await connectDb(STOCKDATA_COLLECTION);
     stockDataArr.forEach(async (e) => {
-        const doc = await collection.findOne(e.id);
+        const query = { _id: e._id };
+        const doc = await collection.findOne(query);
+
         if (!doc) {
-            await db.collection(STOCKDATA_COLLECTION).insertOne(e);
+            await collection.insertOne(e);
             console.log("inserted data");
         }
     });
@@ -92,23 +94,31 @@ const handleOauthCallback = async (req, res) => {
             Authorization: `Bearer ${accessToken}`,
         },
     });
-
+    let collection = await connectDb(USER_COLLECTION);
     const user = {
         id: ghData.id,
         username: ghData.login,
     };
-    db.push(user);
+    const query = { id: ghData.id };
+    const result = await collection.findOne(query);
+    if (!result) {
+        await collection.insertOne(user);
+    }
+
+    console.log("inserted data");
+
     res.redirect(`http://localhost:3000?id=${ghData.id}`);
 };
 
-const handleUserAuth = (req, res) => {
+const handleUserAuth = async (req, res) => {
     const { id } = req.body;
-    db.find((elem) => {
-        if (elem.id === parseInt(id)) {
-            return res.json({ message: "user logged in" });
-        }
+    const query = { id: parseInt(id) };
+    let collection = await connectDb(USER_COLLECTION);
+    const result = await collection.findOne(query);
+    if (!result) {
         return res.json({ message: "user not found" });
-    });
+    }
+    return res.json({ message: "user logged in" });
 };
 
 module.exports = {
