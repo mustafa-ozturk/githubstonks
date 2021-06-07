@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 const GuestAccount = ({ guestAccountStats }) => {
+    console.log(guestAccountStats);
     return (
         <Wrapper>
             <div>

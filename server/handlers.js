@@ -98,14 +98,16 @@ const handleOauthCallback = async (req, res) => {
     const user = {
         id: ghData.id,
         username: ghData.login,
+        startingBalance: 1000,
+        buysAndSells: [],
+        stocksOwned: {},
     };
     const query = { id: ghData.id };
     const result = await collection.findOne(query);
     if (!result) {
         await collection.insertOne(user);
+        console.log("inserted data");
     }
-
-    console.log("inserted data");
 
     res.redirect(`http://localhost:3000?id=${ghData.id}`);
 };
@@ -121,10 +123,180 @@ const handleUserAuth = async (req, res) => {
     return res.json({ message: "user logged in" });
 };
 
+const handleUserBuy = async (req, res) => {
+    const bodyObj = {
+        type: req.body.type,
+        stockName: req.body.stockName,
+        symbol: req.body.symbol,
+        quantity: parseInt(req.body.quantity),
+        purchaseCost: parseFloat(req.body.purchaseCost),
+    };
+    const query = { id: parseInt(req.params.id) };
+    const push = { $push: { buysAndSells: bodyObj } };
+    let collection = await connectDb(USER_COLLECTION);
+    await collection.updateOne(query, push);
+    const stockname = req.body.stockName;
+    const updateStock = {
+        $inc: {
+            [`stocksOwned.${stockname}`]: +parseInt(req.body.quantity),
+        },
+    };
+    await collection.updateOne(query, updateStock);
+    return res
+        .status(200)
+        .json({ message: "success pushed buy to buyandsells in db" });
+};
+
+const handleUserSell = async (req, res) => {
+    const bodyObj = {
+        type: req.body.type,
+        stockName: req.body.stockName,
+        symbol: req.body.symbol,
+        quantity: parseInt(req.body.quantity),
+        purchaseCost: parseFloat(req.body.purchaseCost),
+    };
+    const query = { id: parseInt(req.params.id) };
+    const push = { $push: { buysAndSells: bodyObj } };
+    let collection = await connectDb(USER_COLLECTION);
+    await collection.updateOne(query, push);
+    const stockname = req.body.stockName;
+    const updateStock = {
+        $inc: {
+            [`stocksOwned.${stockname}`]: -parseInt(req.body.quantity),
+        },
+    };
+    await collection.updateOne(query, updateStock);
+    return res
+        .status(200)
+        .json({ message: "success pushed sell to buyandsells in db" });
+};
+
+const getBalance = async (id) => {
+    const query = { id: parseInt(id) };
+    let collection = await connectDb(USER_COLLECTION);
+    let result = await collection.findOne(query);
+    let total = 0;
+    result.buysAndSells.forEach((elem) => {
+        if (elem.type === "BUY") {
+            total += parseFloat(elem.purchaseCost);
+        } else {
+            total -= parseFloat(elem.purchaseCost);
+        }
+    });
+    return result.startingBalance - total;
+};
+
+const getPortfolioValue = async (id) => {
+    const query = { id: parseInt(id) };
+    let userCollection = await connectDb(USER_COLLECTION);
+    let result = await userCollection.findOne(query);
+    const stocksOwned = result.stocksOwned;
+    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+    let stockData = await stockCollection.find().toArray();
+    let portfolioValue = 0;
+    stockData.forEach((elem) => {
+        if (stocksOwned[elem.name]) {
+            portfolioValue += stocksOwned[elem.name] * elem.price;
+        }
+    });
+    return portfolioValue;
+};
+
+const getProfitLoss = async (id) => {
+    // get total purchase cost from user data
+    const query = { id: parseInt(id) };
+    let userCollection = await connectDb(USER_COLLECTION);
+    let result = await userCollection.findOne(query);
+    let totalCostAtPurchase = 0;
+    result.buysAndSells.forEach((elem) => {
+        if (elem.type === "BUY") {
+            totalCostAtPurchase += parseFloat(elem.purchaseCost);
+        } else {
+            totalCostAtPurchase -= parseFloat(elem.purchaseCost);
+        }
+    });
+    // get total value of shares owned from stockdata
+    const stocksOwned = result.stocksOwned;
+    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+    let stockData = await stockCollection.find().toArray();
+    let portfolioValue = 0;
+    stockData.forEach((elem) => {
+        if (stocksOwned[elem.name]) {
+            portfolioValue += stocksOwned[elem.name] * elem.price;
+        }
+    });
+    // return total value of shares - total cost at purchase
+    return portfolioValue - totalCostAtPurchase;
+};
+
+const getTotalshares = async (id) => {
+    const query = { id: parseInt(id) };
+    let userCollection = await connectDb(USER_COLLECTION);
+    let result = await userCollection.findOne(query);
+
+    return result.stocksOwned;
+};
+
+const getAccountStats = async (id) => {
+    const query = { id: parseInt(id) };
+    let accountArr = [];
+    let userCollection = await connectDb(USER_COLLECTION);
+    let userResult = await userCollection.findOne(query);
+    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+    let stockData = await stockCollection.find().toArray();
+    // console.log(userResult);
+    // console.log(stockData);
+    Object.keys(userResult.stocksOwned).forEach((stockname) => {
+        let obj = {};
+        obj.name = stockname;
+        const foundData = stockData.find((e) => e.name === stockname);
+        obj.symbol = foundData.symbol;
+        obj.price = foundData.price;
+        obj.quantity = userResult.stocksOwned[stockname];
+        const foundStocksBought = userResult.buysAndSells.filter(
+            (e) => e.stockName === stockname && e.type === "BUY"
+        );
+        let totalPurchaseCost = 0;
+        foundStocksBought.forEach((elem) => {
+            totalPurchaseCost += elem.purchaseCost;
+        });
+        obj.totalCostBasis = totalPurchaseCost;
+        obj.totalGainLoss =
+            foundData.price * userResult.stocksOwned[stockname] -
+            totalPurchaseCost;
+        obj.currentValue = foundData.price * userResult.stocksOwned[stockname];
+        accountArr.push(obj);
+    });
+    return accountArr;
+};
+
+const handleUserInfo = async (req, res) => {
+    const id = parseInt(req.params.id);
+    const balance = await getBalance(id);
+    const portfolio = await getPortfolioValue(id);
+    const netWorth = portfolio + balance;
+    const profitLoss = await getProfitLoss(id);
+    const totalShares = await getTotalshares(id);
+    const accountStats = await getAccountStats(id);
+    return res.status(200).json({
+        data: {
+            balance,
+            portfolio,
+            netWorth,
+            profitLoss,
+            totalShares,
+            accountStats,
+        },
+    });
+};
+
 module.exports = {
     handleTest,
     handleCards,
     handleSigninRedirect,
     handleOauthCallback,
     handleUserAuth,
+    handleUserBuy,
+    handleUserSell,
+    handleUserInfo,
 };

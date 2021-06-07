@@ -11,6 +11,41 @@ const RealExchange = ({
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
 
+    const handleBuyPost = (type, name, price, symbol) => {
+        let data = {};
+        if (type === "buy") {
+            data.type = "BUY";
+            data.stockName = name;
+            data.symbol = symbol;
+            data.quantity = inputState;
+            data.purchaseCost = (
+                inputState * price * 0.1 +
+                inputState * price
+            ).toFixed(2);
+        } else {
+            data.type = "SELL";
+            data.stockName = name;
+            data.symbol = symbol;
+            data.quantity = inputState;
+            data.purchaseCost = (inputState * price).toFixed(2);
+        }
+        const id = localStorage.getItem("id");
+        fetch(`/api/${id}/${buyOrSell}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    };
+
     const handleBuyOrSellState = (type) => {
         setBuyOrSell(type);
         setInputState(0);
@@ -49,7 +84,7 @@ const RealExchange = ({
             <Input
                 type="number"
                 min="0"
-                max={buyOrSell === "buy" ? "" : guestTotalShares[elem.name]}
+                // max={buyOrSell === "buy" ? "" : realUserTotalShares}
                 placeholder="0"
                 value={inputState}
                 onChange={(ev) => handleInputState(ev.target.value)}
@@ -76,11 +111,14 @@ const RealExchange = ({
 
             <ButtonWrapper>
                 <button
-                    // onClick={() =>
-                    //     buyOrSell === "buy"
-                    //         ? handleBuyDispatch()
-                    //         : handleSellDispatch()
-                    // }
+                    onClick={() =>
+                        handleBuyPost(
+                            buyOrSell,
+                            elem.name,
+                            elem.price,
+                            elem.symbol
+                        )
+                    }
                     className={
                         buyOrSell === "buy"
                             ? guestBalance >= totalBuyCost
@@ -91,16 +129,16 @@ const RealExchange = ({
                             ? "sellBtn"
                             : "sellBtnDisabled"
                     }
-                    disabled={
-                        buyOrSell === "buy"
-                            ? guestBalance >= totalBuyCost
-                                ? false
-                                : true
-                            : realUserTotalShares >= inputState &&
-                              realUserTotalShares > 0
-                            ? false
-                            : true
-                    }
+                    // disabled={
+                    //     buyOrSell === "buy"
+                    //         ? guestBalance >= totalBuyCost
+                    //             ? false
+                    //             : true
+                    //         : realUserTotalShares >= inputState &&
+                    //           realUserTotalShares > 0
+                    //         ? false
+                    //         : true
+                    // }
                 >
                     {buyOrSell === "buy"
                         ? `BUY ${elem.symbol}`

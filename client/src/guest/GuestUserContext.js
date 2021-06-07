@@ -27,6 +27,7 @@ export const GuestUserProvider = ({ children }) => {
         guestUserStatsReducer,
         initialguestUserStatsState
     );
+
     const getguestPortfolioValue = () => {
         // find what stocks we own and how many
         let stonksOwned = {

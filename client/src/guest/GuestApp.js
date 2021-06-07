@@ -28,6 +28,7 @@ const GuestApp = ({ userType }) => {
         guestTotalShares,
         guestAccountStats,
     } = useContext(GuestUserContext);
+    console.log(guestUserStats);
     return (
         <Wrapper>
             <Sidebar

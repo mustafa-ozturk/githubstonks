@@ -11,6 +11,9 @@ const {
     handleSigninRedirect,
     handleOauthCallback,
     handleUserAuth,
+    handleUserBuy,
+    handleUserSell,
+    handleUserInfo,
 } = require("./handlers");
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
@@ -26,6 +29,12 @@ app.get("/api/user/signin", handleSigninRedirect);
 app.get("/oauth-callback", handleOauthCallback);
 
 app.post("/api/user/auth", handleUserAuth);
+
+app.post("/api/:id/buy", handleUserBuy);
+
+app.post("/api/:id/sell", handleUserSell);
+
+app.get("/api/:id/info", handleUserInfo);
 
 app.get("*", (req, res) => {
     res.status(404).json({
