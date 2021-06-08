@@ -27,7 +27,7 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                     <SideBarItem>
                         <SideBarIcon>💰</SideBarIcon>
                         <SideBarItemTextWrapper>
-                            <Description>balance</Description>
+                            <Description>Balance</Description>
                             <span>${balance}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>

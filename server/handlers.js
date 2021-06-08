@@ -142,6 +142,14 @@ const handleUserBuy = async (req, res) => {
         },
     };
     await collection.updateOne(query, updateStock);
+    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+    const stockQuery = { name: stockname };
+    const updateBoughtShares = {
+        $inc: {
+            totalBoughtShares: +parseInt(req.body.quantity),
+        },
+    };
+    await stockCollection.updateOne(stockQuery, updateBoughtShares);
     return res
         .status(200)
         .json({ message: "success pushed buy to buyandsells in db" });
@@ -166,6 +174,14 @@ const handleUserSell = async (req, res) => {
         },
     };
     await collection.updateOne(query, updateStock);
+    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+    const stockQuery = { name: stockname };
+    const updateBoughtShares = {
+        $inc: {
+            totalBoughtShares: -parseInt(req.body.quantity),
+        },
+    };
+    await stockCollection.updateOne(stockQuery, updateBoughtShares);
     return res
         .status(200)
         .json({ message: "success pushed sell to buyandsells in db" });
