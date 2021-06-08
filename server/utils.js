@@ -9,14 +9,7 @@ const githubData = [
         forks: 34000,
         commits: 14173,
         totalBoughtShares: 0,
-        priceHistory: [
-            {
-                Price: 0,
-            },
-            {
-                Price: 58.9,
-            },
-        ],
+        priceHistory: [{ "Price: $": 0 }],
     },
     {
         logo: "/assets/angular.svg",
@@ -27,14 +20,7 @@ const githubData = [
         forks: 19300,
         commits: 21010,
         totalBoughtShares: 0,
-        priceHistory: [
-            {
-                Price: 0,
-            },
-            {
-                Price: 28.0,
-            },
-        ],
+        priceHistory: [{ "Price: $": 0 }],
     },
     {
         logo: "/assets/vue.svg",
@@ -45,14 +31,7 @@ const githubData = [
         forks: 29100,
         commits: 3175,
         totalBoughtShares: 0,
-        priceHistory: [
-            {
-                Price: 0,
-            },
-            {
-                Price: 61.34,
-            },
-        ],
+        priceHistory: [{ "Price: $": 0 }],
     },
 ];
 // const initialSharePrice = (stockname) => {

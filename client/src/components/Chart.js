@@ -12,7 +12,7 @@ const Chart = ({ priceHistory }) => {
                 />
                 <Line
                     type="linear"
-                    dataKey="$"
+                    dataKey="Price: $"
                     stroke="rgb(14, 184, 239)"
                     dot={false}
                     strokeWidth={3}

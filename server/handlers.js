@@ -168,7 +168,11 @@ const handleUserBuy = async (req, res) => {
                     increasePercent: (100 * dollarIncrease) / initialPrice,
                 },
             };
+            const pushPriceHistory = {
+                $push: { priceHistory: { "Price: $": priceAfterMarket } },
+            };
             await stockCollection.updateOne(stockQuery, updatePrices);
+            await stockCollection.updateOne(stockQuery, pushPriceHistory);
         }
     });
     return res
@@ -218,7 +222,11 @@ const handleUserSell = async (req, res) => {
                     increasePercent: (100 * dollarIncrease) / initialPrice,
                 },
             };
+            const pushPriceHistory = {
+                $push: { priceHistory: { "Price: $": priceAfterMarket } },
+            };
             await stockCollection.updateOne(stockQuery, updatePrices);
+            await stockCollection.updateOne(stockQuery, pushPriceHistory);
         }
     });
     return res
