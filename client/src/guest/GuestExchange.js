@@ -7,6 +7,7 @@ const GuestExchange = ({
     guestUserStatsDispatch,
     guestTotalShares,
     guestBalance,
+    setRefetch,
 }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
@@ -21,31 +22,31 @@ const GuestExchange = ({
     };
 
     const handleBuyDispatch = () => {
-        inputState > 0 &&
-            guestUserStatsDispatch({
-                type: "PUSH-TO-BUYS-AND-SELLS",
-                payload: {
-                    type: "BUY",
-                    stockName: elem.name,
-                    quantity: inputState,
-                    purchaseCost: (
-                        inputState * elem.price * 0.1 +
-                        inputState * elem.price
-                    ).toFixed(2),
-                },
-            });
+        inputState > 0 && setRefetch(true);
+        guestUserStatsDispatch({
+            type: "PUSH-TO-BUYS-AND-SELLS",
+            payload: {
+                type: "BUY",
+                stockName: elem.name,
+                quantity: inputState,
+                purchaseCost: (
+                    inputState * elem.price * 0.1 +
+                    inputState * elem.price
+                ).toFixed(2),
+            },
+        });
     };
     const handleSellDispatch = () => {
-        inputState > 0 &&
-            guestUserStatsDispatch({
-                type: "PUSH-TO-BUYS-AND-SELLS",
-                payload: {
-                    type: "SELL",
-                    stockName: elem.name,
-                    quantity: inputState,
-                    purchaseCost: (inputState * elem.price).toFixed(2),
-                },
-            });
+        inputState > 0 && setRefetch(true);
+        guestUserStatsDispatch({
+            type: "PUSH-TO-BUYS-AND-SELLS",
+            payload: {
+                type: "SELL",
+                stockName: elem.name,
+                quantity: inputState,
+                purchaseCost: (inputState * elem.price).toFixed(2),
+            },
+        });
     };
 
     const price = abbreviateNumber(elem.price);

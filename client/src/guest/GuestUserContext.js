@@ -21,7 +21,7 @@ function guestUserStatsReducer(state, action) {
 export const GuestUserContext = createContext();
 
 export const GuestUserProvider = ({ children }) => {
-    const stonkData = useContext(StonkContext);
+    const { stonkData } = useContext(StonkContext);
 
     const [guestUserStats, guestUserStatsDispatch] = useReducer(
         guestUserStatsReducer,

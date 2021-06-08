@@ -10,7 +10,7 @@ import { StonkContext } from "../context/StonkContext";
 import { GuestUserContext } from "./GuestUserContext";
 
 const GuestApp = ({ userType }) => {
-    const stonkData = useContext(StonkContext);
+    const { stonkData, setRefetch } = useContext(StonkContext);
 
     useEffect(() => {
         if (localStorage.getItem("id") !== null) {
@@ -49,6 +49,7 @@ const GuestApp = ({ userType }) => {
                                 guestUserStatsDispatch={guestUserStatsDispatch}
                                 guestTotalShares={guestTotalShares}
                                 guestBalance={guestBalance}
+                                setRefetch={setRefetch}
                             />
                         </Route>
                         <Route path="/guest/account">

@@ -10,7 +10,7 @@ import { StonkContext } from "./context/StonkContext";
 import { realUserContext } from "./context/RealUserContext";
 
 const App = ({ userType }) => {
-    const stonkData = useContext(StonkContext);
+    const { stonkData, setRefetch } = useContext(StonkContext);
     const {
         balance,
         portfolioValue,
@@ -49,6 +49,7 @@ const App = ({ userType }) => {
                                 stonkData={stonkData}
                                 totalShares={totalShares}
                                 balance={balance}
+                                setRefetch={setRefetch}
                             />
                         </Route>
                         <Route path="/account">

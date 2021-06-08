@@ -15,6 +15,7 @@ const Stonks = ({
     guestUserStatsDispatch,
     guestTotalShares,
     guestBalance,
+    setRefetch,
 }) => {
     let { stonkname } = useParams();
     return (
@@ -95,9 +96,13 @@ const Stonks = ({
                                     }
                                     guestTotalShares={guestTotalShares}
                                     guestBalance={guestBalance}
+                                    setRefetch={setRefetch}
                                 />
                             ) : (
-                                <RealExchange elem={elem} />
+                                <RealExchange
+                                    elem={elem}
+                                    setRefetch={setRefetch}
+                                />
                             )}
                         </Wrapper>
                     );
