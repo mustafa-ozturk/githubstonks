@@ -26,13 +26,11 @@ const App = ({ userType }) => {
 
     useEffect(() => {
         if (window.location.search) {
-            console.log("hey");
             const params = new URLSearchParams(window.location.search);
             const param = params.get("id");
             localStorage.setItem("id", param);
         }
     }, []);
-
     return (
         <Wrapper>
             <Sidebar

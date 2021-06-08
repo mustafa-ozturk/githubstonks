@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Sidebar = ({ Balance, PortfolioValue, NetWorth, ProfitLoss }) => {
+const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
     return (
         <Wrapper>
             <LogoWrapper>
@@ -14,28 +14,28 @@ const Sidebar = ({ Balance, PortfolioValue, NetWorth, ProfitLoss }) => {
                         <SideBarIcon>🏦</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Net Worth</Description>
-                            <span>${NetWorth}</span>
+                            <span>${netWorth}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>📁</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Portfolio Value</Description>
-                            <span>${PortfolioValue}</span>
+                            <span>${portfolioValue}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>💰</SideBarIcon>
                         <SideBarItemTextWrapper>
-                            <Description>Balance</Description>
-                            <span>${Balance}</span>
+                            <Description>balance</Description>
+                            <span>${balance}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>📈</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Profit/Loss</Description>
-                            <span>${ProfitLoss}</span>
+                            <span>${profitLoss}</span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                 </SideBarItemWrapper>

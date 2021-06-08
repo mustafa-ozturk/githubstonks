@@ -32,10 +32,10 @@ const GuestApp = ({ userType }) => {
     return (
         <Wrapper>
             <Sidebar
-                Balance={guestBalance}
-                PortfolioValue={guestPortfolioValue}
-                NetWorth={guestNetWorth}
-                ProfitLoss={guestProfitLoss}
+                balance={guestBalance}
+                portfolioValue={guestPortfolioValue}
+                netWorth={guestNetWorth}
+                profitLoss={guestProfitLoss}
             />
             <NavAndContentContainer>
                 <Navbar userType={userType} />

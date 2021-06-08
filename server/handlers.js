@@ -233,7 +233,6 @@ const getTotalshares = async (id) => {
     const query = { id: parseInt(id) };
     let userCollection = await connectDb(USER_COLLECTION);
     let result = await userCollection.findOne(query);
-
     return result.stocksOwned;
 };
 
@@ -244,8 +243,6 @@ const getAccountStats = async (id) => {
     let userResult = await userCollection.findOne(query);
     let stockCollection = await connectDb(STOCKDATA_COLLECTION);
     let stockData = await stockCollection.find().toArray();
-    // console.log(userResult);
-    // console.log(stockData);
     Object.keys(userResult.stocksOwned).forEach((stockname) => {
         let obj = {};
         obj.name = stockname;
@@ -272,22 +269,25 @@ const getAccountStats = async (id) => {
 
 const handleUserInfo = async (req, res) => {
     const id = parseInt(req.params.id);
-    const balance = await getBalance(id);
-    const portfolio = await getPortfolioValue(id);
-    const netWorth = portfolio + balance;
-    const profitLoss = await getProfitLoss(id);
-    const totalShares = await getTotalshares(id);
-    const accountStats = await getAccountStats(id);
-    return res.status(200).json({
-        data: {
-            balance,
-            portfolio,
-            netWorth,
-            profitLoss,
-            totalShares,
-            accountStats,
-        },
-    });
+    console.log(id);
+    if (id) {
+        const balance = await getBalance(id);
+        const portfolio = await getPortfolioValue(id);
+        const netWorth = portfolio + balance;
+        const profitLoss = await getProfitLoss(id);
+        const totalShares = await getTotalshares(id);
+        const accountStats = await getAccountStats(id);
+        return res.status(200).json({
+            data: {
+                balance,
+                portfolio,
+                netWorth,
+                profitLoss,
+                totalShares,
+                accountStats,
+            },
+        });
+    }
 };
 
 module.exports = {
