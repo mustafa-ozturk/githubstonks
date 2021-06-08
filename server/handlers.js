@@ -50,17 +50,16 @@ const insertStockData = async (stockDataArr) => {
     let collection = await connectDb(STOCKDATA_COLLECTION);
     stockDataArr.forEach(async (e) => {
         const query = { _id: e._id };
-        const doc = await collection.findOne(query);
+        const result = await collection.findOne(query);
         const initialPrice =
             e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
-        const marketPrice = e.totalBoughtShares * 0.001;
-        console.log(marketPrice);
+        const marketPrice = e.totalBoughtShares * 0.1;
         const priceAfterMarket = initialPrice + marketPrice;
         const dollarIncrease = priceAfterMarket - initialPrice;
         e.price = priceAfterMarket;
         e.increasePrice = dollarIncrease;
         e.increasePercent = (100 * dollarIncrease) / initialPrice;
-        if (!doc) {
+        if (!result) {
             await collection.insertOne(e);
             console.log("inserted data");
         }
@@ -152,7 +151,26 @@ const handleUserBuy = async (req, res) => {
             totalBoughtShares: +parseInt(req.body.quantity),
         },
     };
+
     await stockCollection.updateOne(stockQuery, updateBoughtShares);
+    let stockData = await stockCollection.find().toArray();
+    stockData.find(async (e) => {
+        if (e.name === stockname) {
+            const initialPrice =
+                e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
+            const marketPrice = e.totalBoughtShares * 0.1;
+            const priceAfterMarket = initialPrice + marketPrice;
+            const dollarIncrease = priceAfterMarket - initialPrice;
+            const updatePrices = {
+                $set: {
+                    price: priceAfterMarket,
+                    increasePrice: dollarIncrease,
+                    increasePercent: (100 * dollarIncrease) / initialPrice,
+                },
+            };
+            await stockCollection.updateOne(stockQuery, updatePrices);
+        }
+    });
     return res
         .status(200)
         .json({ message: "success pushed buy to buyandsells in db" });
@@ -185,6 +203,24 @@ const handleUserSell = async (req, res) => {
         },
     };
     await stockCollection.updateOne(stockQuery, updateBoughtShares);
+    let stockData = await stockCollection.find().toArray();
+    stockData.find(async (e) => {
+        if (e.name === stockname) {
+            const initialPrice =
+                e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
+            const marketPrice = e.totalBoughtShares * 0.1;
+            const priceAfterMarket = initialPrice + marketPrice;
+            const dollarIncrease = priceAfterMarket - initialPrice;
+            const updatePrices = {
+                $set: {
+                    price: priceAfterMarket,
+                    increasePrice: dollarIncrease,
+                    increasePercent: (100 * dollarIncrease) / initialPrice,
+                },
+            };
+            await stockCollection.updateOne(stockQuery, updatePrices);
+        }
+    });
     return res
         .status(200)
         .json({ message: "success pushed sell to buyandsells in db" });
@@ -288,7 +324,7 @@ const getAccountStats = async (id) => {
 
 const handleUserInfo = async (req, res) => {
     const id = parseInt(req.params.id);
-    console.log(id);
+    console.log("id", id);
     if (id) {
         const balance = await getBalance(id);
         const portfolio = await getPortfolioValue(id);
