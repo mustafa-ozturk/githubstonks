@@ -55,11 +55,7 @@ const App = ({ userType }) => {
                             />
                         </Route>
                         <Route path="/account">
-                            <Account
-                                stonkData={stonkData}
-                                totalShares={totalShares}
-                                accountStats={accountStats}
-                            />
+                            <Account accountStats={accountStats} />
                         </Route>
                         <Route path="/">
                             <Card stonkData={stonkData} userType={userType} />

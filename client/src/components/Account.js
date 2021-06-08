@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-const Account = ({ guestAccountStats }) => {
+const Account = ({ accountStats }) => {
     return (
         <Wrapper>
             <div>
@@ -19,29 +19,20 @@ const Account = ({ guestAccountStats }) => {
                         </tr>
                     </Thead>
                     <tbody>
-                        {/* {Object.keys(guestAccountStats).map((elem, index) => {
-                            if (guestAccountStats[elem].name === undefined) {
-                                return [];
-                            }
-                            return (
-                                <tr key={index}>
-                                    <Td>{guestAccountStats[elem].name}</Td>
-                                    <Td>{guestAccountStats[elem].symbol}</Td>
-                                    <Td>${guestAccountStats[elem].price}</Td>
-                                    <Td>{guestAccountStats[elem].quantity}</Td>
-                                    <Td>
-                                        ${guestAccountStats[elem].totalCost}
-                                    </Td>
-                                    <Td>
-                                        $
-                                        {guestAccountStats[elem].gainLossDollar}
-                                    </Td>
-                                    <Td>
-                                        ${guestAccountStats[elem].currentValue}
-                                    </Td>
-                                </tr>
-                            );
-                        })} */}
+                        {accountStats.length > 0 &&
+                            accountStats.map((elem, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <Td>{elem.name}</Td>
+                                        <Td>{elem.symbol}</Td>
+                                        <Td>${elem.price}</Td>
+                                        <Td>{elem.quantity}</Td>
+                                        <Td>${elem.totalCostBasis}</Td>
+                                        <Td>${elem.totalGainLoss}</Td>
+                                        <Td>${elem.currentValue}</Td>
+                                    </tr>
+                                );
+                            })}
                     </tbody>
                 </Table>
             </div>
@@ -75,5 +66,7 @@ const Th = styled.th`
     background-color: white;
     color: black;
 `;
-
+const Td = styled.td`
+    padding: 1rem;
+`;
 export default Account;

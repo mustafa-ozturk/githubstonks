@@ -26,8 +26,6 @@ export const RealUserProvider = ({ children }) => {
                 });
         }
     }, [localStorage.getItem("id"), refetchUserSide]);
-
-    console.log("user", userData);
     const balance = userData ? userData.data.balance : 0;
     const portfolioValue = userData ? userData.data.portfolio : 0;
     const netWorth = userData ? userData.data.netWorth : 0;
