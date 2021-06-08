@@ -55,34 +55,34 @@ const githubData = [
         ],
     },
 ];
-const initialSharePrice = (stockname) => {
-    const result = githubData.find((e) => e.name === stockname);
-    if (result) {
-        return (
-            result.stars * 0.0003 +
-            result.forks * 0.0002 +
-            result.commits * 0.0001
-        );
-    }
-};
+// const initialSharePrice = (stockname) => {
+//     const result = githubData.find((e) => e.name === stockname);
+//     if (result) {
+//         return (
+//             result.stars * 0.0003 +
+//             result.forks * 0.0002 +
+//             result.commits * 0.0001
+//         );
+//     }
+// };
 
-const sharePriceAfterUserMarket = (stockname) => {
-    const result = githubData.find((e) => e.name === stockname);
-    if (result) {
-        return initialSharePrice(stockname) + result.totalBoughtShares * 0.001;
-    }
-};
+// const sharePriceAfterUserMarket = (stockname) => {
+//     const result = githubData.find((e) => e.name === stockname);
+//     if (result) {
+//         return initialSharePrice(stockname) + result.totalBoughtShares * 0.001;
+//     }
+// };
 
-const dollarIncreaseFromInitialPrice = (stockname) => {
-    return sharePriceAfterUserMarket(stockname) - initialSharePrice(stockname);
-};
+// const dollarIncreaseFromInitialPrice = (stockname) => {
+//     return sharePriceAfterUserMarket(stockname) - initialSharePrice(stockname);
+// };
 
-const percentIncreaseFromInitialPrice = (stockname) => {
-    return (
-        (100 * dollarIncreaseFromInitialPrice(stockname)) /
-        initialSharePrice(stockname)
-    );
-};
+// const percentIncreaseFromInitialPrice = (stockname) => {
+//     return (
+//         (100 * dollarIncreaseFromInitialPrice(stockname)) /
+//         initialSharePrice(stockname)
+//     );
+// };
 
 const stonkData = () => {
     const stonkDataArray = githubData.map((elem, index) => {
@@ -91,9 +91,6 @@ const stonkData = () => {
             logo: elem.logo,
             name: elem.name,
             symbol: elem.symbol,
-            price: sharePriceAfterUserMarket(elem.name),
-            increasePrice: dollarIncreaseFromInitialPrice(elem.name),
-            increasePercent: percentIncreaseFromInitialPrice(elem.name),
             stars: elem.stars,
             forks: elem.forks,
             commits: elem.commits,

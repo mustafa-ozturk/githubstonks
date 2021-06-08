@@ -51,26 +51,29 @@ const insertStockData = async (stockDataArr) => {
     stockDataArr.forEach(async (e) => {
         const query = { _id: e._id };
         const doc = await collection.findOne(query);
-
+        const initialPrice =
+            e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
+        const marketPrice = e.totalBoughtShares * 0.001;
+        console.log(marketPrice);
+        const priceAfterMarket = initialPrice + marketPrice;
+        const dollarIncrease = priceAfterMarket - initialPrice;
+        e.price = priceAfterMarket;
+        e.increasePrice = dollarIncrease;
+        e.increasePercent = (100 * dollarIncrease) / initialPrice;
         if (!doc) {
             await collection.insertOne(e);
             console.log("inserted data");
         }
     });
 };
-insertStockData(stonkDataArr);
 
 const handleCards = async (req, res) => {
-    let collection = await connectDb(STOCKDATA_COLLECTION);
-    let result = await collection.find().toArray();
-    try {
+    await insertStockData(stonkDataArr).then(async () => {
+        let collection = await connectDb(STOCKDATA_COLLECTION);
+        let result = await collection.find().toArray();
+
         return res.status(200).json({ data: result });
-    } catch (error) {
-        return res.status(404).json({
-            status: 500,
-            error: error.message,
-        });
-    }
+    });
 };
 
 const handleSigninRedirect = (req, res) => {
