@@ -8,6 +8,7 @@ const RealExchange = ({
     guestTotalShares,
     guestBalance,
     setRefetch,
+    setRefetchUserSide,
 }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
@@ -42,6 +43,7 @@ const RealExchange = ({
             .then((data) => {
                 console.log("Success:", data);
                 setRefetch(true);
+                setRefetchUserSide(true);
             })
             .catch((error) => {
                 console.error("Error:", error);

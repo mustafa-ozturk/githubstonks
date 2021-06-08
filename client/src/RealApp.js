@@ -18,6 +18,7 @@ const App = ({ userType }) => {
         profitLoss,
         totalShares,
         accountStats,
+        setRefetchUserSide,
     } = useContext(realUserContext);
 
     // if(isRedirectToGuest) {
@@ -50,6 +51,7 @@ const App = ({ userType }) => {
                                 totalShares={totalShares}
                                 balance={balance}
                                 setRefetch={setRefetch}
+                                setRefetchUserSide={setRefetchUserSide}
                             />
                         </Route>
                         <Route path="/account">

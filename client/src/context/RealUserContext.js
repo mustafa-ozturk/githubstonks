@@ -10,7 +10,7 @@ export const realUserContext = createContext();
 
 export const RealUserProvider = ({ children }) => {
     const [userData, setUserData] = useState(null);
-
+    const [refetchUserSide, setRefetchUserSide] = useState(false);
     useEffect(() => {
         const id = localStorage.getItem("id");
         if (id) {
@@ -19,12 +19,13 @@ export const RealUserProvider = ({ children }) => {
                 .then((data) => {
                     console.log("Success:", data);
                     setUserData(data);
+                    setRefetchUserSide(false);
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
         }
-    }, [localStorage.getItem("id")]);
+    }, [localStorage.getItem("id"), refetchUserSide]);
 
     console.log("user", userData);
     const balance = userData ? userData.data.balance : 0;
@@ -42,6 +43,7 @@ export const RealUserProvider = ({ children }) => {
                 profitLoss,
                 totalShares,
                 accountStats,
+                setRefetchUserSide,
             }}
         >
             {children}
