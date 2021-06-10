@@ -12,6 +12,7 @@ const App = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({ id: localStorage.getItem("id") }),
             })
                 .then((response) => response.json())
@@ -22,6 +23,7 @@ const App = () => {
             setUserType("guest");
         }
     }, []);
+
     return (
         <>
             <Router>

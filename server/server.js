@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -17,7 +16,7 @@ const {
 } = require("./handlers");
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 
 app.get("/test", handleTest);

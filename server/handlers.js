@@ -2,10 +2,12 @@ const { MongoClient } = require("mongodb");
 const ObjectID = require("mongodb").ObjectID;
 require("dotenv").config();
 const Axios = require("axios");
+const crypto = require("crypto");
 const { stonkData } = require("./utils");
 const { v4: uuidv4 } = require("uuid");
 // uuidv4()
 const stonkDataArr = stonkData();
+const { ObjectOfTokens } = require("./ObjectOfTokens");
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const { MONGO_URI } = process.env;
@@ -96,6 +98,16 @@ const handleOauthCallback = async (req, res) => {
             Authorization: `Bearer ${accessToken}`,
         },
     });
+
+    const cryptographicToken = crypto
+        .randomBytes(32)
+        .toString("base64")
+        .replace(/\//g, "_")
+        .replace(/\+/g, "-")
+        .replace(/=/g, "");
+
+    ObjectOfTokens[cryptographicToken] = ghData.id;
+    // create user if it doesnt already exist
     let collection = await connectDb(USER_COLLECTION);
     const user = {
         id: ghData.id,
@@ -110,19 +122,30 @@ const handleOauthCallback = async (req, res) => {
         await collection.insertOne(user);
         console.log("inserted data");
     }
-
-    res.redirect(`http://localhost:3000?id=${ghData.id}`);
+    res.cookie("session", cryptographicToken, {
+        maxAge: 900000,
+        httpOnly: true,
+    }).redirect(`http://localhost:3000?id=${cryptographicToken}`);
 };
 
 const handleUserAuth = async (req, res) => {
-    const { id } = req.body;
+    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
+
+    const token = sessionCookie.split("=")[1];
+
+    const authenticated = ObjectOfTokens[token];
+
+    if (authenticated === undefined) {
+        return res.json({ message: "not authenticated" });
+    }
+    const id = authenticated[token];
     const query = { id: parseInt(id) };
     let collection = await connectDb(USER_COLLECTION);
     const result = await collection.findOne(query);
     if (!result) {
-        return res.json({ message: "user not found" });
+        return res.json({ auth: "false", message: "user not found" });
     }
-    return res.json({ message: "user logged in" });
+    return res.json({ auth: "true", message: "user logged in" });
 };
 
 const handleUserBuy = async (req, res) => {
@@ -133,7 +156,12 @@ const handleUserBuy = async (req, res) => {
         quantity: parseInt(req.body.quantity),
         purchaseCost: parseFloat(req.body.purchaseCost),
     };
-    const query = { id: parseInt(req.params.id) };
+
+    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
+    const token = sessionCookie.split("=")[1];
+    const authenticated = ObjectOfTokens[token];
+    const id = authenticated;
+    const query = { id: id };
     const push = { $push: { buysAndSells: bodyObj } };
     let collection = await connectDb(USER_COLLECTION);
     await collection.updateOne(query, push);
@@ -175,9 +203,10 @@ const handleUserBuy = async (req, res) => {
             await stockCollection.updateOne(stockQuery, pushPriceHistory);
         }
     });
-    return res
-        .status(200)
-        .json({ message: "success pushed buy to buyandsells in db" });
+    return res.status(200).json({
+        confirmation: `Bought ${req.body.stockName} for ${req.body.purchaseCost}`,
+        message: "success pushed buy to buyandsells in db",
+    });
 };
 
 const handleUserSell = async (req, res) => {
@@ -188,7 +217,11 @@ const handleUserSell = async (req, res) => {
         quantity: parseInt(req.body.quantity),
         purchaseCost: parseFloat(req.body.purchaseCost),
     };
-    const query = { id: parseInt(req.params.id) };
+    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
+    const token = sessionCookie.split("=")[1];
+    const authenticated = ObjectOfTokens[token];
+    const id = authenticated;
+    const query = { id: id };
     const push = { $push: { buysAndSells: bodyObj } };
     let collection = await connectDb(USER_COLLECTION);
     await collection.updateOne(query, push);
@@ -229,9 +262,10 @@ const handleUserSell = async (req, res) => {
             await stockCollection.updateOne(stockQuery, pushPriceHistory);
         }
     });
-    return res
-        .status(200)
-        .json({ message: "success pushed sell to buyandsells in db" });
+    return res.status(200).json({
+        confirmation: `Sold ${req.body.stockName} for ${req.body.purchaseCost}`,
+        message: "success pushed sell to buyandsells in db",
+    });
 };
 
 const getBalance = async (id) => {
@@ -331,8 +365,10 @@ const getAccountStats = async (id) => {
 };
 
 const handleUserInfo = async (req, res) => {
-    const id = parseInt(req.params.id);
-    console.log("id", id);
+    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
+    const token = sessionCookie.split("=")[1];
+    const authenticated = ObjectOfTokens[token];
+    const id = authenticated;
     if (id) {
         const balance = await getBalance(id);
         const portfolio = await getPortfolioValue(id);

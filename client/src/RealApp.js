@@ -21,10 +21,6 @@ const App = ({ userType }) => {
         setRefetchUserSide,
     } = useContext(realUserContext);
 
-    // if(isRedirectToGuest) {
-    //     return <Redirect to="/guest"/>
-    // }
-
     useEffect(() => {
         if (window.location.search) {
             const params = new URLSearchParams(window.location.search);
