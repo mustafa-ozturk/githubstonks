@@ -5,7 +5,6 @@ const path = require("path");
 const app = express();
 
 const {
-    handleTest,
     handleCards,
     handleSigninRedirect,
     handleOauthCallback,
@@ -19,8 +18,6 @@ const {
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
-
-app.get("/test", handleTest);
 
 app.get("/api/stonkData", handleCards);
 
