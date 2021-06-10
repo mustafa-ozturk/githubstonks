@@ -68,6 +68,17 @@ const githubData = [
         totalBoughtShares: 0,
         priceHistory: [{ "Price: $": 0 }],
     },
+    {
+        logo: "/assets/linux.svg",
+        name: "Linux",
+        symbol: "LNX",
+        increase: 0,
+        stars: 113000,
+        forks: 37400,
+        commits: 1014985,
+        totalBoughtShares: 0,
+        priceHistory: [{ "Price: $": 0 }],
+    },
 ];
 
 // thank you https://github.com/matthew-e-brown for helping with this (finding total commit count)
