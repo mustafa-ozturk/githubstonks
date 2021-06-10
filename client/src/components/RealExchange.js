@@ -4,15 +4,14 @@ import { abbreviateNumber } from "../utils";
 
 const RealExchange = ({
     elem,
-    guestUserStatsDispatch,
-    guestTotalShares,
-    guestBalance,
     setRefetch,
     setRefetchUserSide,
+    totalShares,
+    balance,
 }) => {
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
-
+    const [confirmation, setConfirmation] = useState("");
     const handleBuyPost = (type, name, price, symbol) => {
         let data = {};
         if (type === "buy") {
@@ -44,6 +43,12 @@ const RealExchange = ({
                 console.log("Success:", data);
                 setRefetch(true);
                 setRefetchUserSide(true);
+                setInputState(0);
+
+                setConfirmation(data.confirmation);
+                setTimeout(() => {
+                    setConfirmation("");
+                }, 4000);
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -65,7 +70,8 @@ const RealExchange = ({
         inputState * elem.price * 0.1 + inputState * elem.price
     );
     const totalSellCost = abbreviateNumber(inputState * elem.price);
-    const realUserTotalShares = 0;
+    const realUserTotalShares =
+        totalShares[elem.name] === undefined ? 0 : totalShares[elem.name];
 
     return (
         <Wrapper>
@@ -88,7 +94,7 @@ const RealExchange = ({
             <Input
                 type="number"
                 min="0"
-                // max={buyOrSell === "buy" ? "" : realUserTotalShares}
+                max={buyOrSell === "buy" ? "" : realUserTotalShares}
                 placeholder="0"
                 value={inputState}
                 onChange={(ev) => handleInputState(ev.target.value)}
@@ -125,7 +131,7 @@ const RealExchange = ({
                     }
                     className={
                         buyOrSell === "buy"
-                            ? guestBalance >= totalBuyCost
+                            ? balance >= totalBuyCost
                                 ? "buyBtn"
                                 : "buyBtnDisabled"
                             : realUserTotalShares >= inputState &&
@@ -133,22 +139,23 @@ const RealExchange = ({
                             ? "sellBtn"
                             : "sellBtnDisabled"
                     }
-                    // disabled={
-                    //     buyOrSell === "buy"
-                    //         ? guestBalance >= totalBuyCost
-                    //             ? false
-                    //             : true
-                    //         : realUserTotalShares >= inputState &&
-                    //           realUserTotalShares > 0
-                    //         ? false
-                    //         : true
-                    // }
+                    disabled={
+                        buyOrSell === "buy"
+                            ? balance >= totalBuyCost
+                                ? false
+                                : true
+                            : realUserTotalShares >= inputState &&
+                              realUserTotalShares > 0
+                            ? false
+                            : true
+                    }
                 >
                     {buyOrSell === "buy"
                         ? `BUY ${elem.symbol}`
                         : `SELL ${elem.symbol}`}
                 </button>
             </ButtonWrapper>
+            {confirmation.length > 0 && confirmation}
         </Wrapper>
     );
 };

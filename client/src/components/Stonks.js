@@ -17,6 +17,8 @@ const Stonks = ({
     guestBalance,
     setRefetch,
     setRefetchUserSide,
+    totalShares,
+    balance,
 }) => {
     let { stonkname } = useParams();
     return (
@@ -104,6 +106,8 @@ const Stonks = ({
                                     elem={elem}
                                     setRefetch={setRefetch}
                                     setRefetchUserSide={setRefetchUserSide}
+                                    totalShares={totalShares}
+                                    balance={balance}
                                 />
                             )}
                         </Wrapper>
