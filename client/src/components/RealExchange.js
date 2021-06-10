@@ -82,7 +82,7 @@ const RealExchange = ({
                 >
                     Buy
                 </span>
-                <span className="seperator">|real exchange|</span>
+                <span className="seperator">|</span>
                 <span
                     className={buyOrSell === "sell" ? "sell onsell" : "sell"}
                     onClick={() => handleBuyOrSellState("sell")}

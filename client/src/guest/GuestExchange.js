@@ -66,7 +66,7 @@ const GuestExchange = ({
                 >
                     Buy
                 </span>
-                <span className="seperator">|guest exchange|</span>
+                <span className="seperator">|</span>
                 <span
                     className={buyOrSell === "sell" ? "sell onsell" : "sell"}
                     onClick={() => handleBuyOrSellState("sell")}
