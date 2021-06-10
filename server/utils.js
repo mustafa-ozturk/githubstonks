@@ -79,6 +79,28 @@ const githubData = [
         totalBoughtShares: 0,
         priceHistory: [{ "Price: $": 0 }],
     },
+    {
+        logo: "/assets/solana.svg",
+        name: "Solana",
+        symbol: "SOL",
+        increase: 0,
+        stars: 2300,
+        forks: 502,
+        commits: 14527,
+        totalBoughtShares: 0,
+        priceHistory: [{ "Price: $": 0 }],
+    },
+    {
+        logo: "/assets/githubstonks.png",
+        name: "GithubStonks",
+        symbol: "STONKS",
+        increase: 0,
+        stars: 0,
+        forks: 0,
+        commits: 86,
+        totalBoughtShares: 0,
+        priceHistory: [{ "Price: $": 0 }],
+    },
 ];
 
 // thank you https://github.com/matthew-e-brown for helping with this (finding total commit count)

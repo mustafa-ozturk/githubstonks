@@ -38,6 +38,8 @@ export const GuestUserProvider = ({ children }) => {
             Express: 0,
             Nest: 0,
             Linux: 0,
+            Solana: 0,
+            GithubStonks: 0,
         };
         guestUserStats.buysAndSells.forEach((elem) => {
             if (elem.type === "BUY") {
@@ -79,6 +81,8 @@ export const GuestUserProvider = ({ children }) => {
             Express: 0,
             Nest: 0,
             Linux: 0,
+            Solana: 0,
+            GithubStonks: 0,
         };
         let totalCostAtPurchase = 0;
         guestUserStats.buysAndSells.forEach((elem) => {
@@ -107,6 +111,8 @@ export const GuestUserProvider = ({ children }) => {
             Express: 0,
             Nest: 0,
             Linux: 0,
+            Solana: 0,
+            GithubStonks: 0,
         };
         guestUserStats.buysAndSells.forEach((elem) => {
             if (elem.type === "BUY") {
@@ -127,6 +133,8 @@ export const GuestUserProvider = ({ children }) => {
             Express: {},
             Nest: {},
             Linux: {},
+            Solana: {},
+            GithubStonks: {},
         };
         //         name: ,
         //         symbol : ,
