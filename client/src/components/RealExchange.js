@@ -12,23 +12,23 @@ const RealExchange = ({
     const [buyOrSell, setBuyOrSell] = useState("buy");
     const [inputState, setInputState] = useState(0);
     const [confirmation, setConfirmation] = useState("");
-    const handleBuyPost = (type, name, price, symbol) => {
+    const handleBuyPost = (type, price) => {
         let data = {};
         if (type === "buy") {
             data.type = "BUY";
-            data.stockName = name;
-            data.symbol = symbol;
+            data.stockName = elem.name;
+            data.symbol = elem.symbol;
             data.quantity = inputState;
             data.purchaseCost = (
-                inputState * price * 0.1 +
-                inputState * price
+                inputState * elem.price * 0.1 +
+                inputState * elem.price
             ).toFixed(2);
         } else {
             data.type = "SELL";
-            data.stockName = name;
-            data.symbol = symbol;
+            data.stockName = elem.name;
+            data.symbol = elem.symbol;
             data.quantity = inputState;
-            data.purchaseCost = (inputState * price).toFixed(2);
+            data.purchaseCost = (inputState * elem.price).toFixed(2);
         }
         const id = localStorage.getItem("id");
         fetch(`/api/${id}/${buyOrSell}`, {
@@ -121,14 +121,7 @@ const RealExchange = ({
 
             <ButtonWrapper>
                 <button
-                    onClick={() =>
-                        handleBuyPost(
-                            buyOrSell,
-                            elem.name,
-                            elem.price,
-                            elem.symbol
-                        )
-                    }
+                    onClick={() => handleBuyPost(buyOrSell)}
                     className={
                         buyOrSell === "buy"
                             ? balance >= totalBuyCost

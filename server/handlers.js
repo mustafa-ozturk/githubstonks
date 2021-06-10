@@ -182,7 +182,7 @@ const handleUserBuy = async (req, res) => {
 
     await stockCollection.updateOne(stockQuery, updateBoughtShares);
     let stockData = await stockCollection.find().toArray();
-    stockData.find(async (e) => {
+    stockData.forEach(async (e) => {
         if (e.name === stockname) {
             const initialPrice =
                 e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
@@ -241,7 +241,7 @@ const handleUserSell = async (req, res) => {
     };
     await stockCollection.updateOne(stockQuery, updateBoughtShares);
     let stockData = await stockCollection.find().toArray();
-    stockData.find(async (e) => {
+    stockData.forEach(async (e) => {
         if (e.name === stockname) {
             const initialPrice =
                 e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
