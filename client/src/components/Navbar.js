@@ -4,6 +4,19 @@ import { NavLink } from "react-router-dom";
 
 // uselocation
 const Navbar = ({ userType }) => {
+    const handleLogout = () => {
+        localStorage.removeItem("id");
+
+        fetch("/api/delete-session", {
+            method: "DELETE",
+            credentials: "include",
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+            });
+    };
+
     return (
         <Wrapper>
             <NavBarItem
@@ -32,10 +45,7 @@ const Navbar = ({ userType }) => {
                     Sign in with Github
                 </a>
             ) : (
-                <a
-                    href="http://localhost:3000/guest"
-                    onClick={() => localStorage.removeItem("id")}
-                >
+                <a href="http://localhost:3000/guest" onClick={handleLogout}>
                     Logout
                 </a>
             )}

@@ -123,14 +123,13 @@ const handleOauthCallback = async (req, res) => {
         console.log("inserted data");
     }
     res.cookie("session", cryptographicToken, {
-        maxAge: 900000,
+        maxAge: 9999999999999999,
         httpOnly: true,
     }).redirect(`http://localhost:3000?id=${cryptographicToken}`);
 };
 
 const handleUserAuth = async (req, res) => {
     const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
-
     const token = sessionCookie.split("=")[1];
 
     const authenticated = ObjectOfTokens[token];
@@ -220,6 +219,7 @@ const handleUserSell = async (req, res) => {
     const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
     const token = sessionCookie.split("=")[1];
     const authenticated = ObjectOfTokens[token];
+
     const id = authenticated;
     const query = { id: id };
     const push = { $push: { buysAndSells: bodyObj } };
@@ -389,6 +389,13 @@ const handleUserInfo = async (req, res) => {
     }
 };
 
+const handleDeleteSession = (req, res) => {
+    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
+    const token = sessionCookie.split("=")[1];
+    delete ObjectOfTokens[token];
+    res.status(200).end();
+};
+
 module.exports = {
     handleTest,
     handleCards,
@@ -398,4 +405,5 @@ module.exports = {
     handleUserBuy,
     handleUserSell,
     handleUserInfo,
+    handleDeleteSession,
 };
