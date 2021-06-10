@@ -55,17 +55,19 @@ const insertStockData = async (stockDataArr) => {
             await collection.insertOne(e);
             console.log("inserted data");
         } else {
-            const stockQuery = { name: e.name };
-            const update = {
-                $set: {
-                    price: priceAfterMarket,
-                    increasePrice: dollarIncrease,
-                    increasePercent: (100 * dollarIncrease) / initialPrice,
-                },
-                $push: { priceHistory: { "Price: $": priceAfterMarket } },
-            };
-            await collection.updateOne(stockQuery, update);
-            console.log("updated");
+            if (result.price != priceAfterMarket) {
+                const stockQuery = { name: e.name };
+                const update = {
+                    $set: {
+                        price: priceAfterMarket,
+                        increasePrice: dollarIncrease,
+                        increasePercent: (100 * dollarIncrease) / initialPrice,
+                    },
+                    $push: { priceHistory: { "Price: $": priceAfterMarket } },
+                };
+                await collection.updateOne(stockQuery, update);
+                console.log("updated");
+            }
         }
     });
 };
