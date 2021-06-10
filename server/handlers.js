@@ -37,17 +37,6 @@ const disconnectDb = () => {
     }
 };
 
-const handleTest = (req, res) => {
-    try {
-        return res.status(200).json({ status: 200, message: "this is a test" });
-    } catch (error) {
-        return res.status(404).json({
-            status: 500,
-            error: error.message,
-        });
-    }
-};
-
 const insertStockData = async (stockDataArr) => {
     let collection = await connectDb(STOCKDATA_COLLECTION);
     stockDataArr.forEach(async (e) => {
@@ -61,14 +50,28 @@ const insertStockData = async (stockDataArr) => {
         e.price = priceAfterMarket;
         e.increasePrice = dollarIncrease;
         e.increasePercent = (100 * dollarIncrease) / initialPrice;
+        e.initialPrice = initialPrice;
         if (!result) {
             await collection.insertOne(e);
             console.log("inserted data");
+        } else {
+            const stockQuery = { name: e.name };
+            const update = {
+                $set: {
+                    price: priceAfterMarket,
+                    increasePrice: dollarIncrease,
+                    increasePercent: (100 * dollarIncrease) / initialPrice,
+                },
+                $push: { priceHistory: { "Price: $": priceAfterMarket } },
+            };
+            await collection.updateOne(stockQuery, update);
+            console.log("updated");
         }
     });
 };
 
 const handleCards = async (req, res) => {
+    console.log("called");
     await insertStockData(stonkDataArr).then(async () => {
         let collection = await connectDb(STOCKDATA_COLLECTION);
         let result = await collection.find().toArray();
@@ -397,7 +400,6 @@ const handleDeleteSession = (req, res) => {
 };
 
 module.exports = {
-    handleTest,
     handleCards,
     handleSigninRedirect,
     handleOauthCallback,
