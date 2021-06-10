@@ -57,6 +57,17 @@ const githubData = [
         totalBoughtShares: 0,
         priceHistory: [{ "Price: $": 0 }],
     },
+    {
+        logo: "/assets/nest.svg",
+        name: "Nest",
+        symbol: "NEST",
+        increase: 0,
+        stars: 37600,
+        forks: 3700,
+        commits: 7875,
+        totalBoughtShares: 0,
+        priceHistory: [{ "Price: $": 0 }],
+    },
 ];
 
 // thank you https://github.com/matthew-e-brown for helping with this (finding total commit count)
