@@ -34,6 +34,8 @@ export const GuestUserProvider = ({ children }) => {
             React: 0,
             Angular: 0,
             Vue: 0,
+            Node: 0,
+            Express: 0,
         };
         guestUserStats.buysAndSells.forEach((elem) => {
             if (elem.type === "BUY") {
@@ -71,6 +73,8 @@ export const GuestUserProvider = ({ children }) => {
             React: 0,
             Angular: 0,
             Vue: 0,
+            Node: 0,
+            Express: 0,
         };
         let totalCostAtPurchase = 0;
         guestUserStats.buysAndSells.forEach((elem) => {
@@ -95,6 +99,8 @@ export const GuestUserProvider = ({ children }) => {
             React: 0,
             Angular: 0,
             Vue: 0,
+            Node: 0,
+            Express: 0,
         };
         guestUserStats.buysAndSells.forEach((elem) => {
             if (elem.type === "BUY") {

@@ -49,7 +49,6 @@ const Navbar = ({ userType }) => {
                     Logout
                 </a>
             )}
-            <p>account type {userType}</p>
         </Wrapper>
     );
 };
