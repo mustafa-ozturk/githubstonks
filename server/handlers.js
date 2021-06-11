@@ -418,7 +418,7 @@ const handleLeaderboard = async (req, res) => {
         };
         return obj;
     });
-    res.status(200).json({ data: usernameAndNetWorth });
+    res.status(200).json({ leaderboard: usernameAndNetWorth });
 };
 
 module.exports = {

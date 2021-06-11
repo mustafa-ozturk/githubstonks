@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Account from "./components/Account";
 import Stonks from "./components/Stonks";
 import Card from "./components/Card";
+import Leaderboard from "./components/Leaderboard";
 import { StonkContext } from "./context/StonkContext";
 import { realUserContext } from "./context/RealUserContext";
 
@@ -49,6 +50,9 @@ const App = ({ userType }) => {
                                 setRefetch={setRefetch}
                                 setRefetchUserSide={setRefetchUserSide}
                             />
+                        </Route>
+                        <Route path="/leaderboard">
+                            <Leaderboard />
                         </Route>
                         <Route path="/account">
                             <Account accountStats={accountStats} />
