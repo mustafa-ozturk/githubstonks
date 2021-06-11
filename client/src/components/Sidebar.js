@@ -11,10 +11,10 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                     <Info>
                         (BETA)
                         <span className="tooltip">
-                            User accounts may be reset at any time and many
-                            things might change, if you encouter a bug or have a
-                            suggestion please submit an issue or join our
-                            discord server
+                            GITHUBSTONKS is still under development which means
+                            user data and stonk data will be reset many times,
+                            if you encouter a bug or have a suggestion/question
+                            please submit an issue or join our discord server
                         </span>
                     </Info>
                 </Title>
@@ -114,7 +114,7 @@ const Description = styled.span`
 const Info = styled.span`
     position: relative;
     display: inline;
-    font-size: 0.7rem;
+    font-size: 0.62rem;
     cursor: help;
     color: var(--main-red);
     border-bottom: 1px dotted black;
