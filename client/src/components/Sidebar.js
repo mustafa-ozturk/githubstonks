@@ -6,7 +6,18 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
         <Wrapper>
             <LogoWrapper>
                 <Logo>🚀</Logo>
-                <Title>GITHUBSTONKS</Title>
+                <Title>
+                    GITHUBSTONKS
+                    <Info>
+                        (BETA)
+                        <span className="tooltip">
+                            User accounts may be reset at any time and many
+                            things might change, if you encouter a bug or have a
+                            suggestion please submit an issue or join our
+                            discord server
+                        </span>
+                    </Info>
+                </Title>
             </LogoWrapper>
             <SideBarParentWrapper>
                 <SideBarItemWrapper>
@@ -98,6 +109,28 @@ const SideBarItemTextWrapper = styled.div`
 
 const Description = styled.span`
     color: rgba(0, 0, 0, 0.6);
+`;
+
+const Info = styled.span`
+    position: relative;
+    display: inline;
+    font-size: 0.7rem;
+    cursor: help;
+    color: var(--main-red);
+    border-bottom: 1px dotted black;
+    & > .tooltip {
+        display: none;
+        color: red;
+        width: 150px;
+        position: absolute;
+        bottom: 20px;
+        margin-left: 24px;
+        z-index: 1000;
+        background-color: white;
+    }
+    &:hover .tooltip {
+        display: block;
+    }
 `;
 
 export default Sidebar;
