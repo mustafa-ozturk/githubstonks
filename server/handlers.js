@@ -88,67 +88,81 @@ const handleSigninRedirect = (req, res) => {
 };
 
 const handleOauthCallback = async (req, res) => {
-    const code = req.query.code;
-    const { data } = await Axios.post(
-        `https://github.com/login/oauth/access_token?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`
-    );
-    const accessTokenParams = new URLSearchParams(data);
+    try {
+        const code = req.query.code;
+        const { data } = await Axios.post(
+            `https://github.com/login/oauth/access_token?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`
+        );
+        const accessTokenParams = new URLSearchParams(data);
 
-    const accessToken = accessTokenParams.get("access_token");
-    // const refreshToken = accessTokenParams.get("refresh_token");
+        const accessToken = accessTokenParams.get("access_token");
+        // const refreshToken = accessTokenParams.get("refresh_token");
 
-    const { data: ghData } = await Axios.get("https://api.github.com/user", {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
+        const { data: ghData } = await Axios.get(
+            "https://api.github.com/user",
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
 
-    const cryptographicToken = crypto
-        .randomBytes(32)
-        .toString("base64")
-        .replace(/\//g, "_")
-        .replace(/\+/g, "-")
-        .replace(/=/g, "");
+        const cryptographicToken = crypto
+            .randomBytes(32)
+            .toString("base64")
+            .replace(/\//g, "_")
+            .replace(/\+/g, "-")
+            .replace(/=/g, "");
 
-    ObjectOfTokens[cryptographicToken] = ghData.id;
-    // create user if it doesnt already exist
-    let collection = await connectDb(USER_COLLECTION);
-    const user = {
-        id: ghData.id,
-        username: ghData.login,
-        startingBalance: 1000,
-        buysAndSells: [],
-        stocksOwned: {},
-    };
-    const query = { id: ghData.id };
-    const result = await collection.findOne(query);
-    if (!result) {
-        await collection.insertOne(user);
-        console.log("inserted data");
+        ObjectOfTokens[cryptographicToken] = ghData.id;
+        // create user if it doesnt already exist
+        let collection = await connectDb(USER_COLLECTION);
+        const user = {
+            id: ghData.id,
+            username: ghData.login,
+            startingBalance: 1000,
+            buysAndSells: [],
+            stocksOwned: {},
+        };
+        const query = { id: ghData.id };
+        const result = await collection.findOne(query);
+        if (!result) {
+            await collection.insertOne(user);
+            console.log("inserted data");
+        }
+
+        res.cookie("session", cryptographicToken, {
+            maxAge: 9999999999999999,
+            httpOnly: true,
+        }).redirect(`http://localhost:3000?id=${cryptographicToken}`);
+    } catch (error) {
+        console.log("error", error);
     }
-    res.cookie("session", cryptographicToken, {
-        maxAge: 9999999999999999,
-        httpOnly: true,
-    }).redirect(`http://localhost:3000?id=${cryptographicToken}`);
 };
 
 const handleUserAuth = async (req, res) => {
-    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
-    const token = sessionCookie.split("=")[1];
+    try {
+        const sessionCookie = req.rawHeaders.find((e) =>
+            e.startsWith("session=")
+        );
+        const token = sessionCookie.split("=")[1];
+        console.log(sessionCookie);
+        const authenticated = ObjectOfTokens[token];
 
-    const authenticated = ObjectOfTokens[token];
-
-    if (authenticated === undefined) {
-        return res.json({ message: "not authenticated" });
+        if (authenticated === undefined) {
+            return res.json({ message: "not authenticated" });
+        }
+        const id = authenticated[token];
+        const query = { id: parseInt(id) };
+        let collection = await connectDb(USER_COLLECTION);
+        const result = await collection.findOne(query);
+        if (!result) {
+            return res.json({ auth: "false", message: "user not found" });
+        }
+        return res.json({ auth: "true", message: "user logged in" });
+    } catch (error) {
+        console.log("error", error);
     }
-    const id = authenticated[token];
-    const query = { id: parseInt(id) };
-    let collection = await connectDb(USER_COLLECTION);
-    const result = await collection.findOne(query);
-    if (!result) {
-        return res.json({ auth: "false", message: "user not found" });
-    }
-    return res.json({ auth: "true", message: "user logged in" });
 };
 
 const handleUserBuy = async (req, res) => {

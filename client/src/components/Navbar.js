@@ -61,7 +61,7 @@ const Navbar = ({ userType }) => {
                 <Login>
                     <a
                         className="login"
-                        href="http://githubstonks-env.eba-ypr4dpfq.us-east-2.elasticbeanstalk.com/api/user/signin"
+                        href="http://localhost:8000/api/user/signin"
                     >
                         Login with GitHub
                         <span className="logo">

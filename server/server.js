@@ -16,7 +16,8 @@ const {
     handleLeaderboard,
 } = require("./handlers");
 
-app.use("/assets", express.static(path.join(__dirname, "assets")));
+// app.use("/assets", express.static(path.join(__dirname, "assets")));
+// app.use(express.static("assets"));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 

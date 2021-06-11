@@ -6,23 +6,21 @@ import { Switch, Route, useHistory } from "react-router-dom";
 const App = () => {
     const [userType, setUserType] = useState("guest");
     const tokenId = localStorage.getItem("id");
+
     let history = useHistory();
     const removeQueryFromPathOnReceivedToken = () => {
         history.push("/");
     };
     useEffect(() => {
         if (localStorage.getItem("id") !== null) {
-            fetch(
-                "http://githubstonks-env.eba-ypr4dpfq.us-east-2.elasticbeanstalk.com/api/user/auth",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({ id: localStorage.getItem("id") }),
-                }
-            )
+            fetch("http://localhost:8000/api/user/auth", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({ id: localStorage.getItem("id") }),
+            })
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("hello");
