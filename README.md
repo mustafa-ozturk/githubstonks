@@ -1,8 +1,10 @@
 # GithubStonks
 
-> NOTE: This was my final project for a full-stack web bootcamp, I only had 2 weeks~ to work on it. I'm planning on continuing to improve it. top priorities: cleaning up the code base/files,user authentication (the current one was rushed and has many flaws) and use the github api to get stars, forks, commit (I already have the code for this I just ran into rate limitting so I commented it out)
+> NOTE_0: This was my final project for a full-stack web bootcamp, I only had 2 weeks~ to work on it. I'm planning on continuing to improve it. Top priorities: cleaning up the code base/files, user authentication (the current one was rushed and has many flaws) and use the github api to get stars, forks, commit (I already have the code for this I just ran into rate limitting so I commented it out)
 
-for any questions join my discord server or create an issue. [discord server link]
+> NOTE_1: GITHUBSTONKS is still under development which means user data and stonk data will be reset many times, if you encouter a bug or have a suggestion/question please submit an issue or join our discord server
+
+[discord server link]
 
 ## What is githubstonks ?
 
@@ -39,9 +41,7 @@ Full dev setup (frontend + backend)
 ## to-do
 
 -   website is not responsive
--
-
----
+-   ***
 
 ## Api doc
 
