@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-
+import { AiOutlineGithub } from "react-icons/ai";
 // uselocation
 const Navbar = ({ userType }) => {
     const handleLogout = () => {
@@ -19,35 +19,47 @@ const Navbar = ({ userType }) => {
 
     return (
         <Wrapper>
-            <NavBarItem
-                className="active"
-                exact
-                to={userType === "guest" ? "/guest" : "/"}
-                activeStyle={{
-                    fontWeight: "bold",
-                    color: "rgb(14, 184, 239)",
-                }}
-            >
-                Home
-            </NavBarItem>
-            <NavBarItem
-                exact
-                to={userType === "guest" ? "/guest/account" : "/account"}
-                activeStyle={{
-                    fontWeight: "bold",
-                    color: "rgb(14, 184, 239)",
-                }}
-            >
-                Acount
-            </NavBarItem>
+            <div>
+                <NavBarItem
+                    className="active"
+                    exact
+                    to={userType === "guest" ? "/guest" : "/"}
+                    activeStyle={{
+                        fontWeight: "bold",
+                        color: "rgb(14, 184, 239)",
+                    }}
+                >
+                    Home
+                </NavBarItem>
+                <NavBarItem
+                    exact
+                    to={userType === "guest" ? "/guest/account" : "/account"}
+                    activeStyle={{
+                        fontWeight: "bold",
+                        color: "rgb(14, 184, 239)",
+                    }}
+                >
+                    Acount
+                </NavBarItem>
+            </div>
             {userType === "guest" ? (
-                <a href="http://localhost:8000/api/user/signin">
-                    Sign in with Github
-                </a>
+                <Login>
+                    <a href="http://localhost:8000/api/user/signin">
+                        Login with GitHub
+                    </a>
+                    <span className="logo">
+                        <AiOutlineGithub />
+                    </span>
+                </Login>
             ) : (
-                <a href="http://localhost:3000/guest" onClick={handleLogout}>
-                    Logout
-                </a>
+                <Login>
+                    <a
+                        href="http://localhost:3000/guest"
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </a>
+                </Login>
             )}
         </Wrapper>
     );
@@ -55,14 +67,17 @@ const Navbar = ({ userType }) => {
 //  navlink knows
 const Wrapper = styled.div`
     padding: 10px 10px 10px 14px;
-    max-width: 100%;
     height: 21px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     background-color: white;
     position: fixed;
-    width: 100%;
+    min-width: calc(100% - 201px);
     margin-left: 201px;
+
     z-index: 10;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 `;
 
 const NavBarItem = styled(NavLink)`
@@ -72,9 +87,24 @@ const NavBarItem = styled(NavLink)`
     &:active {
         color: rgb(14, 184, 239);
     }
-    /* &.active {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    } */
+`;
+
+const Login = styled.div`
+    margin-right: 24px;
+    display: flex;
+    align-items: center;
+    &:active {
+        color: rgb(14, 184, 239);
+    }
+    & > .logo {
+        font-size: 2rem;
+        margin-left: 4px;
+    }
+    & > a {
+        color: black;
+        text-decoration: none;
+        font-weight: 600;
+    }
 `;
 
 export default Navbar;
