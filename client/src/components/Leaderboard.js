@@ -4,9 +4,12 @@ import styled from "styled-components";
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState(null);
     useEffect(() => {
-        fetch("http://localhost:8000/api/leaderboard", {
-            method: "GET",
-        })
+        fetch(
+            "http://githubstonks-env.eba-ypr4dpfq.us-east-2.elasticbeanstalk.com/api/leaderboard",
+            {
+                method: "GET",
+            }
+        )
             .then((response) => response.json())
             .then((data) => {
                 let sortedData = data.leaderboard.sort(

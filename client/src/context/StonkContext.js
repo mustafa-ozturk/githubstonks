@@ -6,7 +6,12 @@ export const StonkProvider = ({ children }) => {
     const [stonkData, setstonkData] = useState([]);
     const [refetch, setRefetch] = useState(false);
     useEffect(() => {
-        fetch("/api/stonkData")
+        fetch(
+            "http://githubstonks-env.eba-ypr4dpfq.us-east-2.elasticbeanstalk.com/api/stonkData",
+            {
+                method: "GET",
+            }
+        )
             .then((response) => response.json())
             .then(({ data }) => {
                 setstonkData(data);

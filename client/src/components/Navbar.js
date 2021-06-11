@@ -61,7 +61,7 @@ const Navbar = ({ userType }) => {
                 <Login>
                     <a
                         className="login"
-                        href="http://localhost:8000/api/user/signin"
+                        href="http://githubstonks-env.eba-ypr4dpfq.us-east-2.elasticbeanstalk.com/api/user/signin"
                     >
                         Login with GitHub
                         <span className="logo">
@@ -114,9 +114,6 @@ const Login = styled.div`
         color: black;
         text-decoration: none;
         font-weight: 600;
-        &:active {
-            color: rgb(14, 184, 239);
-        }
     }
     & > .login {
         display: flex;
