@@ -41,18 +41,17 @@ const Navbar = ({ userType }) => {
                 >
                     Acount
                 </NavBarItem>
-                {userType === "real" && (
-                    <NavBarItem
-                        exact
-                        to={"/leaderboard"}
-                        activeStyle={{
-                            fontWeight: "bold",
-                            color: "rgb(14, 184, 239)",
-                        }}
-                    >
-                        Leaderboard
-                    </NavBarItem>
-                )}
+
+                <NavBarItem
+                    exact
+                    to={"/leaderboard"}
+                    activeStyle={{
+                        fontWeight: "bold",
+                        color: "rgb(14, 184, 239)",
+                    }}
+                >
+                    Leaderboard
+                </NavBarItem>
             </div>
             {userType === "guest" ? (
                 <Login>

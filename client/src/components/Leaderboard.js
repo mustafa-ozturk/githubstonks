@@ -35,9 +35,9 @@ const Leaderboard = () => {
                             leaderboard.map((elem, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{index + 1}</td>
-                                        <td>@{elem.username}</td>
-                                        <td>${elem.networth}</td>
+                                        <Td>{index + 1}</Td>
+                                        <Td>@{elem.username}</Td>
+                                        <Td>${elem.networth}</Td>
                                     </tr>
                                 );
                             })}
@@ -50,6 +50,8 @@ const Leaderboard = () => {
 
 const Wrapper = styled.div`
     padding: 25px 40px 20px 40px;
+    width: 500px;
+    margin: 0 auto;
     & > div {
         padding: 1rem;
         border-radius: 8px;

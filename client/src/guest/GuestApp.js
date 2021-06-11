@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import GuestAccount from "./GuestAccount";
 import Stonks from "../components/Stonks";
 import Card from "../components/Card";
+import Leaderboard from "../components/Leaderboard";
 import { StonkContext } from "../context/StonkContext";
 import { GuestUserContext } from "./GuestUserContext";
 
@@ -51,6 +52,9 @@ const GuestApp = ({ userType }) => {
                                 guestBalance={guestBalance}
                                 setRefetch={setRefetch}
                             />
+                        </Route>
+                        <Route path="/leaderboard">
+                            <Leaderboard />
                         </Route>
                         <Route path="/guest/account">
                             <GuestAccount

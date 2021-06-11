@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
+    console.log(balance);
     return (
         <Wrapper>
             <LogoWrapper>
