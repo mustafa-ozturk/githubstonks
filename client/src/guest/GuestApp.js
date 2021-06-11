@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
@@ -12,13 +12,6 @@ import { GuestUserContext } from "./GuestUserContext";
 
 const GuestApp = ({ userType }) => {
     const { stonkData, setRefetch } = useContext(StonkContext);
-
-    useEffect(() => {
-        if (localStorage.getItem("id") !== null) {
-            console.log("this mf is logged in tf");
-        }
-    }, []);
-
     const {
         guestUserStats,
         guestUserStatsDispatch,
@@ -29,7 +22,6 @@ const GuestApp = ({ userType }) => {
         guestTotalShares,
         guestAccountStats,
     } = useContext(GuestUserContext);
-    console.log(guestUserStats);
     return (
         <Wrapper>
             <Sidebar
@@ -53,7 +45,7 @@ const GuestApp = ({ userType }) => {
                                 setRefetch={setRefetch}
                             />
                         </Route>
-                        <Route path="/leaderboard">
+                        <Route path="/guest/leaderboard">
                             <Leaderboard />
                         </Route>
                         <Route path="/guest/account">

@@ -44,7 +44,11 @@ const Navbar = ({ userType }) => {
 
                 <NavBarItem
                     exact
-                    to={"/leaderboard"}
+                    to={
+                        userType === "guest"
+                            ? "/guest/leaderboard"
+                            : "/leaderboard"
+                    }
                     activeStyle={{
                         fontWeight: "bold",
                         color: "rgb(14, 184, 239)",
@@ -55,12 +59,15 @@ const Navbar = ({ userType }) => {
             </div>
             {userType === "guest" ? (
                 <Login>
-                    <a href="http://localhost:8000/api/user/signin">
+                    <a
+                        className="login"
+                        href="http://localhost:8000/api/user/signin"
+                    >
                         Login with GitHub
+                        <span className="logo">
+                            <AiOutlineGithub />
+                        </span>
                     </a>
-                    <span className="logo">
-                        <AiOutlineGithub />
-                    </span>
                 </Login>
             ) : (
                 <Login>
@@ -102,19 +109,29 @@ const NavBarItem = styled(NavLink)`
 
 const Login = styled.div`
     margin-right: 24px;
-    display: flex;
-    align-items: center;
-    &:active {
-        color: rgb(14, 184, 239);
-    }
-    & > .logo {
-        font-size: 2rem;
-        margin-left: 4px;
-    }
     & > a {
+        margin-top: 0;
         color: black;
         text-decoration: none;
         font-weight: 600;
+        &:active {
+            color: rgb(14, 184, 239);
+        }
+    }
+    & > .login {
+        display: flex;
+        align-items: center;
+        color: black;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: -10px;
+        &:active {
+            color: rgb(14, 184, 239);
+        }
+        & > .logo {
+            font-size: 2rem;
+            margin-left: 4px;
+        }
     }
 `;
 

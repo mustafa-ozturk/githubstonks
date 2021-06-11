@@ -18,7 +18,6 @@ const Leaderboard = () => {
                 console.error("Error:", error);
             });
     }, []);
-    console.log(leaderboard);
     return (
         <Wrapper>
             <div>

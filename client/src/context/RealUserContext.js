@@ -12,7 +12,6 @@ export const RealUserProvider = ({ children }) => {
             fetch(`/api/${id}/info`, {})
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("Success:", data);
                     setUserData(data);
                     setRefetchUserSide(false);
                 })

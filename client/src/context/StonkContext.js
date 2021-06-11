@@ -11,7 +11,6 @@ export const StonkProvider = ({ children }) => {
             .then(({ data }) => {
                 setstonkData(data);
                 setRefetch(false);
-                console.log("got data from server", data);
             });
     }, [refetch]);
 
