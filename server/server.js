@@ -13,6 +13,7 @@ const {
     handleUserSell,
     handleUserInfo,
     handleDeleteSession,
+    handleLeaderboard,
 } = require("./handlers");
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
@@ -20,6 +21,8 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 
 app.get("/api/stonkData", handleCards);
+
+app.get("/api/leaderboard", handleLeaderboard);
 
 app.get("/api/user/signin", handleSigninRedirect);
 

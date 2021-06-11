@@ -380,6 +380,14 @@ const handleUserInfo = async (req, res) => {
         const profitLoss = await getProfitLoss(id);
         const totalShares = await getTotalshares(id);
         const accountStats = await getAccountStats(id);
+        let collection = await connectDb(USER_COLLECTION);
+        const query = { id: id };
+        const setNetWorth = {
+            $set: {
+                networth: netWorth,
+            },
+        };
+        await collection.updateOne(query, setNetWorth);
         return res.status(200).json({
             data: {
                 balance,
@@ -400,6 +408,19 @@ const handleDeleteSession = (req, res) => {
     res.status(200).end();
 };
 
+const handleLeaderboard = async (req, res) => {
+    let collection = await connectDb(USER_COLLECTION);
+    let result = await collection.find().toArray();
+    const usernameAndNetWorth = result.map((elem) => {
+        const obj = {
+            username: elem.username,
+            networth: elem.networth,
+        };
+        return obj;
+    });
+    res.status(200).json({ data: usernameAndNetWorth });
+};
+
 module.exports = {
     handleCards,
     handleSigninRedirect,
@@ -409,4 +430,5 @@ module.exports = {
     handleUserSell,
     handleUserInfo,
     handleDeleteSession,
+    handleLeaderboard,
 };
