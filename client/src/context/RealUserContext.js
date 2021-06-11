@@ -1,16 +1,11 @@
-import React, {
-    createContext,
-    useContext,
-    useEffect,
-    useReducer,
-    useState,
-} from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const realUserContext = createContext();
 
 export const RealUserProvider = ({ children }) => {
     const [userData, setUserData] = useState(null);
     const [refetchUserSide, setRefetchUserSide] = useState(false);
+    const tokenId = localStorage.getItem("id");
     useEffect(() => {
         const id = localStorage.getItem("id");
         if (id) {
@@ -25,7 +20,7 @@ export const RealUserProvider = ({ children }) => {
                     console.error("Error:", error);
                 });
         }
-    }, [localStorage.getItem("id"), refetchUserSide]);
+    }, [tokenId, refetchUserSide]);
     const balance = userData ? userData.data.balance : 0;
     const portfolioValue = userData ? userData.data.portfolio : 0;
     const netWorth = userData ? userData.data.netWorth : 0;

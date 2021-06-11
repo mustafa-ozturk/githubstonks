@@ -73,7 +73,6 @@ const insertStockData = async (stockDataArr) => {
 };
 
 const handleCards = async (req, res) => {
-    console.log("called");
     await insertStockData(stonkDataArr).then(async () => {
         let collection = await connectDb(STOCKDATA_COLLECTION);
         let result = await collection.find().toArray();

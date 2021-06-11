@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import GuestApp from "./guest/GuestApp";
 import RealApp from "./RealApp";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useHistory,
-} from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 
 const App = () => {
     const [userType, setUserType] = useState("guest");
-
+    const tokenId = localStorage.getItem("id");
     let history = useHistory();
     const removeQueryFromPathOnReceivedToken = () => {
         history.push("/");
@@ -33,7 +28,8 @@ const App = () => {
         } else {
             setUserType("guest");
         }
-    }, []);
+    }, [tokenId]);
+
     return (
         <>
             <Switch>
