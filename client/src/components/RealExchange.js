@@ -31,11 +31,12 @@ const RealExchange = ({
             data.purchaseCost = (inputState * elem.price).toFixed(2);
         }
         const id = localStorage.getItem("id");
-        fetch(`/api/${id}/${buyOrSell}`, {
+        fetch(`http://localhost:8000/api/${id}/${buyOrSell}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify(data),
         })
             .then((response) => response.json())

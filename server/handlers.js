@@ -146,7 +146,6 @@ const handleUserAuth = async (req, res) => {
             e.startsWith("session=")
         );
         const token = sessionCookie.split("=")[1];
-        console.log(sessionCookie);
         const authenticated = ObjectOfTokens[token];
 
         if (authenticated === undefined) {
