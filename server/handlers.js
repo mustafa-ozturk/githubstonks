@@ -160,7 +160,7 @@ const handleUserBuy = async (req, res) => {
         quantity: parseInt(req.body.quantity),
         purchaseCost: parseFloat(req.body.purchaseCost),
     };
-
+    console.log(ObjectOfTokens);
     const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
     const token = sessionCookie.split("=")[1];
     const authenticated = ObjectOfTokens[token];
