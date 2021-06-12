@@ -122,7 +122,7 @@ const handleOauthCallback = async (req, res) => {
         const user = {
             id: ghData.id,
             username: ghData.login,
-            startingBalance: 1000,
+            startingBalance: 1000000,
             buysAndSells: [],
             stocksOwned: {},
         };
@@ -132,11 +132,7 @@ const handleOauthCallback = async (req, res) => {
             await collection.insertOne(user);
             console.log("inserted data");
         }
-
-        res.cookie("session", cryptographicToken, {
-            maxAge: 9999999999999999,
-            httpOnly: true,
-        }).redirect(`http://localhost:3000?id=${cryptographicToken}`);
+        res.redirect(`https://githubstonks.com?id=${cryptographicToken}`);
     } catch (error) {
         console.log("error", error);
     }
@@ -171,10 +167,8 @@ const handleUserBuy = async (req, res) => {
         quantity: parseInt(req.body.quantity),
         purchaseCost: parseFloat(req.body.purchaseCost),
     };
-    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
-    const token = sessionCookie.split("=")[1];
-    const authenticated = ObjectOfTokens[token];
-    const id = authenticated;
+    const tokenid = req.params.id;
+    const id = ObjectOfTokens[tokenid];
     const query = { id: id };
     const push = { $push: { buysAndSells: bodyObj } };
     let collection = await connectDb(USER_COLLECTION);
@@ -228,11 +222,8 @@ const handleUserSell = async (req, res) => {
         quantity: parseInt(req.body.quantity),
         purchaseCost: parseFloat(req.body.purchaseCost),
     };
-    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
-    const token = sessionCookie.split("=")[1];
-    const authenticated = ObjectOfTokens[token];
-
-    const id = authenticated;
+    const tokenid = req.params.id;
+    const id = ObjectOfTokens[tokenid];
     const query = { id: id };
     const push = { $push: { buysAndSells: bodyObj } };
     let collection = await connectDb(USER_COLLECTION);
