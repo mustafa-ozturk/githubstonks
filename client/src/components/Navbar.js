@@ -39,7 +39,7 @@ const Navbar = ({ userType }) => {
                         color: "rgb(14, 184, 239)",
                     }}
                 >
-                    Acount
+                    Account
                 </NavBarItem>
 
                 <NavBarItem
