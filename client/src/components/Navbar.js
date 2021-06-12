@@ -7,9 +7,8 @@ const Navbar = ({ userType }) => {
     const handleLogout = () => {
         localStorage.removeItem("id");
 
-        fetch("/api/delete-session", {
+        fetch("https://api.githubstonks.com/api/delete-session", {
             method: "DELETE",
-            credentials: "include",
         })
             .then((response) => response.json())
             .then((data) => {
