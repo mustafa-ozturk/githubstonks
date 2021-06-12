@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { abbreviateNumber } from "../utils";
 const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
     return (
         <Wrapper>
@@ -25,28 +25,36 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                         <SideBarIcon>🏦</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Net Worth</Description>
-                            <span>${netWorth}</span>
+                            <span title={netWorth}>
+                                ${abbreviateNumber(netWorth)}
+                            </span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>📁</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Portfolio Value</Description>
-                            <span>${portfolioValue}</span>
+                            <span title={portfolioValue}>
+                                ${abbreviateNumber(portfolioValue)}
+                            </span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>💰</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Balance</Description>
-                            <span>${balance}</span>
+                            <span title={balance}>
+                                ${abbreviateNumber(balance)}
+                            </span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                     <SideBarItem>
                         <SideBarIcon>📈</SideBarIcon>
                         <SideBarItemTextWrapper>
                             <Description>Profit/Loss</Description>
-                            <span>${profitLoss}</span>
+                            <span title={profitLoss}>
+                                ${abbreviateNumber(profitLoss)}
+                            </span>
                         </SideBarItemTextWrapper>
                     </SideBarItem>
                 </SideBarItemWrapper>

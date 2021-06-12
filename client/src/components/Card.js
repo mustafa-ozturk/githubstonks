@@ -28,26 +28,37 @@ const Card = ({ stonkData, userType }) => {
                                 <Price>${elem.price.toFixed(2)}</Price>
                                 <IncreaseWrapper>
                                     <Increase>
-                                        +${elem.increasePrice} (
-                                        {elem.increasePercent}%)
+                                        <span title={elem.increasePrice}>
+                                            +$
+                                            {abbreviateNumber(
+                                                elem.increasePrice
+                                            )}
+                                        </span>{" "}
+                                        <span title={elem.increasePercent}>
+                                            (
+                                            {abbreviateNumber(
+                                                elem.increasePercent
+                                            )}
+                                            %)
+                                        </span>
                                     </Increase>
                                     <Past24>past 24h</Past24>
                                 </IncreaseWrapper>
                             </PriceIncreasePast>
                             <StatWrapper>
-                                <Statbox>
+                                <Statbox title={elem.stars}>
                                     {abbreviateNumber(elem.stars)}
                                     <StatIcons>
                                         <RiStarSLine />
                                     </StatIcons>
                                 </Statbox>
-                                <Statbox>
+                                <Statbox title={elem.forks}>
                                     {abbreviateNumber(elem.forks)}
                                     <StatIcons>
                                         <AiOutlineBranches />
                                     </StatIcons>
                                 </Statbox>
-                                <Statbox>
+                                <Statbox title={elem.commits}>
                                     {abbreviateNumber(elem.commits)}
                                     <StatIcons>
                                         <BiGitCommit />

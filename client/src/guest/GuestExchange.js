@@ -85,15 +85,15 @@ const GuestExchange = ({
             />
 
             <CostContainer>
-                <p>
+                <p title={price}>
                     <Label>Price</Label> ${price}
                 </p>
                 {buyOrSell === "buy" && (
-                    <p>
+                    <p title={fee}>
                         <Label>Fee</Label> ${fee}
                     </p>
                 )}
-                <p>
+                <p title={totalBuyCost}>
                     <Label>Total</Label> $
                     {buyOrSell === "buy" ? totalBuyCost : totalSellCost}
                 </p>

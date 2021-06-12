@@ -37,19 +37,19 @@ const Stonks = ({
                                         </StockSymbol>
                                     </IconNameSymbol>
                                     <StatWrapper>
-                                        <Statbox>
+                                        <Statbox title={elem.stars}>
                                             {abbreviateNumber(elem.stars)}
                                             <StatIcons>
                                                 <RiStarSLine />
                                             </StatIcons>
                                         </Statbox>
-                                        <Statbox>
+                                        <Statbox title={elem.forks}>
                                             {abbreviateNumber(elem.forks)}
                                             <StatIcons>
                                                 <AiOutlineBranches />
                                             </StatIcons>
                                         </Statbox>
-                                        <Statbox>
+                                        <Statbox title={elem.commits}>
                                             {abbreviateNumber(elem.commits)}
                                             <StatIcons>
                                                 <BiGitCommit />
@@ -60,7 +60,7 @@ const Stonks = ({
                                 <Container>
                                     <div>
                                         <PriceIncreasePast>
-                                            <Price>
+                                            <Price title={elem.price}>
                                                 ${abbreviateNumber(elem.price)}
                                             </Price>
                                             <IncreaseWrapper>
@@ -185,6 +185,7 @@ const Past24 = styled.span`
 `;
 
 const PriceIncreasePast = styled.div`
+    z-index: 10;
     width: 100%;
     position: relative;
     margin-bottom: -60px;

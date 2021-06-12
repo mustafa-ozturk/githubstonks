@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
+import { abbreviateNumber } from "../utils";
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState(null);
     useEffect(() => {
@@ -36,7 +36,9 @@ const Leaderboard = () => {
                                     <tr key={index}>
                                         <Td>{index + 1}</Td>
                                         <Td>@{elem.username}</Td>
-                                        <Td>${elem.networth}</Td>
+                                        <Td title={elem.networth}>
+                                            ${abbreviateNumber(elem.networth)}
+                                        </Td>
                                     </tr>
                                 );
                             })}
