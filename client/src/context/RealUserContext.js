@@ -10,9 +10,9 @@ export const RealUserProvider = ({ children }) => {
         const id = localStorage.getItem("id");
 
         if (id) {
-            fetch(`http://localhost:8000/api/${id}/info`, {
-                credentials: "include",
-            })
+            fetch(
+                `http://githubstonks-env.eba-muyv6gtb.us-east-2.elasticbeanstalk.com/api/${id}/info`
+            )
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("test", data);

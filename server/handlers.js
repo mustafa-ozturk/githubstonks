@@ -144,10 +144,7 @@ const handleOauthCallback = async (req, res) => {
 
 const handleUserAuth = async (req, res) => {
     try {
-        const sessionCookie = req.rawHeaders.find((e) =>
-            e.startsWith("session=")
-        );
-        const token = sessionCookie.split("=")[1];
+        const token = req.body.id;
         const authenticated = ObjectOfTokens[token];
 
         if (authenticated === undefined) {
@@ -380,10 +377,8 @@ const getAccountStats = async (id) => {
 };
 
 const handleUserInfo = async (req, res) => {
-    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
-    const token = sessionCookie.split("=")[1];
-    const authenticated = ObjectOfTokens[token];
-    const id = authenticated;
+    const tokenid = req.params.id;
+    const id = ObjectOfTokens[tokenid];
     if (id) {
         const balance = await getBalance(id);
         const portfolio = await getPortfolioValue(id);

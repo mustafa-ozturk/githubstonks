@@ -4,9 +4,12 @@ import { abbreviateNumber } from "../utils";
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState(null);
     useEffect(() => {
-        fetch("http://localhost:8000/api/leaderboard", {
-            method: "GET",
-        })
+        fetch(
+            "http://githubstonks-env.eba-muyv6gtb.us-east-2.elasticbeanstalk.com/api/leaderboard",
+            {
+                method: "GET",
+            }
+        )
             .then((response) => response.json())
             .then((data) => {
                 let sortedData = data.leaderboard.sort(
