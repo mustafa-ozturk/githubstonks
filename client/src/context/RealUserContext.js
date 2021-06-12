@@ -15,10 +15,8 @@ export const RealUserProvider = ({ children }) => {
             )
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("test", data);
                     setUserData(data);
                     setRefetchUserSide(false);
-                    console.log("hello ?", data);
                 })
                 .catch((error) => {
                     console.error("Error:", error);

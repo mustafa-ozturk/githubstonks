@@ -15,7 +15,6 @@ export const StonkProvider = ({ children }) => {
                 setRefetch(false);
             });
     }, [refetch]);
-    console.log(stonkData);
     return (
         <StonkContext.Provider value={{ stonkData, setRefetch }}>
             {children}

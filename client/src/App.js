@@ -25,7 +25,6 @@ const App = () => {
             )
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("hello");
                     setUserType("real");
                     removeQueryFromPathOnReceivedToken();
                 });
@@ -33,7 +32,6 @@ const App = () => {
             setUserType("guest");
         }
     }, [tokenId]);
-    console.log(userType);
     return (
         <>
             <Switch>
