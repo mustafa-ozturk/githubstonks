@@ -13,16 +13,13 @@ const App = () => {
     };
     useEffect(() => {
         if (localStorage.getItem("id") !== null) {
-            fetch(
-                "http://githubstonks-env.eba-muyv6gtb.us-east-2.elasticbeanstalk.com/api/user/auth",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ id: localStorage.getItem("id") }),
-                }
-            )
+            fetch("https://api.githubstonks.com/api/user/auth", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id: localStorage.getItem("id") }),
+            })
                 .then((response) => response.json())
                 .then((data) => {
                     setUserType("real");
