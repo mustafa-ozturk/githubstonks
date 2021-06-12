@@ -54,21 +54,23 @@ const insertStockData = async (stockDataArr) => {
         if (!result) {
             await collection.insertOne(e);
             console.log("inserted data");
-        } else {
-            if (result.price != priceAfterMarket) {
-                const stockQuery = { name: e.name };
-                const update = {
-                    $set: {
-                        price: priceAfterMarket,
-                        increasePrice: dollarIncrease,
-                        increasePercent: (100 * dollarIncrease) / initialPrice,
-                    },
-                    $push: { priceHistory: { "Price: $": priceAfterMarket } },
-                };
-                await collection.updateOne(stockQuery, update);
-                console.log("updated");
-            }
         }
+        // updates stock if result exist but this breaks buy and sell so I leave it out temporarily
+        // else {
+        //     if (result.price != priceAfterMarket) {
+        //         const stockQuery = { name: e.name };
+        //         const update = {
+        //             $set: {
+        //                 price: priceAfterMarket,
+        //                 increasePrice: dollarIncrease,
+        //                 increasePercent: (100 * dollarIncrease) / initialPrice,
+        //             },
+        //             $push: { priceHistory: { "Price: $": priceAfterMarket } },
+        //         };
+        //         await collection.updateOne(stockQuery, update);
+        //         console.log("updated");
+        //     }
+        // }
     });
 };
 
@@ -172,7 +174,6 @@ const handleUserBuy = async (req, res) => {
         quantity: parseInt(req.body.quantity),
         purchaseCost: parseFloat(req.body.purchaseCost),
     };
-    console.log(ObjectOfTokens);
     const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
     const token = sessionCookie.split("=")[1];
     const authenticated = ObjectOfTokens[token];
@@ -205,18 +206,15 @@ const handleUserBuy = async (req, res) => {
             const marketPrice = e.totalBoughtShares * 0.1;
             const priceAfterMarket = initialPrice + marketPrice;
             const dollarIncrease = priceAfterMarket - initialPrice;
-            const updatePrices = {
+            const updateValues = {
                 $set: {
                     price: priceAfterMarket,
                     increasePrice: dollarIncrease,
                     increasePercent: (100 * dollarIncrease) / initialPrice,
                 },
-            };
-            const pushPriceHistory = {
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
-            await stockCollection.updateOne(stockQuery, updatePrices);
-            await stockCollection.updateOne(stockQuery, pushPriceHistory);
+            await stockCollection.updateOne({ name: e.name }, updateValues);
         }
     });
     return res.status(200).json({
