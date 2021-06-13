@@ -122,10 +122,10 @@ const handleOauthCallback = async (req, res) => {
         const user = {
             id: ghData.id,
             username: ghData.login,
-            startingBalance: 1000000,
+            startingBalance: 100000,
             buysAndSells: [],
             stocksOwned: {},
-            newBalance: 1000000,
+            newBalance: 100000,
         };
         const query = { id: ghData.id };
         const result = await collection.findOne(query);
@@ -133,7 +133,7 @@ const handleOauthCallback = async (req, res) => {
             await collection.insertOne(user);
             console.log("inserted data");
         }
-        res.redirect(`http://localhost:3000/?id=${cryptographicToken}`);
+        res.redirect(`https://githubstonks.com/?id=${cryptographicToken}`);
     } catch (error) {
         console.log("error", error);
     }
