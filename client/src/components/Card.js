@@ -15,8 +15,10 @@ const Card = ({ stonkData, userType }) => {
                         <Links
                             to={
                                 userType === "guest"
-                                    ? `/guest/stonk/${elem.name}`
-                                    : `/stonk/${elem.name}`
+                                    ? process.env.PUBLIC_URL +
+                                      `/guest/stonk/${elem.name}`
+                                    : process.env.PUBLIC_URL +
+                                      `/stonk/${elem.name}`
                             }
                         >
                             <IconNameSymbol>

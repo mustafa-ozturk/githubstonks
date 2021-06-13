@@ -26,7 +26,11 @@ const Navbar = ({ userType }) => {
                 <NavBarItem
                     className="active"
                     exact
-                    to={userType === "guest" ? "/guest" : "/"}
+                    to={
+                        userType === "guest"
+                            ? process.env.PUBLIC_URL + "/guest"
+                            : process.env.PUBLIC_URL + "/"
+                    }
                     activeStyle={{
                         fontWeight: "bold",
                         color: "rgb(14, 184, 239)",

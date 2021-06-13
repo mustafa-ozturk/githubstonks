@@ -32,10 +32,10 @@ const App = () => {
     return (
         <>
             <Switch>
-                <Route path="/guest">
+                <Route path={process.env.PUBLIC_URL + "/guest"}>
                     <GuestApp userType={userType} />
                 </Route>
-                <Route path="/">
+                <Route path={process.env.PUBLIC_URL + "/"}>
                     <RealApp userType={userType} />
                 </Route>
             </Switch>

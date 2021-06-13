@@ -34,7 +34,12 @@ const GuestApp = ({ userType }) => {
                 <Navbar userType={userType} />
                 <ContentWrapper>
                     <Switch>
-                        <Route path="/guest/stonk/:stonkname">
+                        <Route
+                            path={
+                                process.env.PUBLIC_URL +
+                                "/guest/stonk/:stonkname"
+                            }
+                        >
                             <Stonks
                                 userType={userType}
                                 stonkData={stonkData}
@@ -45,15 +50,17 @@ const GuestApp = ({ userType }) => {
                                 setRefetch={setRefetch}
                             />
                         </Route>
-                        <Route path="/guest/leaderboard">
+                        <Route
+                            path={process.env.PUBLIC_URL + "/guest/leaderboard"}
+                        >
                             <Leaderboard />
                         </Route>
-                        <Route path="/guest/account">
+                        <Route path={process.env.PUBLIC_URL + "/guest/account"}>
                             <GuestAccount
                                 guestAccountStats={guestAccountStats}
                             />
                         </Route>
-                        <Route path="/guest">
+                        <Route path={process.env.PUBLIC_URL + "/guest"}>
                             <Card stonkData={stonkData} userType={userType} />
                         </Route>
                     </Switch>
