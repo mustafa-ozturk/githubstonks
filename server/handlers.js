@@ -125,6 +125,7 @@ const handleOauthCallback = async (req, res) => {
             startingBalance: 1000000,
             buysAndSells: [],
             stocksOwned: {},
+            newBalance: 1000000,
         };
         const query = { id: ghData.id };
         const result = await collection.findOne(query);
@@ -132,7 +133,7 @@ const handleOauthCallback = async (req, res) => {
             await collection.insertOne(user);
             console.log("inserted data");
         }
-        res.redirect(`https://githubstonks.com?id=${cryptographicToken}`);
+        res.redirect(`http://localhost:3000/?id=${cryptographicToken}`);
     } catch (error) {
         console.log("error", error);
     }
@@ -160,6 +161,24 @@ const handleUserAuth = async (req, res) => {
 };
 
 const handleUserBuy = async (req, res) => {
+    const tokenid = req.params.id;
+    const id = ObjectOfTokens[tokenid];
+    let collection = await connectDb(USER_COLLECTION);
+    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+    const stockResult = await stockCollection.findOne({
+        name: req.body.stockName,
+    });
+    const userResult = await collection.findOne({ id: id });
+    if (
+        parseFloat(req.body.purchaseCost) > userResult.newBalance ||
+        parseFloat(req.body.quantity) * stockResult.price >
+            userResult.newBalance
+    ) {
+        return res.status(400).json({
+            status: 400,
+            message: "not enough money to buy stonks",
+        });
+    }
     const bodyObj = {
         type: req.body.type,
         stockName: req.body.stockName,
@@ -167,12 +186,11 @@ const handleUserBuy = async (req, res) => {
         quantity: parseInt(req.body.quantity),
         purchaseCost: parseFloat(req.body.purchaseCost),
     };
-    const tokenid = req.params.id;
-    const id = ObjectOfTokens[tokenid];
+
     const query = { id: id };
     const push = { $push: { buysAndSells: bodyObj } };
-    let collection = await connectDb(USER_COLLECTION);
     await collection.updateOne(query, push);
+
     const stockname = req.body.stockName;
     const updateStock = {
         $inc: {
@@ -180,7 +198,7 @@ const handleUserBuy = async (req, res) => {
         },
     };
     await collection.updateOne(query, updateStock);
-    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+
     const stockQuery = { name: stockname };
     const updateBoughtShares = {
         $inc: {
@@ -282,6 +300,11 @@ const getBalance = async (id) => {
         } else {
             total -= parseFloat(elem.purchaseCost);
         }
+    });
+    await collection.updateOne(query, {
+        $set: {
+            newBalance: parseInt(result.startingBalance - total),
+        },
     });
     return result.startingBalance - total;
 };
