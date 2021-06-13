@@ -1,10 +1,12 @@
-# GithubStonks
+# GitHubStonks
 
-> NOTE_0: This was my final project for a full-stack web bootcamp, I only had 2 weeks~ to work on it. I'm planning on continuing to improve it. Top priorities: cleaning up the code base/files, user authentication (the current one was rushed and has many flaws) and use the github api to get stars, forks, commit (I already have the code for this I just ran into rate limitting so I commented it out)
+> NOTE_0: This is my full-stack web bootcamp final project, I only had 2 weeks to work on it (though I did start couple days early). There is still a lot of things to do, Top priorities: cleaning up the code base/files, user authentication (the current one was rushed and has many flaws) and use the github api to get stars, forks, commits (I already have the code for this I just ran into rate limitting so I commented it out)
 
 > NOTE_1: GITHUBSTONKS is still under development which means user data and stonk data will be reset many times, if you encouter a bug or have a suggestion/question please submit an issue or join our discord server
 
-[discord server link]
+### [Join my Discord server for questions/discussions/suggestions/reporting bugs](https://discord.gg/n7uR5CbM2u)
+
+---
 
 ## What is githubstonks ?
 
@@ -16,32 +18,38 @@ Create an issue with a link to the repo you wan't me to add and I might add it :
 
 ## How are the share prices calculated ?
 
-`stars * 0.0003 + forks * 0.0002 + commits * 0.0001`
+`intial price = stars * 0.0003 + forks * 0.0002 + commits * 0.0001`
 
-[link to the code where the price is calculated]
+the price of the stocks go up and down based on how many total shares were bought
 
----
+`marketprice = total shares bought * 0.1`
 
-## Contributing
+`price = initial price + market price`
 
-Frontend dev setup:
+## Github login says "Act on your Behalf"
 
-1.
-2.
-3.
+This is bad wording from github the only data I use and request is public info (github id and username). There has been a lot of complaints about this to github but no changes yet.
 
-Full dev setup (frontend + backend)
+<https://github.community/t/enable-you-to-trigger-actions-in-github/117938/12>
 
-1.
-2.
-3.
+<https://news.ycombinator.com/item?id=26485844>
 
 ---
+
+## Contributions
+
+GitHubStonks is open to contributions, but I recommend creating an issue first to let me know what you are working on that way we don't overwrite each other.
+
+more info on contributing coming soon
+
+## How to run locally
+
+coming soon
 
 ## to-do
 
 -   website is not responsive
--   ***
+-   more coming soon
 
 ## Api doc
 
@@ -60,3 +68,5 @@ stars
 forks
 commits
 ```
+
+proper api doc coming soon
