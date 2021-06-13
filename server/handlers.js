@@ -133,7 +133,7 @@ const handleOauthCallback = async (req, res) => {
             await collection.insertOne(user);
             console.log("inserted data");
         }
-        res.redirect(`http://localhost:3000/?id=${cryptographicToken}`);
+        res.redirect(`https://githubstonks.com/?id=${cryptographicToken}`);
     } catch (error) {
         console.log("error", error);
     }

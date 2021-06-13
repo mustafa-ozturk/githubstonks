@@ -6,7 +6,7 @@ import { AiOutlineGithub } from "react-icons/ai";
 const Navbar = ({ userType }) => {
     const handleLogout = () => {
         fetch(
-            `http://localhost:8000/api/${localStorage.getItem(
+            `https://api.githubstonks.com/api/${localStorage.getItem(
                 "id"
             )}/delete-session`,
             {
@@ -64,7 +64,7 @@ const Navbar = ({ userType }) => {
                 <Login>
                     <a
                         className="login"
-                        href="http://localhost:8000/api/user/signin"
+                        href="https://api.githubstonks.com/api/user/signin"
                     >
                         Login with GitHub
                         <span className="logo">
@@ -74,7 +74,10 @@ const Navbar = ({ userType }) => {
                 </Login>
             ) : (
                 <Login>
-                    <a href="http://localhost:3000/" onClick={handleLogout}>
+                    <a
+                        href="https://githubstonks.com/guest"
+                        onClick={handleLogout}
+                    >
                         Logout
                     </a>
                 </Login>
