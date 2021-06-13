@@ -169,22 +169,34 @@ const handleUserBuy = async (req, res) => {
         name: req.body.stockName,
     });
     const userResult = await collection.findOne({ id: id });
-    if (
-        parseFloat(req.body.purchaseCost) > userResult.newBalance ||
-        parseFloat(req.body.quantity) * stockResult.price >
-            userResult.newBalance
-    ) {
+    const purchaseCost =
+        parseFloat(req.body.quantity) * (parseFloat(stockResult.price) * 0.1);
+
+    if (!stockResult) {
+        return res.status(400).json({
+            status: 400,
+            message: "stonk does not exist",
+        });
+    }
+    if (req.body.quantity <= 0) {
+        return res.status(400).json({
+            status: 400,
+            message: "cannot buy 0 or negative",
+        });
+    }
+    if (purchaseCost > userResult.newBalance) {
         return res.status(400).json({
             status: 400,
             message: "not enough money to buy stonks",
         });
     }
+
     const bodyObj = {
         type: req.body.type,
         stockName: req.body.stockName,
         symbol: req.body.symbol,
         quantity: parseInt(req.body.quantity),
-        purchaseCost: parseFloat(req.body.purchaseCost),
+        purchaseCost: purchaseCost,
     };
 
     const query = { id: id };
@@ -227,24 +239,62 @@ const handleUserBuy = async (req, res) => {
         }
     });
     return res.status(200).json({
-        confirmation: `Bought ${req.body.stockName} for ${req.body.purchaseCost}`,
+        confirmation: `Bought ${req.body.stockName} for ${purchaseCost}`,
         message: "success pushed buy to buyandsells in db",
     });
 };
 
 const handleUserSell = async (req, res) => {
+    const tokenid = req.params.id;
+    const id = ObjectOfTokens[tokenid];
+
+    let collection = await connectDb(USER_COLLECTION);
+    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+    const stockResult = await stockCollection.findOne({
+        name: req.body.stockName,
+    });
+    const userResult = await collection.findOne({ id: id });
+    const purchaseCost =
+        parseFloat(req.body.quantity) * (parseFloat(stockResult.price) * 0.1);
+
+    if (!stockResult) {
+        return res.status(400).json({
+            status: 400,
+            message: "stonk does not exist",
+        });
+    }
+    if (req.body.quantity <= 0) {
+        return res.status(400).json({
+            status: 400,
+            message: "cannot sell 0 or negative",
+        });
+    }
+    if (
+        parseInt(req.body.quantity) > userResult.stocksOwned[req.body.stockName]
+    ) {
+        return res.status(400).json({
+            status: 400,
+            message: "you can't sell more stonks than you own",
+        });
+    }
+    if (parseInt(req.body.quantity) <= 0) {
+        return res.status(400).json({
+            status: 400,
+            message: "you can't sell zero or negative stonks",
+        });
+    }
+
     const bodyObj = {
         type: req.body.type,
         stockName: req.body.stockName,
         symbol: req.body.symbol,
         quantity: parseInt(req.body.quantity),
-        purchaseCost: parseFloat(req.body.purchaseCost),
+        purchaseCost: purchaseCost,
     };
-    const tokenid = req.params.id;
-    const id = ObjectOfTokens[tokenid];
+
     const query = { id: id };
     const push = { $push: { buysAndSells: bodyObj } };
-    let collection = await connectDb(USER_COLLECTION);
+
     await collection.updateOne(query, push);
     const stockname = req.body.stockName;
     const updateStock = {
@@ -253,7 +303,7 @@ const handleUserSell = async (req, res) => {
         },
     };
     await collection.updateOne(query, updateStock);
-    let stockCollection = await connectDb(STOCKDATA_COLLECTION);
+
     const stockQuery = { name: stockname };
     const updateBoughtShares = {
         $inc: {
@@ -284,7 +334,7 @@ const handleUserSell = async (req, res) => {
         }
     });
     return res.status(200).json({
-        confirmation: `Sold ${req.body.stockName} for ${req.body.purchaseCost}`,
+        confirmation: `Sold ${req.body.stockName} for ${purchaseCost}`,
         message: "success pushed sell to buyandsells in db",
     });
 };
