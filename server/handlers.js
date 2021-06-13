@@ -133,7 +133,7 @@ const handleOauthCallback = async (req, res) => {
             await collection.insertOne(user);
             console.log("inserted data");
         }
-        res.redirect(`https://githubstonks.com/?id=${cryptographicToken}`);
+        res.redirect(`http://localhost:3000/?id=${cryptographicToken}`);
     } catch (error) {
         console.log("error", error);
     }
@@ -472,9 +472,8 @@ const handleUserInfo = async (req, res) => {
 };
 
 const handleDeleteSession = (req, res) => {
-    const sessionCookie = req.rawHeaders.find((e) => e.startsWith("session="));
-    const token = sessionCookie.split("=")[1];
-    delete ObjectOfTokens[token];
+    const tokenid = req.params.id;
+    delete ObjectOfTokens[tokenid];
     res.status(200).end();
 };
 

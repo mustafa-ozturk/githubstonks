@@ -5,15 +5,19 @@ import { AiOutlineGithub } from "react-icons/ai";
 // uselocation
 const Navbar = ({ userType }) => {
     const handleLogout = () => {
-        localStorage.removeItem("id");
-
-        fetch("https://api.githubstonks.com/api/delete-session", {
-            method: "DELETE",
-        })
+        fetch(
+            `http://localhost:8000/api/${localStorage.getItem(
+                "id"
+            )}/delete-session`,
+            {
+                method: "DELETE",
+            }
+        )
             .then((response) => response.json())
             .then((data) => {
                 console.log("Success:", data);
             });
+        localStorage.removeItem("id");
     };
 
     return (
@@ -60,7 +64,7 @@ const Navbar = ({ userType }) => {
                 <Login>
                     <a
                         className="login"
-                        href="https://api.githubstonks.com/api/user/signin"
+                        href="http://localhost:8000/api/user/signin"
                     >
                         Login with GitHub
                         <span className="logo">
@@ -70,7 +74,7 @@ const Navbar = ({ userType }) => {
                 </Login>
             ) : (
                 <Login>
-                    <a href="https://githubstonks.com/" onClick={handleLogout}>
+                    <a href="http://localhost:3000/" onClick={handleLogout}>
                         Logout
                     </a>
                 </Login>

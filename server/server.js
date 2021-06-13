@@ -37,7 +37,7 @@ app.post("/api/:id/sell", handleUserSell);
 
 app.get("/api/:id/info", handleUserInfo);
 
-app.delete("/api/delete-session", handleDeleteSession);
+app.delete("/api/:id/delete-session", handleDeleteSession);
 
 app.get("*", (req, res) => {
     res.status(404).json({
