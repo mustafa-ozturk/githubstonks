@@ -44,8 +44,10 @@ const RealExchange = ({
                 setRefetch(true);
                 setRefetchUserSide(true);
                 setInputState(0);
+                if (data.status != 400) {
+                    setConfirmation(data.confirmation);
+                }
 
-                setConfirmation(data.confirmation);
                 setTimeout(() => {
                     setConfirmation("");
                 }, 4000);
