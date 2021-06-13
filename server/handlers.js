@@ -171,7 +171,12 @@ const handleUserBuy = async (req, res) => {
     const userResult = await collection.findOne({ id: id });
     const purchaseCost =
         parseInt(req.body.quantity) * (parseFloat(stockResult.price) * 1.1);
-
+    if (isNaN(parseFloat(req.body.quantity))) {
+        return res.status(400).json({
+            status: 400,
+            message: "quantity must be number",
+        });
+    }
     if (!stockResult) {
         return res.status(400).json({
             status: 400,
@@ -256,7 +261,12 @@ const handleUserSell = async (req, res) => {
     const userResult = await collection.findOne({ id: id });
     const purchaseCost =
         parseInt(req.body.quantity) * parseFloat(stockResult.price);
-
+    if (isNaN(parseFloat(req.body.quantity))) {
+        return res.status(400).json({
+            status: 400,
+            message: "quantity must be number",
+        });
+    }
     if (!stockResult) {
         return res.status(400).json({
             status: 400,
