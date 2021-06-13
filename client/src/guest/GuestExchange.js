@@ -49,8 +49,8 @@ const GuestExchange = ({
         });
     };
 
-    const price = abbreviateNumber(elem.price);
-    const fee = abbreviateNumber(inputState * elem.price * 0.1);
+    const price = elem.price;
+    const fee = inputState * elem.price * 0.1;
     const totalBuyCost =
         inputState * elem.price * 0.1 + inputState * elem.price;
     const totalSellCost = inputState * elem.price;
@@ -85,11 +85,11 @@ const GuestExchange = ({
 
             <CostContainer>
                 <p title={price}>
-                    <Label>Price</Label> ${price}
+                    <Label>Price</Label> ${abbreviateNumber(price)}
                 </p>
                 {buyOrSell === "buy" && (
                     <p title={fee}>
-                        <Label>Fee</Label> ${fee}
+                        <Label>Fee</Label> ${abbreviateNumber(fee)}
                     </p>
                 )}
                 <p title={buyOrSell === "buy" ? totalBuyCost : totalSellCost}>

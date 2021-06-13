@@ -19,16 +19,14 @@ const RealExchange = ({
             data.stockName = elem.name;
             data.symbol = elem.symbol;
             data.quantity = inputState;
-            data.purchaseCost = (
-                inputState * elem.price * 0.1 +
-                inputState * elem.price
-            ).toFixed(2);
+            data.purchaseCost =
+                inputState * elem.price * 0.1 + inputState * elem.price;
         } else {
             data.type = "SELL";
             data.stockName = elem.name;
             data.symbol = elem.symbol;
             data.quantity = inputState;
-            data.purchaseCost = (inputState * elem.price).toFixed(2);
+            data.purchaseCost = inputState * elem.price;
         }
         const id = localStorage.getItem("id");
         fetch(`http://localhost:8000/api/${id}/${buyOrSell}`, {
@@ -66,8 +64,8 @@ const RealExchange = ({
         setInputState(value);
     };
 
-    const price = abbreviateNumber(elem.price);
-    const fee = abbreviateNumber(inputState * elem.price * 0.1);
+    const price = elem.price;
+    const fee = inputState * elem.price * 0.1;
     const totalBuyCost =
         inputState * elem.price * 0.1 + inputState * elem.price;
     const totalSellCost = inputState * elem.price;
@@ -102,11 +100,11 @@ const RealExchange = ({
 
             <CostContainer>
                 <p title={price}>
-                    <Label>Price</Label> ${price}
+                    <Label>Price</Label> ${abbreviateNumber(price)}
                 </p>
                 {buyOrSell === "buy" && (
                     <p title={fee}>
-                        <Label>Fee</Label> ${fee}
+                        <Label>Fee</Label> ${abbreviateNumber(fee)}
                     </p>
                 )}
                 <p title={buyOrSell === "buy" ? totalBuyCost : totalSellCost}>
