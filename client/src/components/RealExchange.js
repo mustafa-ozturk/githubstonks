@@ -31,7 +31,7 @@ const RealExchange = ({
             data.purchaseCost = (inputState * elem.price).toFixed(2);
         }
         const id = localStorage.getItem("id");
-        fetch(`https://api.githubstonks.com/api/${id}/${buyOrSell}`, {
+        fetch(`http://localhost:8000/api/${id}/${buyOrSell}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -68,13 +68,11 @@ const RealExchange = ({
 
     const price = abbreviateNumber(elem.price);
     const fee = abbreviateNumber(inputState * elem.price * 0.1);
-    const totalBuyCost = abbreviateNumber(
-        inputState * elem.price * 0.1 + inputState * elem.price
-    );
-    const totalSellCost = abbreviateNumber(inputState * elem.price);
+    const totalBuyCost =
+        inputState * elem.price * 0.1 + inputState * elem.price;
+    const totalSellCost = inputState * elem.price;
     const realUserTotalShares =
         totalShares[elem.name] === undefined ? 0 : totalShares[elem.name];
-
     return (
         <Wrapper>
             <BuyOrSellTabContainer>
@@ -111,9 +109,11 @@ const RealExchange = ({
                         <Label>Fee</Label> ${fee}
                     </p>
                 )}
-                <p title={totalBuyCost}>
+                <p title={buyOrSell === "buy" ? totalBuyCost : totalSellCost}>
                     <Label>Total</Label> $
-                    {buyOrSell === "buy" ? totalBuyCost : totalSellCost}
+                    {buyOrSell === "buy"
+                        ? abbreviateNumber(totalBuyCost)
+                        : abbreviateNumber(totalSellCost)}
                 </p>
             </CostContainer>
 

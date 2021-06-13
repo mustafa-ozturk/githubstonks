@@ -51,10 +51,9 @@ const GuestExchange = ({
 
     const price = abbreviateNumber(elem.price);
     const fee = abbreviateNumber(inputState * elem.price * 0.1);
-    const totalBuyCost = abbreviateNumber(
-        inputState * elem.price * 0.1 + inputState * elem.price
-    );
-    const totalSellCost = abbreviateNumber(inputState * elem.price);
+    const totalBuyCost =
+        inputState * elem.price * 0.1 + inputState * elem.price;
+    const totalSellCost = inputState * elem.price;
     const guestTotalSharesOwned = guestTotalShares[elem.name];
 
     return (
@@ -93,9 +92,11 @@ const GuestExchange = ({
                         <Label>Fee</Label> ${fee}
                     </p>
                 )}
-                <p title={totalBuyCost}>
+                <p title={buyOrSell === "buy" ? totalBuyCost : totalSellCost}>
                     <Label>Total</Label> $
-                    {buyOrSell === "buy" ? totalBuyCost : totalSellCost}
+                    {buyOrSell === "buy"
+                        ? abbreviateNumber(totalBuyCost)
+                        : abbreviateNumber(totalSellCost)}
                 </p>
             </CostContainer>
 
