@@ -63,6 +63,13 @@ const Navbar = ({ userType }) => {
                 >
                     Leaderboard
                 </NavBarItem>
+
+                <About
+                    href="https://github.com/mustafa-ozturk/githubstonks/blob/main/README.md"
+                    target="_blank"
+                >
+                    About
+                </About>
             </div>
             {userType === "guest" ? (
                 <Login>
@@ -103,6 +110,15 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+`;
+
+const About = styled.a`
+    margin-right: 14px;
+    text-decoration: none;
+    color: black;
+    &:active {
+        color: rgb(14, 184, 239);
+    }
 `;
 
 const NavBarItem = styled(NavLink)`

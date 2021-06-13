@@ -1,4 +1,7 @@
-# GitHubStonks
+<div align="center">
+<img align="center" width="100" height="100" src="client/public/ghs.png">
+<h1>GitHubStonks</h1>
+</div>
 
 > NOTE_0: This is my full-stack web bootcamp final project, I only had 2 weeks to work on it (though I did start couple days early). There is still a lot of things to do, Top priorities: cleaning up the code base/files, user authentication (the current one was rushed and has many flaws) and use the github api to get stars, forks, commits (I already have the code for this I just ran into rate limitting so I commented it out)
 
