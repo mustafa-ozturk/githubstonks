@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import { StonkContext } from "../context/StonkContext";
 
 const initialguestUserStatsState = {
-    startingguestBalance: 1000,
+    startingguestBalance: 100000,
     buysAndSells: [],
 };
 
