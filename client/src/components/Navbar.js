@@ -127,7 +127,7 @@ const About = styled.a`
 `;
 
 const NavBarItem = styled(NavLink)`
-    margin-right: 14px;
+    margin-right: 18px;
     text-decoration: none;
     color: black;
     &:active {
