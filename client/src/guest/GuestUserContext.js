@@ -157,7 +157,6 @@ export const GuestUserProvider = ({ children }) => {
         //         currentValue: ,
         //     },
         guestUserStats.buysAndSells.forEach((elem) => {
-            console.log(elem.stockName);
             stonksAndCost[elem.stockName].name = elem.stockName;
             stonkData.forEach((e) => {
                 if (e.name === elem.stockName) {

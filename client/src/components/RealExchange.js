@@ -13,6 +13,9 @@ const RealExchange = ({
     const [inputState, setInputState] = useState(0);
     const [confirmation, setConfirmation] = useState("");
     const handleBuyPost = (type, price) => {
+        if (inputState <= 0) {
+            return;
+        }
         let data = {};
         if (type === "buy") {
             data.type = "BUY";
@@ -42,7 +45,7 @@ const RealExchange = ({
                 setRefetch(true);
                 setRefetchUserSide(true);
                 setInputState(0);
-                if (data.status != 400) {
+                if (data.status !== 400) {
                     setConfirmation(data.confirmation);
                 }
 

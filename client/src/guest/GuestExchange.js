@@ -23,6 +23,7 @@ const GuestExchange = ({
 
     const handleBuyDispatch = () => {
         inputState > 0 && setRefetch(true);
+
         guestUserStatsDispatch({
             type: "PUSH-TO-BUYS-AND-SELLS",
             payload: {
@@ -35,6 +36,7 @@ const GuestExchange = ({
                 ).toFixed(2),
             },
         });
+        setInputState(0);
     };
     const handleSellDispatch = () => {
         inputState > 0 && setRefetch(true);
@@ -47,6 +49,7 @@ const GuestExchange = ({
                 purchaseCost: (inputState * elem.price).toFixed(2),
             },
         });
+        setInputState(0);
     };
 
     const price = elem.price;
