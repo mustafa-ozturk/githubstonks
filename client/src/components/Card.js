@@ -9,68 +9,68 @@ import { abbreviateNumber } from "../utils";
 const Card = ({ stonkData, userType }) => {
     return (
         <CardWrapper>
-            {stonkData.map((elem, index) => {
-                return (
-                    <Wrapper key={index}>
-                        <Links
-                            to={
-                                userType === "guest"
-                                    ? process.env.PUBLIC_URL +
-                                      `/guest/stonk/${elem.name}`
-                                    : process.env.PUBLIC_URL +
-                                      `/stonk/${elem.name}`
-                            }
-                        >
-                            <IconNameSymbol>
-                                <StockIcon src={elem.logo} />
-                                <StockName>{elem.name}</StockName>
-                                <StockSymbol>({elem.symbol})</StockSymbol>
-                            </IconNameSymbol>
-                            <PriceIncreasePast>
-                                <Price>${elem.price.toFixed(2)}</Price>
-                                <IncreaseWrapper>
-                                    <Increase>
-                                        <span title={elem.increasePrice}>
-                                            +$
-                                            {abbreviateNumber(
-                                                elem.increasePrice
-                                            )}
-                                        </span>{" "}
-                                        <span title={elem.increasePercent}>
-                                            (
-                                            {abbreviateNumber(
-                                                elem.increasePercent
-                                            )}
-                                            %)
-                                        </span>
-                                    </Increase>
-                                    <Past24>past 24h</Past24>
-                                </IncreaseWrapper>
-                            </PriceIncreasePast>
-                            <StatWrapper>
-                                <Statbox title={elem.stars}>
-                                    {abbreviateNumber(elem.stars)}
-                                    <StatIcons>
-                                        <RiStarSLine />
-                                    </StatIcons>
-                                </Statbox>
-                                <Statbox title={elem.forks}>
-                                    {abbreviateNumber(elem.forks)}
-                                    <StatIcons>
-                                        <AiOutlineBranches />
-                                    </StatIcons>
-                                </Statbox>
-                                <Statbox title={elem.commits}>
-                                    {abbreviateNumber(elem.commits)}
-                                    <StatIcons>
-                                        <BiGitCommit />
-                                    </StatIcons>
-                                </Statbox>
-                            </StatWrapper>
-                        </Links>
-                    </Wrapper>
-                );
-            })}
+            {stonkData
+                .sort((a, b) => b.price - a.price)
+                .map((elem, index) => {
+                    return (
+                        <Wrapper key={index}>
+                            <Links
+                                to={
+                                    userType === "guest"
+                                        ? `/guest/stonk/${elem.name}`
+                                        : `/stonk/${elem.name}`
+                                }
+                            >
+                                <IconNameSymbol>
+                                    <StockIcon src={elem.logo} />
+                                    <StockName>{elem.name}</StockName>
+                                    <StockSymbol>({elem.symbol})</StockSymbol>
+                                </IconNameSymbol>
+                                <PriceIncreasePast>
+                                    <Price>${elem.price.toFixed(2)}</Price>
+                                    <IncreaseWrapper>
+                                        <Increase>
+                                            <span title={elem.increasePrice}>
+                                                +$
+                                                {abbreviateNumber(
+                                                    elem.increasePrice
+                                                )}
+                                            </span>{" "}
+                                            <span title={elem.increasePercent}>
+                                                (
+                                                {abbreviateNumber(
+                                                    elem.increasePercent
+                                                )}
+                                                %)
+                                            </span>
+                                        </Increase>
+                                        <Past24>past 24h</Past24>
+                                    </IncreaseWrapper>
+                                </PriceIncreasePast>
+                                <StatWrapper>
+                                    <Statbox title={elem.stars}>
+                                        {abbreviateNumber(elem.stars)}
+                                        <StatIcons>
+                                            <RiStarSLine />
+                                        </StatIcons>
+                                    </Statbox>
+                                    <Statbox title={elem.forks}>
+                                        {abbreviateNumber(elem.forks)}
+                                        <StatIcons>
+                                            <AiOutlineBranches />
+                                        </StatIcons>
+                                    </Statbox>
+                                    <Statbox title={elem.commits}>
+                                        {abbreviateNumber(elem.commits)}
+                                        <StatIcons>
+                                            <BiGitCommit />
+                                        </StatIcons>
+                                    </Statbox>
+                                </StatWrapper>
+                            </Links>
+                        </Wrapper>
+                    );
+                })}
         </CardWrapper>
     );
 };
