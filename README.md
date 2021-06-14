@@ -25,7 +25,7 @@ Create an issue with a link to the repo you wan't me to add and I might add it :
 
 the price of the stocks go up and down based on how many total shares were bought
 
-`marketprice = total shares bought * 0.1`
+`marketprice = total shares bought * 0.00001`
 
 `price = initial price + market price`
 
@@ -36,6 +36,10 @@ This is bad wording from github the only data I use and request is public info (
 <https://github.community/t/enable-you-to-trigger-actions-in-github/117938/12>
 
 <https://news.ycombinator.com/item?id=26485844>
+
+I only use github id and username.
+
+[you can check for yourself here](https://github.com/mustafa-ozturk/githubstonks/blob/6ee4dd89c43f06e7d0d65832f6bba6f992840641/server/handlers.js#L92)
 
 ---
 
