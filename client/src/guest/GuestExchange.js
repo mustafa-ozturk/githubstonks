@@ -115,7 +115,7 @@ const GuestExchange = ({
                     }
                     className={
                         buyOrSell === "buy"
-                            ? guestBalance >= totalBuyCost
+                            ? guestBalance >= totalBuyCost && inputState <= 1000
                                 ? "buyBtn"
                                 : "buyBtnDisabled"
                             : guestTotalSharesOwned >= inputState &&
@@ -125,7 +125,7 @@ const GuestExchange = ({
                     }
                     disabled={
                         buyOrSell === "buy"
-                            ? guestBalance >= totalBuyCost
+                            ? guestBalance >= totalBuyCost && inputState <= 1000
                                 ? false
                                 : true
                             : guestTotalSharesOwned >= inputState &&

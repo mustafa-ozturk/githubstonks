@@ -179,6 +179,12 @@ const handleUserBuy = async (req, res) => {
             });
         }
     });
+    if (parseFloat(req.body.quantity) > 1000) {
+        return res.status(400).json({
+            status: 400,
+            message: "quantity cannot be more than 1000",
+        });
+    }
     if (isNaN(parseFloat(req.body.quantity))) {
         return res.status(400).json({
             status: 400,
@@ -277,6 +283,12 @@ const handleUserSell = async (req, res) => {
             });
         }
     });
+    if (parseFloat(req.body.quantity) > 1000) {
+        return res.status(400).json({
+            status: 400,
+            message: "quantity cannot be more than 1000",
+        });
+    }
     if (isNaN(parseFloat(req.body.quantity))) {
         return res.status(400).json({
             status: 400,

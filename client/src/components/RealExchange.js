@@ -127,7 +127,7 @@ const RealExchange = ({
                     onClick={() => handleBuyPost(buyOrSell)}
                     className={
                         buyOrSell === "buy"
-                            ? balance >= totalBuyCost
+                            ? balance >= totalBuyCost && inputState <= 1000
                                 ? "buyBtn"
                                 : "buyBtnDisabled"
                             : realUserTotalShares >= inputState &&
@@ -137,7 +137,7 @@ const RealExchange = ({
                     }
                     disabled={
                         buyOrSell === "buy"
-                            ? balance >= totalBuyCost
+                            ? balance >= totalBuyCost && inputState <= 1000
                                 ? false
                                 : true
                             : realUserTotalShares >= inputState &&
