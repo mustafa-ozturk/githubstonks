@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FiExternalLink } from "react-icons/fi";
+import { AiFillGithub } from "react-icons/ai";
 import { abbreviateNumber } from "../utils";
 const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
     return (
@@ -62,11 +63,22 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
             </SideBarParentWrapper>
             <OtherSideElement>
                 <a href="https://mozturk.dev/" target="_blank">
-                    made by mozturk.dev
+                    made by
                     <br />
-                    hire me
+                    mozturk.dev
                     <span>
                         <FiExternalLink />
+                    </span>
+                </a>
+            </OtherSideElement>
+            <OtherSideElement>
+                <a
+                    href="https://github.com/mustafa-ozturk/githubstonks"
+                    target="_blank"
+                >
+                    contribute
+                    <span>
+                        <AiFillGithub />
                     </span>
                 </a>
             </OtherSideElement>
@@ -140,10 +152,11 @@ const Info = styled.span`
     & > .tooltip {
         display: none;
         color: red;
-        width: 150px;
+        width: 190px;
+        font-size: 1rem;
         position: absolute;
-        bottom: 20px;
-        margin-left: 24px;
+        bottom: -65px;
+        margin-left: 5px;
         z-index: 1000;
         background-color: white;
     }
@@ -164,7 +177,7 @@ const OtherSideElement = styled.div`
         text-decoration: none;
         & > span {
             position: relative;
-            top: 1.75px;
+            top: 2.5px;
             left: 2px;
         }
         &:active {
