@@ -50,12 +50,14 @@ const GuestExchange = ({
     };
 
     const price = elem.price;
-    const fee = inputState * elem.price * 0.1;
-    const totalBuyCost =
-        inputState * elem.price * 0.1 + inputState * elem.price;
-    const totalSellCost = inputState * elem.price;
-    const guestTotalSharesOwned = guestTotalShares[elem.name];
+    const fee =
+        buyOrSell === "buy"
+            ? inputState * elem.price * 0.15
+            : inputState * elem.price * 0.15;
+    const totalBuyCost = inputState * elem.price * 1.15;
+    const totalSellCost = inputState * elem.price * 1.15;
 
+    const guestTotalSharesOwned = guestTotalShares[elem.name];
     return (
         <Wrapper>
             <BuyOrSellTabContainer>
@@ -87,11 +89,11 @@ const GuestExchange = ({
                 <p title={price}>
                     <Label>Price</Label> ${abbreviateNumber(price)}
                 </p>
-                {buyOrSell === "buy" && (
-                    <p title={fee}>
-                        <Label>Fee</Label> ${abbreviateNumber(fee)}
-                    </p>
-                )}
+
+                <p title={fee}>
+                    <Label>Fee</Label> ${abbreviateNumber(fee)}
+                </p>
+
                 <p title={buyOrSell === "buy" ? totalBuyCost : totalSellCost}>
                     <Label>Total</Label> $
                     {buyOrSell === "buy"

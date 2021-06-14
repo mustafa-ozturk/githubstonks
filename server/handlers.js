@@ -170,7 +170,7 @@ const handleUserBuy = async (req, res) => {
     });
     const userResult = await collection.findOne({ id: id });
     const purchaseCost =
-        parseInt(req.body.quantity) * (parseFloat(stockResult.price) * 1.1);
+        parseInt(req.body.quantity) * parseFloat(stockResult.price) * 1.15;
     req.body.quantity.split("").forEach((e) => {
         if (isNaN(parseInt(e))) {
             return res.status(400).json({
@@ -237,7 +237,7 @@ const handleUserBuy = async (req, res) => {
         if (e.name === stockname) {
             const initialPrice =
                 e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
-            const marketPrice = e.totalBoughtShares * 0.1;
+            const marketPrice = e.totalBoughtShares * 0.00000001;
             const priceAfterMarket = initialPrice + marketPrice;
             const dollarIncrease = priceAfterMarket - initialPrice;
             const updateValues = {
@@ -268,7 +268,7 @@ const handleUserSell = async (req, res) => {
     });
     const userResult = await collection.findOne({ id: id });
     const purchaseCost =
-        parseInt(req.body.quantity) * parseFloat(stockResult.price);
+        parseInt(req.body.quantity) * parseFloat(stockResult.price) * 1.15;
     req.body.quantity.split("").forEach((e) => {
         if (isNaN(parseInt(e))) {
             return res.status(400).json({
@@ -342,7 +342,7 @@ const handleUserSell = async (req, res) => {
         if (e.name === stockname) {
             const initialPrice =
                 e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
-            const marketPrice = e.totalBoughtShares * 0.1;
+            const marketPrice = e.totalBoughtShares * 0.00000001;
             const priceAfterMarket = initialPrice + marketPrice;
             const dollarIncrease = priceAfterMarket - initialPrice;
             const updatePrices = {

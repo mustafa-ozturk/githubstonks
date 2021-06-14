@@ -65,10 +65,13 @@ const RealExchange = ({
     };
 
     const price = elem.price;
-    const fee = inputState * elem.price * 0.1;
-    const totalBuyCost =
-        inputState * elem.price * 0.1 + inputState * elem.price;
-    const totalSellCost = inputState * elem.price;
+    const fee =
+        buyOrSell === "buy"
+            ? inputState * elem.price * 0.15
+            : inputState * elem.price * 0.15;
+    const totalBuyCost = inputState * elem.price * 1.15;
+    const totalSellCost = inputState * elem.price * 1.15;
+
     const realUserTotalShares =
         totalShares[elem.name] === undefined ? 0 : totalShares[elem.name];
     return (
@@ -102,11 +105,11 @@ const RealExchange = ({
                 <p title={price}>
                     <Label>Price</Label> ${abbreviateNumber(price)}
                 </p>
-                {buyOrSell === "buy" && (
-                    <p title={fee}>
-                        <Label>Fee</Label> ${abbreviateNumber(fee)}
-                    </p>
-                )}
+
+                <p title={fee}>
+                    <Label>Fee</Label> ${abbreviateNumber(fee)}
+                </p>
+
                 <p title={buyOrSell === "buy" ? totalBuyCost : totalSellCost}>
                     <Label>Total</Label> $
                     {buyOrSell === "buy"
