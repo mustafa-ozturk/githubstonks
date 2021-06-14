@@ -10,7 +10,7 @@ const Card = ({ stonkData, userType }) => {
     return (
         <CardWrapper>
             {stonkData
-                .sort((a, b) => b.price - a.price)
+                .sort((a, b) => b.increasePrice - a.increasePrice)
                 .map((elem, index) => {
                     return (
                         <Wrapper key={index}>
