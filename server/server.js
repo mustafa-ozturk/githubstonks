@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const path = require("path");
 const app = express();
@@ -15,6 +16,16 @@ const {
     handleDeleteSession,
     handleLeaderboard,
 } = require("./handlers");
+
+app.set("trust proxy", 1);
+
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 120, // limit each IP to 60 requests per windowMs
+});
+
+//  apply to all requests
+app.use(limiter);
 
 // app.use("/assets", express.static(path.join(__dirname, "assets")));
 // app.use(express.static("assets"));
