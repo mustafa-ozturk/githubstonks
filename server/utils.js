@@ -97,7 +97,7 @@ const githubData = [
         increase: 0,
         stars: 0,
         forks: 0,
-        commits: 86,
+        commits: 150,
         totalBoughtShares: 0,
         priceHistory: [{ "Price: $": 0 }],
     },
