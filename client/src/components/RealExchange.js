@@ -131,7 +131,8 @@ const RealExchange = ({
                                 ? "buyBtn"
                                 : "buyBtnDisabled"
                             : realUserTotalShares >= inputState &&
-                              realUserTotalShares > 0
+                              realUserTotalShares > 0 &&
+                              inputState <= 1000
                             ? "sellBtn"
                             : "sellBtnDisabled"
                     }
@@ -141,7 +142,8 @@ const RealExchange = ({
                                 ? false
                                 : true
                             : realUserTotalShares >= inputState &&
-                              realUserTotalShares > 0
+                              realUserTotalShares > 0 &&
+                              inputState <= 1000
                             ? false
                             : true
                     }

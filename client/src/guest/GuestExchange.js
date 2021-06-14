@@ -119,7 +119,8 @@ const GuestExchange = ({
                                 ? "buyBtn"
                                 : "buyBtnDisabled"
                             : guestTotalSharesOwned >= inputState &&
-                              guestTotalSharesOwned > 0
+                              guestTotalSharesOwned > 0 &&
+                              inputState <= 1000
                             ? "sellBtn"
                             : "sellBtnDisabled"
                     }
@@ -129,7 +130,8 @@ const GuestExchange = ({
                                 ? false
                                 : true
                             : guestTotalSharesOwned >= inputState &&
-                              guestTotalSharesOwned > 0
+                              guestTotalSharesOwned > 0 &&
+                              inputState <= 1000
                             ? false
                             : true
                     }
