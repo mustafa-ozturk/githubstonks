@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { AiOutlineGithub } from "react-icons/ai";
+import { FiExternalLink } from "react-icons/fi";
 // uselocation
 const Navbar = ({ userType }) => {
     const handleLogout = () => {
@@ -65,6 +66,9 @@ const Navbar = ({ userType }) => {
                     target="_blank"
                 >
                     About
+                    <span>
+                        <FiExternalLink />
+                    </span>
                 </About>
             </div>
             {userType === "guest" ? (
@@ -114,6 +118,11 @@ const About = styled.a`
     color: black;
     &:active {
         color: rgb(14, 184, 239);
+    }
+    & > span {
+        position: relative;
+        top: 2px;
+        left: 2px;
     }
 `;
 

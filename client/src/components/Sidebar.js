@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { FiExternalLink } from "react-icons/fi";
 import { abbreviateNumber } from "../utils";
 const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
     return (
@@ -59,6 +60,16 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                     </SideBarItem>
                 </SideBarItemWrapper>
             </SideBarParentWrapper>
+            <OtherSideElement>
+                <a href="https://mozturk.dev/" target="_blank">
+                    made by mozturk.dev
+                    <br />
+                    hire me
+                    <span>
+                        <FiExternalLink />
+                    </span>
+                </a>
+            </OtherSideElement>
         </Wrapper>
     );
 };
@@ -138,6 +149,27 @@ const Info = styled.span`
     }
     &:hover .tooltip {
         display: block;
+    }
+`;
+
+const OtherSideElement = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    & > a {
+        text-align: center;
+        color: rgba(0, 0, 0, 0.9);
+        text-decoration: none;
+        & > span {
+            position: relative;
+            top: 1.75px;
+            left: 2px;
+        }
+        &:active {
+            color: rgb(14, 184, 239);
+        }
     }
 `;
 
