@@ -25,7 +25,7 @@ Create an issue with a link to the repo you wan't me to add and I might add it :
 
 the price of the stocks go up and down based on how many total shares were bought
 
-`marketprice = total shares bought * 0.1`
+`marketprice = total shares bought * 0.00001`
 
 `price = initial price + market price`
 
