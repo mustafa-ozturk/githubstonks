@@ -243,7 +243,7 @@ const handleUserBuy = async (req, res) => {
         if (e.name === stockname) {
             const initialPrice =
                 e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
-            const marketPrice = e.totalBoughtShares * 0.00000001;
+            const marketPrice = e.totalBoughtShares * 0.00001;
             const priceAfterMarket = initialPrice + marketPrice;
             const dollarIncrease = priceAfterMarket - initialPrice;
             const updateValues = {
@@ -354,7 +354,7 @@ const handleUserSell = async (req, res) => {
         if (e.name === stockname) {
             const initialPrice =
                 e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
-            const marketPrice = e.totalBoughtShares * 0.00000001;
+            const marketPrice = e.totalBoughtShares * 0.00001;
             const priceAfterMarket = initialPrice + marketPrice;
             const dollarIncrease = priceAfterMarket - initialPrice;
             const updatePrices = {
