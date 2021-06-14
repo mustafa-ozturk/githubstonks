@@ -50,17 +50,15 @@ const GuestApp = ({ userType }) => {
                                 setRefetch={setRefetch}
                             />
                         </Route>
-                        <Route
-                            path={process.env.PUBLIC_URL + "/guest/leaderboard"}
-                        >
+                        <Route path={"/guest/leaderboard"}>
                             <Leaderboard />
                         </Route>
-                        <Route path={process.env.PUBLIC_URL + "/guest/account"}>
+                        <Route path={"/guest/account"}>
                             <GuestAccount
                                 guestAccountStats={guestAccountStats}
                             />
                         </Route>
-                        <Route path={process.env.PUBLIC_URL + "/guest"}>
+                        <Route path={"/guest"}>
                             <Card stonkData={stonkData} userType={userType} />
                         </Route>
                     </Switch>

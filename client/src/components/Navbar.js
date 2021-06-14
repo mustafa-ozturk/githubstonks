@@ -26,11 +26,7 @@ const Navbar = ({ userType }) => {
                 <NavBarItem
                     className="active"
                     exact
-                    to={
-                        userType === "guest"
-                            ? process.env.PUBLIC_URL + "/guest"
-                            : process.env.PUBLIC_URL + "/"
-                    }
+                    to={userType === "guest" ? "/guest" : "/"}
                     activeStyle={{
                         fontWeight: "bold",
                         color: "rgb(14, 184, 239)",
@@ -86,7 +82,7 @@ const Navbar = ({ userType }) => {
             ) : (
                 <Login>
                     <a
-                        href="https://githubstonks.com/guest"
+                        href="https://githubstonks.com//guest"
                         onClick={handleLogout}
                     >
                         Logout

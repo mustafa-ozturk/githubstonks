@@ -41,9 +41,7 @@ const App = ({ userType }) => {
                 <Navbar userType={userType} />
                 <ContentWrapper>
                     <Switch>
-                        <Route
-                            path={process.env.PUBLIC_URL + "/stonk/:stonkname"}
-                        >
+                        <Route path={"/stonk/:stonkname"}>
                             <Stonks
                                 userType={userType}
                                 stonkData={stonkData}
@@ -53,13 +51,13 @@ const App = ({ userType }) => {
                                 setRefetchUserSide={setRefetchUserSide}
                             />
                         </Route>
-                        <Route path={process.env.PUBLIC_URL + "/leaderboard"}>
+                        <Route path={"/leaderboard"}>
                             <Leaderboard />
                         </Route>
-                        <Route path={process.env.PUBLIC_URL + "/account"}>
+                        <Route path={"/account"}>
                             <Account accountStats={accountStats} />
                         </Route>
-                        <Route path={process.env.PUBLIC_URL + "/"}>
+                        <Route path={"/"}>
                             <Card stonkData={stonkData} userType={userType} />
                         </Route>
                     </Switch>
