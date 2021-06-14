@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FiExternalLink } from "react-icons/fi";
 import { AiFillGithub } from "react-icons/ai";
+import { SiDiscord } from "react-icons/si";
 import { abbreviateNumber } from "../utils";
 const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
     return (
@@ -79,6 +80,14 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                     contribute
                     <span>
                         <AiFillGithub />
+                    </span>
+                </a>
+            </OtherSideElement>
+            <OtherSideElement>
+                <a href="https://discord.gg/n7uR5CbM2u" target="_blank">
+                    discord server
+                    <span>
+                        <SiDiscord />
                     </span>
                 </a>
             </OtherSideElement>
