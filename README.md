@@ -58,22 +58,32 @@ coming soon
 -   website is not responsive
 -   more coming soon
 
-## Api doc
+# Api doc
 
-Get - /api/stonkInfo
+api link: https://api.githubstonks.com/
 
-Response:
+## login/auth
 
-```json
-Logo
-Name
-Symbol
-Price
-Increase price
-Increase percent
-stars
-forks
-commits
-```
+| METHOD | path                    |
+| ------ | ----------------------- |
+| GET    | /api/user/signin        |
+| GET    | /oauth-callback         |
+| POST   | /api/user/auth          |
+| DELETE | /api/:id/delete-session |
+
+## data
+
+| METHOD | path             |
+| ------ | ---------------- |
+| GET    | /api/stonkData   |
+| GET    | /api/leaderboard |
+| GET    | /api/:id/info    |
+
+## buy/sell
+
+| METHOD | path          |
+| ------ | ------------- |
+| POST   | /api/:id/buy  |
+| POST   | /api/:id/sell |
 
 proper api doc coming soon
