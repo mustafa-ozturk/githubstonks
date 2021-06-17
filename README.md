@@ -1,6 +1,6 @@
 <div align="center">
 <img align="center" width="100" height="100" src="client/public/ghs.png">
-<h1><a href="https://githubstonks.com/" target="_blank">GitHubStonks</a></h1>
+<h1>GitHubStonks</h1>
 
 </div>
 
@@ -11,6 +11,8 @@
 ### [Join my Discord server for questions/discussions/suggestions/reporting bugs](https://discord.gg/n7uR5CbM2u)
 
 ---
+
+<a href="https://githubstonks.com/" target="_blank">githubstonks.com</a>
 
 ## What is githubstonks ?
 
