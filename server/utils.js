@@ -1,4 +1,3 @@
-const Axios = require("axios");
 const fetch = require("node-fetch");
 // I would get this data from github but rate limiting and stuff...
 const githubData = [

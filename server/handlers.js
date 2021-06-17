@@ -4,8 +4,6 @@ require("dotenv").config();
 const Axios = require("axios");
 const crypto = require("crypto");
 const { stonkData } = require("./utils");
-const { v4: uuidv4 } = require("uuid");
-// uuidv4()
 const stonkDataArr = stonkData();
 const { ObjectOfTokens } = require("./ObjectOfTokens");
 const CLIENT_ID = process.env.CLIENT_ID;
