@@ -44,6 +44,8 @@ I only use github id and username.
 
 [you can check for yourself here](https://github.com/mustafa-ozturk/githubstonks/blob/6ee4dd89c43f06e7d0d65832f6bba6f992840641/server/handlers.js#L92)
 
+to fix this I need to switch from github apps to github oauth
+
 ---
 
 ## Contributions
