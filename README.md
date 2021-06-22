@@ -4,6 +4,14 @@
 
 </div>
 
+## What is githubstonks ?
+
+<a href="https://githubstonks.com/" target="_blank">githubstonks.com</a>
+
+Githubstonks is a simple stock market game where the stocks are popular github repositories. You can buy and sell popular repo's like React, Node and more.
+
+---
+
 > NOTE_0: This is my full-stack web bootcamp final project, I only had 2 weeks to work on it (though I did start couple days early). There is still a lot of things to do, Top priorities: cleaning up the code base/files, user authentication (the current one was rushed and has many flaws) and use the github api to get stars, forks, commits (I already have the code for this I just ran into rate limitting so I commented it out)
 
 > NOTE_1: GITHUBSTONKS is still under development which means user data and stonk data will be reset many times, if you encounter a bug or have a suggestion/question please submit an issue or join our discord server
@@ -11,12 +19,6 @@
 ### [Join my Discord server for questions/discussions/suggestions/reporting bugs](https://discord.gg/n7uR5CbM2u)
 
 ---
-
-<a href="https://githubstonks.com/" target="_blank">githubstonks.com</a>
-
-## What is githubstonks ?
-
-Githubstonks is a simple stock market game where the stocks are popular github repositories. You can buy and sell popular repo's like React, Node and more.
 
 ## "You should add this repo to the game"
 
