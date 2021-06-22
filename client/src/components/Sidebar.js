@@ -63,7 +63,7 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                 </SideBarItemWrapper>
             </SideBarParentWrapper>
             <OtherSideElement>
-                <a href="https://mozturk.dev/" target="_blank">
+                <a href="https://mozturk.dev/" target="_blank" rel="noreferrer">
                     made by
                     <br />
                     mozturk.dev
@@ -76,6 +76,7 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                 <a
                     href="https://github.com/mustafa-ozturk/githubstonks"
                     target="_blank"
+                    rel="noreferrer"
                 >
                     contribute
                     <span>
@@ -84,7 +85,11 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                 </a>
             </OtherSideElement>
             <OtherSideElement>
-                <a href="https://discord.gg/n7uR5CbM2u" target="_blank">
+                <a
+                    href="https://discord.gg/n7uR5CbM2u"
+                    target="_blank"
+                    rel="noreferrer"
+                >
                     discord server
                     <span>
                         <SiDiscord />

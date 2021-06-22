@@ -148,14 +148,6 @@ export const GuestUserProvider = ({ children }) => {
             SerenityOS: {},
             Rust: {},
         };
-        //         name: ,
-        //         symbol : ,
-        //         price: ,
-        //         quantity: ,
-        //         totalCost: ,
-        //         gainLossDollar: ,  totalCost -  price * quantity,
-        //         currentValue: ,
-        //     },
         guestUserStats.buysAndSells.forEach((elem) => {
             stonksAndCost[elem.stockName].name = elem.stockName;
             stonkData.forEach((e) => {
