@@ -22,14 +22,11 @@ const RealExchange = ({
             data.stockName = elem.name;
             data.symbol = elem.symbol;
             data.quantity = inputState;
-            data.purchaseCost =
-                inputState * elem.price * 0.1 + inputState * elem.price;
         } else {
             data.type = "SELL";
             data.stockName = elem.name;
             data.symbol = elem.symbol;
             data.quantity = inputState;
-            data.purchaseCost = inputState * elem.price;
         }
         const id = localStorage.getItem("id");
         fetch(`https://api.githubstonks.com/api/${id}/${buyOrSell}`, {
