@@ -36,7 +36,7 @@ app.use(express.json());
 app.disable("x-powered-by");
 
 app.use((req, res, next) => {
-    res.setHeader("x-powered-by", "⚡ electricity");
+    res.setHeader("x-powered-by", "electricity");
     next();
 });
 
