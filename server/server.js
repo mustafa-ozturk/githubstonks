@@ -32,6 +32,14 @@ app.use(limiter);
 app.use(cors());
 app.use(express.json());
 
+// set x-powered-by header to "⚡ electricity"
+app.disable("x-powered-by");
+
+app.use((req, res, next) => {
+    res.setHeader("x-powered-by", "⚡ electricity");
+    next();
+});
+
 app.get("/api/stonkData", handleCards);
 
 app.get("/api/leaderboard", handleLeaderboard);
