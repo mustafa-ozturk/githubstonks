@@ -72,6 +72,8 @@ const insertStockData = async (stockDataArr) => {
     });
 };
 
+
+// /api/stonkData
 const handleCards = async (req, res) => {
     await insertStockData(stonkDataArr).then(async () => {
         let collection = await connectDb(STOCKDATA_COLLECTION);
@@ -81,12 +83,14 @@ const handleCards = async (req, res) => {
     });
 };
 
+// /api/user/signin
 const handleSigninRedirect = (req, res) => {
     res.redirect(
         `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`
     );
 };
 
+// /oauth-callback
 const handleOauthCallback = async (req, res) => {
     try {
         const code = req.query.code;
@@ -137,6 +141,7 @@ const handleOauthCallback = async (req, res) => {
     }
 };
 
+// /api/user/auth
 const handleUserAuth = async (req, res) => {
     try {
         const token = req.body.id;
@@ -158,6 +163,7 @@ const handleUserAuth = async (req, res) => {
     }
 };
 
+// /api/:id/buy
 const handleUserBuy = async (req, res) => {
     const tokenid = req.params.id;
     const id = ObjectOfTokens[tokenid];
@@ -261,6 +267,7 @@ const handleUserBuy = async (req, res) => {
     });
 };
 
+// /api/:id/sell
 const handleUserSell = async (req, res) => {
     const tokenid = req.params.id;
     const id = ObjectOfTokens[tokenid];
@@ -476,6 +483,8 @@ const getAccountStats = async (id) => {
     return accountArr;
 };
 
+
+// /api/:id/info
 const handleUserInfo = async (req, res) => {
     const tokenid = req.params.id;
     const id = ObjectOfTokens[tokenid];
@@ -507,12 +516,15 @@ const handleUserInfo = async (req, res) => {
     }
 };
 
+// /api/:id/delete-session
 const handleDeleteSession = (req, res) => {
     const tokenid = req.params.id;
     delete ObjectOfTokens[tokenid];
     res.status(200).end();
 };
 
+
+// /api/leaderboard"
 const handleLeaderboard = async (req, res) => {
     let collection = await connectDb(USER_COLLECTION);
     let result = await collection.find().toArray();
