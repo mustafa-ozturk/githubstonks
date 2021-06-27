@@ -1,39 +1,14 @@
-const { MongoClient } = require("mongodb");
-const ObjectID = require("mongodb").ObjectID;
 require("dotenv").config();
 const Axios = require("axios");
 const crypto = require("crypto");
 const { stonkData } = require("./utils");
 const stonkDataArr = stonkData();
 const { ObjectOfTokens } = require("./ObjectOfTokens");
+const { connectDb } = require("./db");
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const { MONGO_URI } = process.env;
-const DBNAME = "githubstonks";
 const STOCKDATA_COLLECTION = "stock-data";
 const USER_COLLECTION = "user-data";
-const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-};
-
-let client;
-const connectDb = async (collection) => {
-    if (!client) {
-        client = MongoClient(MONGO_URI, options);
-        await client.connect();
-        console.log("client connected");
-    }
-    return client.db(DBNAME).collection(collection);
-};
-
-const disconnectDb = () => {
-    if (client) {
-        client.close();
-        client = undefined;
-        console.log("client disconnected");
-    }
-};
 
 const insertStockData = async (stockDataArr) => {
     let collection = await connectDb(STOCKDATA_COLLECTION);
