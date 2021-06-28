@@ -1,7 +1,7 @@
 require("dotenv").config();
 const Axios = require("axios");
 const crypto = require("crypto");
-const { stonkData } = require("./utils");
+const { stonkData } = require("./stonkdata");
 const stonkDataArr = stonkData();
 const { ObjectOfTokens } = require("./ObjectOfTokens");
 const { connectDb } = require("./db");
