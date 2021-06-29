@@ -1,6 +1,5 @@
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
-const ObjectID = require("mongodb").ObjectID;
 
 const { MONGO_URI } = process.env;
 const DBNAME = "githubstonks";
