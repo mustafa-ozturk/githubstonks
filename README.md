@@ -56,7 +56,14 @@ more info on contributing coming soon
 
 ## How to run locally
 
-coming soon
+Frontend (React.js)
+1. `cd client` 
+2. `yarn install` 
+3. `yarn start`
+
+Backend (Node, Express, MongoDB)
+
+- coming soon
 
 ## to-do
 
