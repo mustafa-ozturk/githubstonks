@@ -28,7 +28,13 @@ const App = ({ userType }) => {
             const param = params.get("id");
             localStorage.setItem("id", param);
         }
+        if(!localStorage.getItem("id")) {
+            window.location.replace("/guest")
+        }
+        console.log()
     }, []);
+
+
     return (
         <Wrapper>
             <Sidebar
