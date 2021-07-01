@@ -86,7 +86,7 @@ const Navbar = ({ userType }) => {
             ) : (
                 <Login>
                     <a
-                        href="https://githubstonks.com//guest"
+                        href="https://githubstonks.com/guest"
                         onClick={handleLogout}
                     >
                         Logout
