@@ -31,7 +31,6 @@ const App = ({ userType }) => {
         if(!localStorage.getItem("id")) {
             window.location.replace("/guest")
         }
-        console.log()
     }, []);
 
 
