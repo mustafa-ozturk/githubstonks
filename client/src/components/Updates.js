@@ -29,6 +29,7 @@ const Updates = () => {
                         <li>github login</li>
                         <li>player leaderboard</li>
                         <li>player basic account (portfolio)</li>
+                        <li>login with github + user auth</li>
                         <li>login user has effect on prices</li>
                         <li>initial readme</li>
                     </ul>
