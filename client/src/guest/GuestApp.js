@@ -7,6 +7,7 @@ import GuestAccount from "./GuestAccount";
 import Stonks from "../components/Stonks";
 import Card from "../components/Card";
 import Leaderboard from "../components/Leaderboard";
+import Updates from "../components/Updates";
 import { StonkContext } from "../context/StonkContext";
 import { GuestUserContext } from "./GuestUserContext";
 
@@ -57,6 +58,9 @@ const GuestApp = ({ userType }) => {
                             <GuestAccount
                                 guestAccountStats={guestAccountStats}
                             />
+                        </Route>
+                        <Route path={"/guest/updates"}>
+                            <Updates />
                         </Route>
                         <Route path={"/guest"}>
                             <Card stonkData={stonkData} userType={userType} />

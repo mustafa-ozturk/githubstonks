@@ -60,7 +60,20 @@ const Navbar = ({ userType }) => {
                 >
                     Leaderboard
                 </NavBarItem>
-
+                <NavBarItem
+                    exact
+                    to={
+                        userType === "guest"
+                            ? "/guest/updates"
+                            : "/updates"
+                    }
+                    activeStyle={{
+                        fontWeight: "bold",
+                        color: "rgb(14, 184, 239)",
+                    }}
+                >
+                    Updates
+                </NavBarItem>
                 <About
                     href="https://github.com/mustafa-ozturk/githubstonks/blob/main/README.md"
                     target="_blank"

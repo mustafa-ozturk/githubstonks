@@ -7,6 +7,7 @@ import Account from "./components/Account";
 import Stonks from "./components/Stonks";
 import Card from "./components/Card";
 import Leaderboard from "./components/Leaderboard";
+import Updates from "./components/Updates";
 import { StonkContext } from "./context/StonkContext";
 import { realUserContext } from "./context/RealUserContext";
 
@@ -28,11 +29,10 @@ const App = ({ userType }) => {
             const param = params.get("id");
             localStorage.setItem("id", param);
         }
-        if(!localStorage.getItem("id")) {
-            window.location.replace("/guest")
+        if (!localStorage.getItem("id")) {
+            window.location.replace("/guest");
         }
     }, []);
-
 
     return (
         <Wrapper>
@@ -61,6 +61,9 @@ const App = ({ userType }) => {
                         </Route>
                         <Route path={"/account"}>
                             <Account accountStats={accountStats} />
+                        </Route>
+                        <Route path={"/updates"}>
+                            <Updates />
                         </Route>
                         <Route path={"/"}>
                             <Card stonkData={stonkData} userType={userType} />

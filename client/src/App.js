@@ -38,6 +38,7 @@ const App = () => {
                 <Route path={"/"}>
                     <RealApp userType={userType} />
                 </Route>
+
             </Switch>
         </>
     );
