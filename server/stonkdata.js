@@ -4,6 +4,7 @@ const githubData = [
     {
         logo: "/assets/react.svg",
         name: "React",
+        owner: "facebook",
         symbol: "RCT",
         increase: 0,
         stars: 169000,
@@ -15,6 +16,7 @@ const githubData = [
     {
         logo: "/assets/angular.svg",
         name: "Angular",
+        owner: "angular",
         symbol: "AGLR",
         increase: 0,
         stars: 73400,
@@ -26,6 +28,7 @@ const githubData = [
     {
         logo: "/assets/vue.svg",
         name: "Vue",
+        owner: "vuejs",
         symbol: "VUE",
         increase: 0,
         stars: 184000,
@@ -37,6 +40,7 @@ const githubData = [
     {
         logo: "/assets/node.svg",
         name: "Node",
+        owner: "nodejs",
         symbol: "NODE",
         increase: 0,
         stars: 20400,
@@ -48,6 +52,7 @@ const githubData = [
     {
         logo: "/assets/expressjs.png",
         name: "Express",
+        owner: "expressjs",
         symbol: "EXSS",
         increase: 0,
         stars: 53400,
@@ -59,6 +64,7 @@ const githubData = [
     {
         logo: "/assets/nest.svg",
         name: "Nest",
+        owner: "nestjs",
         symbol: "NEST",
         increase: 0,
         stars: 37600,
@@ -70,6 +76,7 @@ const githubData = [
     {
         logo: "/assets/linux.svg",
         name: "Linux",
+        owner: "torvalds",
         symbol: "LNX",
         increase: 0,
         stars: 113000,
@@ -81,6 +88,7 @@ const githubData = [
     {
         logo: "/assets/solana.svg",
         name: "Solana",
+        owner: "solana-labs",
         symbol: "SOL",
         increase: 0,
         stars: 2300,
@@ -92,6 +100,7 @@ const githubData = [
     {
         logo: "/assets/githubstonks.png",
         name: "GithubStonks",
+        owner: "mustafa-ozturk",
         symbol: "STONKS",
         increase: 0,
         stars: 0,
@@ -103,6 +112,7 @@ const githubData = [
     {
         logo: "/assets/deno.svg",
         name: "Deno",
+        owner: "denoland",
         symbol: "DENO",
         increase: 0,
         stars: 76000,
@@ -113,7 +123,8 @@ const githubData = [
     },
     {
         logo: "/assets/serenity.png",
-        name: "SerenityOS",
+        name: "Serenity",
+        owner: "SerenityOS",
         symbol: "SOS",
         increase: 0,
         stars: 13400,
@@ -125,6 +136,7 @@ const githubData = [
     {
         logo: "/assets/rust.svg",
         name: "Rust",
+        owner: "rust-lang",
         symbol: "RUST",
         increase: 0,
         stars: 55900,
