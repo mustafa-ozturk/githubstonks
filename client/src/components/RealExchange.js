@@ -29,7 +29,7 @@ const RealExchange = ({
             data.quantity = inputState;
         }
         const id = localStorage.getItem("id");
-        fetch(`https://api.githubstonks.com/api/${id}/${buyOrSell}`, {
+        fetch(`${process.env.REACT_APP_API_LINK}/api/${id}/${buyOrSell}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -47,7 +47,6 @@ const insertStockData = async (stockDataArr) => {
     });
 };
 
-
 // /api/stonkData
 const handleCards = async (req, res) => {
     await insertStockData(stonkDataArr).then(async () => {
@@ -458,7 +457,6 @@ const getAccountStats = async (id) => {
     return accountArr;
 };
 
-
 // /api/:id/info
 const handleUserInfo = async (req, res) => {
     const tokenid = req.params.id;
@@ -497,7 +495,6 @@ const handleDeleteSession = (req, res) => {
     delete ObjectOfTokens[tokenid];
     res.status(200).end();
 };
-
 
 // /api/leaderboard"
 const handleLeaderboard = async (req, res) => {

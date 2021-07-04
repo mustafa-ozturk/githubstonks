@@ -11,9 +11,10 @@ const App = () => {
     const removeQueryFromPathOnReceivedToken = () => {
         history.push("/");
     };
+
     useEffect(() => {
         if (localStorage.getItem("id") !== null) {
-            fetch("https://api.githubstonks.com/api/user/auth", {
+            fetch(`${process.env.REACT_APP_API_LINK}/api/user/auth`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -38,7 +39,6 @@ const App = () => {
                 <Route path={"/"}>
                     <RealApp userType={userType} />
                 </Route>
-
             </Switch>
         </>
     );

@@ -10,7 +10,7 @@ export const RealUserProvider = ({ children }) => {
         const id = localStorage.getItem("id");
 
         if (id) {
-            fetch(`https://api.githubstonks.com/api/${id}/info`)
+            fetch(`${process.env.REACT_APP_API_LINK}/api/${id}/info`)
                 .then((response) => response.json())
                 .then((data) => {
                     setUserData(data);

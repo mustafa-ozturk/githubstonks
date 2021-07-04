@@ -7,7 +7,7 @@ import { FiExternalLink } from "react-icons/fi";
 const Navbar = ({ userType }) => {
     const handleLogout = () => {
         fetch(
-            `https://api.githubstonks.com/api/${localStorage.getItem(
+            `${process.env.REACT_APP_API_LINK}/api/${localStorage.getItem(
                 "id"
             )}/delete-session`,
             {
@@ -62,11 +62,7 @@ const Navbar = ({ userType }) => {
                 </NavBarItem>
                 <NavBarItem
                     exact
-                    to={
-                        userType === "guest"
-                            ? "/guest/updates"
-                            : "/updates"
-                    }
+                    to={userType === "guest" ? "/guest/updates" : "/updates"}
                     activeStyle={{
                         fontWeight: "bold",
                         color: "rgb(14, 184, 239)",
@@ -88,7 +84,7 @@ const Navbar = ({ userType }) => {
                 <Login>
                     <a
                         className="login"
-                        href="https://api.githubstonks.com/api/user/signin"
+                        href="process.env.REACT_APP_API_LINK/api/user/signin"
                     >
                         Login with GitHub
                         <span className="logo">

@@ -4,7 +4,7 @@ import { abbreviateNumber } from "../utils";
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState(null);
     useEffect(() => {
-        fetch("https://api.githubstonks.com/api/leaderboard", {
+        fetch(`${process.env.REACT_APP_API_LINK}/api/leaderboard`, {
             method: "GET",
         })
             .then((response) => response.json())
