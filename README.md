@@ -57,13 +57,17 @@ more info on contributing coming soon
 ## How to run locally
 
 Frontend (React.js)
-1. `cd client` 
-2. `yarn install` 
+
+1. `cd client`
+2. `yarn install`
 3. `yarn start`
+
+if you want to fetch the hosted api instead of localhost
+go to `client/.env` and change localhost to the hosted api link
 
 Backend (Node, Express, MongoDB)
 
-- coming soon
+-   coming soon
 
 ## to-do
 
