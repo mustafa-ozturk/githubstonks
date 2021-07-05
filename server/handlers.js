@@ -9,6 +9,9 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const STOCKDATA_COLLECTION = "stock-data";
 const USER_COLLECTION = "user-data";
+const CLIENT_LINK = "https://githubstonks.com";
+// http://localhost:3000
+// https://githubstonks.com
 
 const insertStockData = async (stockDataArr) => {
     let collection = await connectDb(STOCKDATA_COLLECTION);
@@ -109,7 +112,7 @@ const handleOauthCallback = async (req, res) => {
             await collection.insertOne(user);
             console.log("inserted data");
         }
-        res.redirect(`https://githubstonks.com/?id=${cryptographicToken}`);
+        res.redirect(`${CLIENT_LINK}/?id=${cryptographicToken}`);
     } catch (error) {
         console.log("error", error);
     }
