@@ -32,20 +32,6 @@ the price of the stocks go up and down based on how many total shares were bough
 
 `price = initial price + market price`
 
-## Github login says "Act on your Behalf"
-
-This is bad wording from github the only data I use and request is public info (github id and username). There has been a lot of complaints about this to github but no changes yet.
-
-<https://github.community/t/enable-you-to-trigger-actions-in-github/117938/12>
-
-<https://news.ycombinator.com/item?id=26485844>
-
-I only use github id and username.
-
-[you can check for yourself here](https://github.com/mustafa-ozturk/githubstonks/blob/6ee4dd89c43f06e7d0d65832f6bba6f992840641/server/handlers.js#L92)
-
-to fix this I need to switch from github apps to github oauth
-
 ---
 
 ## Contributions
@@ -54,7 +40,7 @@ GitHubStonks is open to contributions, but I recommend creating an issue first t
 
 more info on contributing coming soon
 
-## How to run locally
+## How to run locally (dev environment)
 
 Frontend (React.js)
 
@@ -63,16 +49,23 @@ Frontend (React.js)
 3. `yarn start`
 
 if you want to fetch the hosted api instead of localhost
-go to `client/.env` and change localhost to the hosted api link
+go to `client/.env` and change localhost to `https://api.githubstonks.com/`
 
 Backend (Node, Express, MongoDB)
 
--   coming soon
+1. create a `.env` file in `/server` and put your mongoURI, github client id, github client secret
 
-## to-do
+```
+MONGO_URI= # put your mongo uri here
+CLIENT_ID=  # put your github oauth client id here
+CLIENT_SECRET= # put your github oauth client secret here
+```
 
--   website is not responsive
--   more coming soon
+2. `cd server`
+3. `yarn install`
+4. `yarn start:dev`
+
+if you have any questions about running the code locally join our discord server !
 
 # Api doc
 
