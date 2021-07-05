@@ -84,7 +84,7 @@ const Navbar = ({ userType }) => {
                 <Login>
                     <a
                         className="login"
-                        href="process.env.REACT_APP_API_LINK/api/user/signin"
+                        href={`${process.env.REACT_APP_API_LINK}/api/user/signin`}
                     >
                         Login with GitHub
                         <span className="logo">
