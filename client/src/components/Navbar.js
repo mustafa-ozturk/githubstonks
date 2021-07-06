@@ -95,7 +95,7 @@ const Navbar = ({ userType }) => {
             ) : (
                 <Login>
                     <a
-                        href="https://githubstonks.com/guest"
+                        href={`${process.env.REACT_APP_CLIENT_LINK}/guest`}
                         onClick={handleLogout}
                     >
                         Logout
