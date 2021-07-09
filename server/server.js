@@ -32,6 +32,12 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get("/", (req, res) => {
+    return res.status(200).json({
+        "api doc": "https://github.com/mustafa-ozturk/githubstonks#api-doc",
+    });
+});
+
 app.get("/api/stonkData", handleCards);
 
 app.get("/api/leaderboard", handleLeaderboard);
