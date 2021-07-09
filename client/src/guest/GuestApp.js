@@ -44,7 +44,7 @@ const GuestApp = ({ userType }) => {
             {isMobile
                 ? sideBar()
                 : <BurgerMenu>
-                    <Menu noOverlay isOpen={isMobile} width={'43%'} >
+                    <Menu noOverlay isOpen={isMobile} width={'190px'} >
                         {sideBar()}
                     </Menu>
                 </BurgerMenu>
@@ -131,7 +131,7 @@ const BurgerMenu = styled.div`
 }
 .bm-menu {
     background: rgba(255, 255, 255, 1);
-    padding: 2.5em 1.5em 0';
+    padding: 2.5em 1.5em 0;
     font-size: 1.15em;
 }
 `;
