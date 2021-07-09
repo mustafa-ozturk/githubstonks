@@ -10,6 +10,8 @@ import Leaderboard from "../components/Leaderboard";
 import Updates from "../components/Updates";
 import { StonkContext } from "../context/StonkContext";
 import { GuestUserContext } from "./GuestUserContext";
+import { slide as Menu } from 'react-burger-menu';
+import { useMediaQuery } from 'react-responsive';
 
 const GuestApp = ({ userType }) => {
     const { stonkData, setRefetch } = useContext(StonkContext);
@@ -23,14 +25,31 @@ const GuestApp = ({ userType }) => {
         guestTotalShares,
         guestAccountStats,
     } = useContext(GuestUserContext);
-    return (
-        <Wrapper>
+
+    const isMobile = useMediaQuery({ query: '(min-width: 720px)' })
+
+    const sideBar = () => {
+        return (
             <Sidebar
                 balance={guestBalance}
                 portfolioValue={guestPortfolioValue}
                 netWorth={guestNetWorth}
                 profitLoss={guestProfitLoss}
             />
+        )
+    }
+
+    return (
+        <Wrapper>
+            {isMobile
+                ? sideBar()
+                : <BurgerMenu>
+                    <Menu noOverlay isOpen={isMobile} width={'43%'} >
+                        {sideBar()}
+                    </Menu>
+                </BurgerMenu>
+            }
+
             <NavAndContentContainer>
                 <Navbar userType={userType} />
                 <ContentWrapper>
@@ -84,5 +103,40 @@ const ContentWrapper = styled.div`
     margin-left: 201px;
     margin-top: 50px;
 `;
+
+const BurgerMenu = styled.div`
+.bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 20px;
+    top: 20px;
+}
+.bm-burger-bars {
+    background: #373a47;
+}
+.bm-burger-bars-hover {
+    background: #a90000;
+}
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+.bm-cross {
+    background: #bdc3c7;
+}
+.bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+}
+.bm-menu {
+    background: rgba(255, 255, 255, 1);
+    padding: 2.5em 1.5em 0';
+    font-size: 1.15em;
+}
+`;
+
+
+
 
 export default GuestApp;
