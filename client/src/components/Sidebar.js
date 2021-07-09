@@ -4,14 +4,21 @@ import { FiExternalLink } from "react-icons/fi";
 import { AiFillGithub } from "react-icons/ai";
 import { SiDiscord } from "react-icons/si";
 import { abbreviateNumber } from "../utils";
-const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
+import Navbar from "./Navbar";
+import { useMediaQuery } from 'react-responsive';
+import { MOBILE_SIZE } from '../utils';
+
+const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss, userType }) => {
+
+    const isMobile = useMediaQuery({ query: MOBILE_SIZE });
+
     return (
-        <Wrapper>
+        <Wrapper isMobile={isMobile}>
             <LogoWrapper>
-                <Logo>🚀</Logo>
-                <Title>
+                <Logo isMobile={isMobile}>🚀</Logo>
+                <Title isMobile={isMobile}>
                     GITHUBSTONKS
-                    <Info>
+                    <Info isMobile={isMobile}>
                         (BETA)
                         <span className="tooltip">
                             GITHUBSTONKS is still under development which means
@@ -23,7 +30,7 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                 </Title>
             </LogoWrapper>
             <SideBarParentWrapper>
-                <SideBarItemWrapper>
+                <SideBarItemWrapper isMobile={isMobile}>
                     <SideBarItem>
                         <SideBarIcon>🏦</SideBarIcon>
                         <SideBarItemTextWrapper>
@@ -62,7 +69,12 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                     </SideBarItem>
                 </SideBarItemWrapper>
             </SideBarParentWrapper>
-            <OtherSideElement>
+            {isMobile
+                && <OtherSideElement isMobile={isMobile}>
+                    <Navbar userType={userType} />
+                </OtherSideElement>
+            }
+            <OtherSideElement isMobile={isMobile}>
                 <a href="https://mozturk.dev/" target="_blank" rel="noreferrer">
                     made by
                     <br />
@@ -72,7 +84,7 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                     </span>
                 </a>
             </OtherSideElement>
-            <OtherSideElement>
+            <OtherSideElement isMobile={isMobile}>
                 <a
                     href="https://github.com/mustafa-ozturk/githubstonks"
                     target="_blank"
@@ -84,7 +96,7 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
                     </span>
                 </a>
             </OtherSideElement>
-            <OtherSideElement>
+            <OtherSideElement isMobile={isMobile}>
                 <a
                     href="https://discord.gg/n7uR5CbM2u"
                     target="_blank"
@@ -101,7 +113,8 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss }) => {
 };
 
 const Wrapper = styled.div`
-    min-width: 200px;
+    min-width:  ${props => props.isMobile ? "" : "200px"};
+    max-width:  ${props => props.isMobile ? "160px" : ""};
     height: 100vh;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -122,18 +135,20 @@ const LogoWrapper = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 const Logo = styled.div`
-    font-size: 5rem;
+    font-size:  ${props => props.isMobile ? "3rem" : "5rem"};
     margin-bottom: 0;
 `;
 const Title = styled.p`
     margin-top: 0;
     font-weight: bold;
+    font-size:  ${props => props.isMobile ? "0.85rem" : ""};
 `;
 
 const SideBarItemWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: baseline;
+    font-size:  ${props => props.isMobile ? "0.85rem" : ""};
 `;
 
 const SideBarItem = styled.div`
@@ -183,7 +198,8 @@ const OtherSideElement = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding:  ${props => props.isMobile ? "0.80rem" : "1rem"};
+    font-size:  ${props => props.isMobile ? "0.85rem" : ""};
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     & > a {
         text-align: center;
