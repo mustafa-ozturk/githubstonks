@@ -117,7 +117,7 @@ const Wrapper = styled.div`
     max-width:  ${props => props.isMobile ? "190px" : ""};
     height: 100vh;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    position: fixed;
+    position: sticky;
     z-index: 1;
     top: 0;
     left: 0;

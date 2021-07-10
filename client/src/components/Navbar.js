@@ -5,7 +5,7 @@ import { AiOutlineGithub } from "react-icons/ai";
 import { FiExternalLink } from "react-icons/fi";
 import { useMediaQuery } from 'react-responsive';
 import { MOBILE_SIZE } from '../utils';
-// uselocation
+
 const Navbar = ({ userType }) => {
     const isMobile = useMediaQuery({ query: MOBILE_SIZE });
 
@@ -27,7 +27,7 @@ const Navbar = ({ userType }) => {
 
     return (
         <Wrapper isMobile={isMobile}>
-            <ColumnOne isMobile={isMobile}>
+            <Column isMobile={isMobile}>
                 <NavBarItem
                     className="active"
                     exact
@@ -88,8 +88,8 @@ const Navbar = ({ userType }) => {
                         <FiExternalLink />
                     </span>
                 </About>
-            </ColumnOne>
-            <ColumnTwo isMobile={isMobile}>
+            </Column>
+            <Column isMobile={isMobile}>
                 {userType === "guest" ? (
                     <Login isMobile={isMobile}>
                         <a
@@ -112,7 +112,7 @@ const Navbar = ({ userType }) => {
                         </a>
                     </Login>
                 )}
-            </ColumnTwo>
+            </Column>
         </Wrapper>
     );
 };
@@ -133,9 +133,7 @@ const Wrapper = styled.div`
              height: 21px;
              border-bottom: 1px solid rgba(0, 0, 0, 0.1);
              background-color: white;
-             position: fixed;
-             min-width: calc(100% - 201px);
-             margin-left: 201px;
+             max-width: 100%;
              z-index: 10;
              display: flex;
              flex-direction: row;
@@ -144,15 +142,11 @@ const Wrapper = styled.div`
     }
 `;
 
-const ColumnOne = styled.div`
+const Column = styled.div`
     display: flex;
     flex-direction: ${props => props.isMobile ? "column" : "row"};
     flex-wrap: wrap;
-`;
-const ColumnTwo = styled.div`
-    display: flex;
-    flex-direction: ${props => props.isMobile ? "column" : "row"};
-    flex-wrap: wrap;
+    justify-content: space-between;
 `;
 
 const About = styled.a`
@@ -181,7 +175,6 @@ const NavBarItem = styled(NavLink)`
 `;
 
 const Login = styled.div`
-    margin-right: ${props => props.isMobile ? "0" : "24px"};
     & > a {
         margin-top: 0;
         color: black;
@@ -191,7 +184,6 @@ const Login = styled.div`
     & > .login {
         display: flex;
         align-items: center;
-       
         color: black;
         text-decoration: none;
         font-weight: 600;

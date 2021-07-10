@@ -27,17 +27,19 @@ const GuestApp = ({ userType }) => {
         guestAccountStats,
     } = useContext(GuestUserContext);
 
-    const isMobile = useMediaQuery({ query: MOBILE_SIZE })
+    const isMobile = useMediaQuery({ query: MOBILE_SIZE });
 
     const sideBar = () => {
         return (
-            <Sidebar
-                balance={guestBalance}
-                portfolioValue={guestPortfolioValue}
-                netWorth={guestNetWorth}
-                profitLoss={guestProfitLoss}
-                userType={userType}
-            />
+            <Column>
+                <Sidebar
+                    balance={guestBalance}
+                    portfolioValue={guestPortfolioValue}
+                    netWorth={guestNetWorth}
+                    profitLoss={guestProfitLoss}
+                    userType={userType}
+                />
+            </Column>
         )
     }
 
@@ -45,52 +47,54 @@ const GuestApp = ({ userType }) => {
         <Wrapper>
             {isMobile
                 ? <BurgerMenu>
-                    <Menu isOpen={!isMobile} width={'11.8rem'} >
+                    <Menu isOpen={!isMobile} width={'12rem'} >
                         {sideBar()}
                     </Menu>
                 </BurgerMenu>
                 : sideBar()
             }
 
-            <NavAndContentContainer>
-                {!isMobile
-                    && <Navbar userType={userType} />
-                }
-                <ContentWrapper>
-                    <Switch>
-                        <Route
-                            path={
-                                process.env.PUBLIC_URL +
-                                "/guest/stonk/:stonkname"
-                            }
-                        >
-                            <Stonks
-                                userType={userType}
-                                stonkData={stonkData}
-                                guestUserStats={guestUserStats}
-                                guestUserStatsDispatch={guestUserStatsDispatch}
-                                guestTotalShares={guestTotalShares}
-                                guestBalance={guestBalance}
-                                setRefetch={setRefetch}
-                            />
-                        </Route>
-                        <Route path={"/guest/leaderboard"}>
-                            <Leaderboard />
-                        </Route>
-                        <Route path={"/guest/account"}>
-                            <GuestAccount
-                                guestAccountStats={guestAccountStats}
-                            />
-                        </Route>
-                        <Route path={"/guest/updates"}>
-                            <Updates />
-                        </Route>
-                        <Route path={"/guest"}>
-                            <Card stonkData={stonkData} userType={userType} />
-                        </Route>
-                    </Switch>
-                </ContentWrapper>
-            </NavAndContentContainer>
+            <DoubleColumn>
+                <NavAndContentContainer>
+                    {!isMobile
+                        && <Navbar userType={userType} />
+                    }
+                    <ContentWrapper isMobile={isMobile}>
+                        <Switch>
+                            <Route
+                                path={
+                                    process.env.PUBLIC_URL +
+                                    "/guest/stonk/:stonkname"
+                                }
+                            >
+                                <Stonks
+                                    userType={userType}
+                                    stonkData={stonkData}
+                                    guestUserStats={guestUserStats}
+                                    guestUserStatsDispatch={guestUserStatsDispatch}
+                                    guestTotalShares={guestTotalShares}
+                                    guestBalance={guestBalance}
+                                    setRefetch={setRefetch}
+                                />
+                            </Route>
+                            <Route path={"/guest/leaderboard"}>
+                                <Leaderboard />
+                            </Route>
+                            <Route path={"/guest/account"}>
+                                <GuestAccount
+                                    guestAccountStats={guestAccountStats}
+                                />
+                            </Route>
+                            <Route path={"/guest/updates"}>
+                                <Updates />
+                            </Route>
+                            <Route path={"/guest"}>
+                                <Card stonkData={stonkData} userType={userType} />
+                            </Route>
+                        </Switch>
+                    </ContentWrapper>
+                </NavAndContentContainer>
+            </DoubleColumn>
         </Wrapper>
     );
 };
@@ -104,8 +108,17 @@ const NavAndContentContainer = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-    margin-left: 201px;
-    margin-top: 50px;
+    margin-top:  ${props => props.isMobile ? "50px" : "15px"};
+`;
+
+const Column = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+const DoubleColumn = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 const BurgerMenu = styled.div`
@@ -135,7 +148,7 @@ const BurgerMenu = styled.div`
     }
     .bm-menu {
         background: rgba(255, 255, 255, 1);
-        padding: 2.5em 1.5em 0;
+        // padding: 2.5em 1.5em 0;
         font-size: 1.15em;
     }
 `;
