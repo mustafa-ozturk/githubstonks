@@ -8,7 +8,7 @@
 
 <a href="https://githubstonks.com/" target="_blank">githubstonks.com</a>
 
-Githubstonks is a simple stock market game where the stocks are popular github repositories. You can buy and sell popular repo's like React, Node and more.
+Githubstonks is a stock market game where the stocks are popular GitHub repositories. You can buy and sell repo's like React, Node, and more.
 
 ---
 
@@ -20,25 +20,23 @@ Githubstonks is a simple stock market game where the stocks are popular github r
 
 ## "You should add this repo to the game"
 
-Create an issue with a link to the repo you wan't me to add and I might add it :)
+Create an issue with a link to the repo you want me to add, and I might add it :)
 
 ## How are the share prices calculated ?
 
 `intial price = stars * 0.0003 + forks * 0.0002 + commits * 0.0001`
 
-the price of the stocks go up and down based on how many total shares were bought
+The price of the stonks go up and down based on the total shares bought of that stonk.
 
 `marketprice = total shares bought * 0.00001`
 
-`price = initial price + market price`
+`final price = initial price + market price`
 
 ---
 
 ## Contributions
 
 GitHubStonks is open to contributions, but I recommend creating an issue first to let me know what you are working on that way we don't overwrite each other.
-
-more info on contributing coming soon
 
 ## How to run locally (dev environment)
 
@@ -53,12 +51,12 @@ go to `client/.env` and change localhost to `https://api.githubstonks.com/`
 
 Backend (Node, Express, MongoDB)
 
-1. create a `.env` file in `/server` and put your mongoURI, github client id, github client secret
+1. create a `.env` file in `/server` and put your mongoURI, github client id, and github client secret
 
 ```
-MONGO_URI= # put your mongo uri here
-CLIENT_ID=  # put your github oauth client id here
-CLIENT_SECRET= # put your github oauth client secret here
+MONGO_URI=put your mongo uri here
+CLIENT_ID=put your github oauth client id here
+CLIENT_SECRET=put your github oauth client secret here
 ```
 
 2. `cd server`
