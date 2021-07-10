@@ -108,7 +108,7 @@ const NavAndContentContainer = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-    margin-top:  ${props => props.isMobile ? "50px" : "15px"};
+    margin-top:  ${props => props.isMobile ? "70px" : "15px"};
 `;
 
 const Column = styled.div`
