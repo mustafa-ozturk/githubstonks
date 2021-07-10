@@ -113,8 +113,8 @@ const Sidebar = ({ balance, portfolioValue, netWorth, profitLoss, userType }) =>
 };
 
 const Wrapper = styled.div`
-    min-width:  ${props => props.isMobile ? "" : "200px"};
-    max-width:  ${props => props.isMobile ? "160px" : ""};
+    min-width:  ${props => props.isMobile ? "190px" : "200px"};
+    max-width:  ${props => props.isMobile ? "190px" : ""};
     height: 100vh;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     position: fixed;

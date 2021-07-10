@@ -45,7 +45,7 @@ const GuestApp = ({ userType }) => {
         <Wrapper>
             {isMobile
                 ? <BurgerMenu>
-                    <Menu isOpen={!isMobile} width={'9.1rem'} >
+                    <Menu isOpen={!isMobile} width={'11.8rem'} >
                         {sideBar()}
                     </Menu>
                 </BurgerMenu>
