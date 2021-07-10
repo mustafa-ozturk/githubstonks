@@ -12,4 +12,4 @@ export function abbreviateNumber(value) {
     return newVal;
 }
 
-export const MOBILE_SIZE = '(max-width: 720px)';
+export const MOBILE_SIZE = '(max-width: 768px)';
