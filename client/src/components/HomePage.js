@@ -3,6 +3,7 @@ import { Switch, Route, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import Account from "./Account";
 import GuestAccount from "./guest/GuestAccount";
 import Stonks from "./Stonks";
 import Card from "./Card";
@@ -20,7 +21,7 @@ const HomePage = ({ userType, context }) => {
 
     const { stonkData, setRefetch } = useContext(StonkContext);
 
-    const isGuest = location.pathname === GUEST;
+    const isGuest = location.pathname.includes(GUEST);
 
     const {
         guestUserStats,
@@ -31,6 +32,7 @@ const HomePage = ({ userType, context }) => {
         profitLoss,
         totalShares,
         accountStats,
+        guestAccountStats,
         setRefetchUserSide,
     } = useContext(context);
 
@@ -118,9 +120,11 @@ const HomePage = ({ userType, context }) => {
                                 <Leaderboard />
                             </Route>
                             <Route path={isGuest ? "/guest/account" : "/account"}>
-                                <GuestAccount
-                                    accountStats={accountStats}
-                                />
+                                {isGuest ?
+                                    <GuestAccount guestAccountStats={guestAccountStats} />
+                                    :
+                                    <Account accountStats={accountStats} />
+                                }
                             </Route>
                             <Route path={isGuest ? "/guest/updates" : "/updates"}>
                                 <Updates />

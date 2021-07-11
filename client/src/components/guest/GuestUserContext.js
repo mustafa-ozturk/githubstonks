@@ -199,7 +199,7 @@ export const GuestUserProvider = ({ children }) => {
     const netWorth = getguestNetWorth();
     const profitLoss = getguestProfitLoss();
     const totalShares = getguestTotalShares();
-    const accountStats = getAccountStat();
+    const   guestAccountStats = getAccountStat();
     return (
         <GuestUserContext.Provider
             value={{
@@ -210,7 +210,7 @@ export const GuestUserProvider = ({ children }) => {
                 netWorth,
                 profitLoss,
                 totalShares,
-                accountStats
+                guestAccountStats
             }}
         >
             {children}
