@@ -54,6 +54,7 @@ const insertStockData = async (stockDataArr) => {
                     price: priceAfterMarket,
                     increasePrice: dollarIncrease,
                     increasePercent: (100 * dollarIncrease) / result.firstPrice,
+                    initialPrice: initialPrice,
                 },
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
@@ -248,6 +249,7 @@ const handleUserBuy = async (req, res) => {
                     price: priceAfterMarket,
                     increasePrice: dollarIncrease,
                     increasePercent: (100 * dollarIncrease) / e.firstPrice,
+                    initialPrice: initialPrice,
                 },
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
@@ -363,6 +365,7 @@ const handleUserSell = async (req, res) => {
                     price: priceAfterMarket,
                     increasePrice: dollarIncrease,
                     increasePercent: (100 * dollarIncrease) / e.firstPrice,
+                    initialPrice: initialPrice,
                 },
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
