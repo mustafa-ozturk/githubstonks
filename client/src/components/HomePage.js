@@ -98,8 +98,8 @@ const HomePage = ({ userType, context }) => {
                                             stonkData={stonkData}
                                             guestUserStats={guestUserStats}
                                             guestUserStatsDispatch={guestUserStatsDispatch}
-                                            totalShares={totalShares}
-                                            balance={balance}
+                                            guestTotalShares={totalShares}
+                                            guestBalance={balance}
                                             setRefetch={setRefetch}
                                         />
                                     ) :
