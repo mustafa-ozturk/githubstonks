@@ -74,7 +74,7 @@ const HomePage = ({ userType, context }) => {
                 : sideBar()
             }
 
-            <DoubleColumn>
+            <Column>
                 <NavAndContentContainer>
                     {!isMobile
                         && <Navbar userType={userType} />
@@ -131,7 +131,7 @@ const HomePage = ({ userType, context }) => {
                         </Switch>
                     </ContentWrapper>
                 </NavAndContentContainer>
-            </DoubleColumn>
+            </Column>
         </Wrapper>
     );
 }
@@ -149,11 +149,6 @@ const ContentWrapper = styled.div`
 `;
 
 const Column = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const DoubleColumn = styled.div`
     display: flex;
     flex-direction: column;
 `;
