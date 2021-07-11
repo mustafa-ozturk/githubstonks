@@ -89,30 +89,30 @@ const Navbar = ({ userType }) => {
                     </span>
                 </About>
             </Column>
-            <Column isMobile={isMobile}>
-                {userType === "guest" ? (
-                    <Login isMobile={isMobile}>
-                        <a
-                            className="login"
-                            href={`${process.env.REACT_APP_API_LINK}/api/user/signin`}
-                        >
-                            Login with GitHub
-                            <span className="logo">
-                                <AiOutlineGithub />
-                            </span>
-                        </a>
-                    </Login>
-                ) : (
-                    <Login isMobile={isMobile}>
-                        <a
-                            href={`${process.env.REACT_APP_CLIENT_LINK}/guest`}
-                            onClick={handleLogout}
-                        >
-                            Logout
-                        </a>
-                    </Login>
-                )}
-            </Column>
+
+            {userType === "guest" ? (
+                <Login isMobile={isMobile}>
+                    <a
+                        className="login"
+                        href={`${process.env.REACT_APP_API_LINK}/api/user/signin`}
+                    >
+                        Login with GitHub
+                        <span className="logo">
+                            <AiOutlineGithub />
+                        </span>
+                    </a>
+                </Login>
+            ) : (
+                <Login isMobile={isMobile}>
+                    <a
+                        href={`${process.env.REACT_APP_CLIENT_LINK}/guest`}
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </a>
+                </Login>
+            )}
+
         </Wrapper>
     );
 };
@@ -120,24 +120,29 @@ const Navbar = ({ userType }) => {
 const Wrapper = styled.div`
     ${props => props.isMobile ?
         (
-            `display: flex;
-             flex-direction: column;
-             flex-wrap: wrap;
-             font-size: 0.85rem;
-             z-index: 10;
-             justify-content: center;
-             align-items: flex-start;`
+            `
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            z-index: 10;
+            justify-content: center;
+            align-items: flex-start;
+            `
         ) :
         (
-            `padding: 10px 10px 10px 14px;
-             height: 21px;
-             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-             background-color: white;
-             max-width: 100%;
-             z-index: 10;
-             display: flex;
-             flex-direction: row;
-             justify-content: space-between;`
+            `
+            padding: 10px 10px 10px 14px;
+            height: 21px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: white;
+            max-width: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex: 1;
+             `
         )
     }
 `;
@@ -145,7 +150,7 @@ const Wrapper = styled.div`
 const Column = styled.div`
     display: flex;
     flex-direction: ${props => props.isMobile ? "column" : "row"};
-    flex-wrap: wrap;
+    flex-wrap: ${props => props.isMobile ? "wrap" : "no-wrap"};
     justify-content: space-between;
 `;
 
@@ -184,6 +189,7 @@ const Login = styled.div`
     & > .login {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         color: black;
         text-decoration: none;
         font-weight: 600;

@@ -76,11 +76,13 @@ const HomePage = ({ userType, context }) => {
                 : sideBar()
             }
 
-            <Column>
-                <NavAndContentContainer>
+            <StretchColumn>
+                <Row>
                     {!isMobile
                         && <Navbar userType={userType} />
                     }
+                </Row>
+                <Row>
                     <ContentWrapper isMobile={isMobile}>
                         <Switch>
                             <Route
@@ -134,18 +136,14 @@ const HomePage = ({ userType, context }) => {
                             </Route>
                         </Switch>
                     </ContentWrapper>
-                </NavAndContentContainer>
-            </Column>
+                </Row>
+            </StretchColumn>
         </Wrapper>
     );
 }
 
 const Wrapper = styled.div`
     display: flex;
-`;
-
-const NavAndContentContainer = styled.div`
-    width: 100%;
 `;
 
 const ContentWrapper = styled.div`
@@ -155,6 +153,19 @@ const ContentWrapper = styled.div`
 const Column = styled.div`
     display: flex;
     flex-direction: column;
+`;
+
+const StretchColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap
+    flex: 1;
+    width: 100%;
+`;
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
 `;
 
 const BurgerMenu = styled.div`

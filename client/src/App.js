@@ -32,8 +32,6 @@ const App = () => {
         }
     }, [tokenId]);
 
-
-
     return (
         <>
             <Switch>
