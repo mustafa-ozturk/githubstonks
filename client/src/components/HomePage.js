@@ -85,6 +85,7 @@ const HomePage = ({ userType, context }) => {
                 <Row>
                     <ContentWrapper isMobile={isMobile}>
                         <Switch>
+
                             <Route
                                 path={
                                     isGuest ?
@@ -93,6 +94,7 @@ const HomePage = ({ userType, context }) => {
                                         "/stonk/:stonkname"
                                 }
                             >
+
                                 {isGuest ?
                                     (
                                         <Stonks
@@ -148,6 +150,11 @@ const Wrapper = styled.div`
 
 const ContentWrapper = styled.div`
     margin-top:  ${props => props.isMobile ? "70px" : "15px"};
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    // width: 100%;
+    
 `;
 
 const Column = styled.div`
@@ -166,6 +173,13 @@ const StretchColumn = styled.div`
 const Row = styled.div`
     display: flex;
     flex-direction: row;
+`;
+
+const Stonk = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
 `;
 
 const BurgerMenu = styled.div`
