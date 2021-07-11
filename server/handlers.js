@@ -58,7 +58,6 @@ const insertStockData = async (stockDataArr) => {
                     price: priceAfterMarket,
                     increasePrice: dollarIncrease,
                     increasePercent: (100 * dollarIncrease) / result.firstPrice,
-                    initialPrice: initialPrice,
                     stars: e.stars,
                     forks: e.forks,
                     commits: e.commits,
