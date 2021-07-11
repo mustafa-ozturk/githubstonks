@@ -22,13 +22,13 @@ const stonkValueCalc = (elem) => {
                 100
         ) / 100;
     const marketPrice =
-        Math.round((elem.totalBoughtShares * 0.1 + Number.EPSILON) * 100) / 100;
+        Math.round((elem.totalBoughtShares * 0.00001 + Number.EPSILON) * 100) /
+        100;
     const priceAfterMarket =
         Math.round((initialPrice + marketPrice + Number.EPSILON) * 100) / 100;
     const dollarIncrease =
         Math.round((priceAfterMarket - initialPrice + Number.EPSILON) * 100) /
         100;
-    console.log(initialPrice, priceAfterMarket, dollarIncrease);
     return { initialPrice, priceAfterMarket, dollarIncrease };
 };
 
