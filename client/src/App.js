@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import GuestApp from "./guest/GuestApp";
-import RealApp from "./RealApp";
+import React, { useEffect, useState, useContext } from "react";
+import HomePage from './components/HomePage';
 import { Switch, Route, useHistory } from "react-router-dom";
+import { GuestUserContext } from "./components/guest/GuestUserContext";
+import { RealUserContext } from "./context/RealUserContext";
 
 const App = () => {
     const [userType, setUserType] = useState("guest");
@@ -30,14 +31,17 @@ const App = () => {
             setUserType("guest");
         }
     }, [tokenId]);
+
+
+
     return (
         <>
             <Switch>
                 <Route path={"/guest"}>
-                    <GuestApp userType={userType} />
+                    <HomePage userType={userType} context={GuestUserContext} />
                 </Route>
                 <Route path={"/"}>
-                    <RealApp userType={userType} />
+                    <HomePage userType={userType} context={RealUserContext} />
                 </Route>
             </Switch>
         </>

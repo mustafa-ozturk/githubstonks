@@ -5,7 +5,7 @@ import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import Chart from "./Chart";
-import GuestExchange from "../guest/GuestExchange";
+import GuestExchange from "./guest/GuestExchange";
 import RealExchange from "./RealExchange";
 import { abbreviateNumber } from "../utils";
 

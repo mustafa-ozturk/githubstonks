@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
+import Sidebar from "../Sidebar";
+import Navbar from "../Navbar";
 import GuestAccount from "./GuestAccount";
-import Stonks from "../components/Stonks";
-import Card from "../components/Card";
-import Leaderboard from "../components/Leaderboard";
-import Updates from "../components/Updates";
-import { StonkContext } from "../context/StonkContext";
+import Stonks from "../Stonks";
+import Card from "../Card";
+import Leaderboard from "../Leaderboard";
+import Updates from "../Updates";
+import { StonkContext } from "../../context/StonkContext";
 import { GuestUserContext } from "./GuestUserContext";
 import { slide as Menu } from 'react-burger-menu';
 import { useMediaQuery } from 'react-responsive';
-import { MOBILE_SIZE } from '../utils';
+import { MOBILE_SIZE } from '../../utils';
 
-const GuestApp = ({ userType }) => {
+const GuestApp = ({ userType,context }) => {
     const { stonkData, setRefetch } = useContext(StonkContext);
     const {
         guestUserStats,

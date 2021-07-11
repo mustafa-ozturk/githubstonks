@@ -6,7 +6,7 @@ import "./index.css";
 import App from "./App";
 
 import { StonkProvider } from "./context/StonkContext";
-import { GuestUserProvider } from "./guest/GuestUserContext";
+import { GuestUserProvider } from "./components/guest/GuestUserContext";
 import { RealUserProvider } from "./context/RealUserContext";
 
 ReactDOM.render(
