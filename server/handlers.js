@@ -2,60 +2,73 @@ require("dotenv").config();
 const Axios = require("axios");
 const crypto = require("crypto");
 const { stonkData } = require("./stonkdata");
-const stonkDataArr = stonkData();
 const { ObjectOfTokens } = require("./ObjectOfTokens");
 const { connectDb } = require("./db");
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const STOCKDATA_COLLECTION = "stock-data";
 const USER_COLLECTION = "user-data";
-const CLIENT_LINK = "https://githubstonks.com";
+const CLIENT_LINK = "http://localhost:3000";
 // http://localhost:3000
 // https://githubstonks.com
 
+const stonkValueCalc = (elem) => {
+    const initialPrice =
+        Math.round(
+            (elem.stars * 0.0003 +
+                elem.forks * 0.0002 +
+                elem.commits * 0.0001 +
+                Number.EPSILON) *
+                100
+        ) / 100;
+    const marketPrice =
+        Math.round((elem.totalBoughtShares * 0.1 + Number.EPSILON) * 100) / 100;
+    const priceAfterMarket =
+        Math.round((initialPrice + marketPrice + Number.EPSILON) * 100) / 100;
+    const dollarIncrease =
+        Math.round((priceAfterMarket - initialPrice + Number.EPSILON) * 100) /
+        100;
+    console.log(initialPrice, priceAfterMarket, dollarIncrease);
+    return { initialPrice, priceAfterMarket, dollarIncrease };
+};
+
 const insertStockData = async (stockDataArr) => {
     let collection = await connectDb(STOCKDATA_COLLECTION);
-    stockDataArr.forEach(async (e) => {
+    await stockDataArr.forEach(async (e) => {
         const query = { _id: e._id };
         const result = await collection.findOne(query);
-        const initialPrice =
-            e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
-        const marketPrice = e.totalBoughtShares * 0.1;
-        const priceAfterMarket = initialPrice + marketPrice;
-        const dollarIncrease = priceAfterMarket - initialPrice;
+        const { initialPrice, priceAfterMarket, dollarIncrease } =
+            stonkValueCalc(e);
         e.price = priceAfterMarket;
         e.increasePrice = dollarIncrease;
         e.increasePercent = (100 * dollarIncrease) / initialPrice;
         e.initialPrice = initialPrice;
+        e.firstPrice = initialPrice;
         if (!result) {
             await collection.insertOne(e);
             console.log("inserted data");
+        } else if (result.initialPrice !== initialPrice) {
+            const stockQuery = { name: e.name };
+            const update = {
+                $set: {
+                    price: priceAfterMarket,
+                    increasePrice: dollarIncrease,
+                    increasePercent: (100 * dollarIncrease) / result.firstPrice,
+                },
+                $push: { priceHistory: { "Price: $": priceAfterMarket } },
+            };
+            await collection.updateOne(stockQuery, update);
+            console.log("updated");
         }
-        // updates stock if result exist but this breaks buy and sell so I leave it out temporarily
-        // else {
-        //     if (result.price != priceAfterMarket) {
-        //         const stockQuery = { name: e.name };
-        //         const update = {
-        //             $set: {
-        //                 price: priceAfterMarket,
-        //                 increasePrice: dollarIncrease,
-        //                 increasePercent: (100 * dollarIncrease) / initialPrice,
-        //             },
-        //             $push: { priceHistory: { "Price: $": priceAfterMarket } },
-        //         };
-        //         await collection.updateOne(stockQuery, update);
-        //         console.log("updated");
-        //     }
-        // }
     });
 };
 
 // /api/stonkData
 const handleCards = async (req, res) => {
+    const stonkDataArr = await stonkData();
     await insertStockData(stonkDataArr).then(async () => {
         let collection = await connectDb(STOCKDATA_COLLECTION);
         let result = await collection.find().toArray();
-
         return res.status(200).json({ data: result });
     });
 };
