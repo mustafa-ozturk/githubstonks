@@ -8,7 +8,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const STOCKDATA_COLLECTION = "stock-data";
 const USER_COLLECTION = "user-data";
-const CLIENT_LINK = "http://localhost:3000";
+const CLIENT_LINK = "https://githubstonks.com";
 // http://localhost:3000
 // https://githubstonks.com
 
