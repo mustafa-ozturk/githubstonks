@@ -226,7 +226,7 @@ const stonkData = async () => {
 setInterval(() => {
     cache = {};
     console.log("cache cleared");
-}, 10000);
+}, 1000 * 60 * 60);
 
 module.exports = {
     stonkData,
