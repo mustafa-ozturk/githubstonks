@@ -62,79 +62,87 @@ const HomePage = ({ userType, context }) => {
                     userType={userType}
                 />
             </Column>
-        )
-    }
+        );
+    };
 
     return (
         <Wrapper>
-            {isMobile
-                ? <BurgerMenu>
-                    <Menu isOpen={!isMobile} width={'12rem'} >
+            {isMobile ? (
+                <BurgerMenu>
+                    <Menu isOpen={!isMobile} width={"12rem"}>
                         {sideBar()}
                     </Menu>
                 </BurgerMenu>
-                : sideBar()
-            }
+            ) : (
+                sideBar()
+            )}
 
             <StretchColumn>
-                <Row>
-                    {!isMobile
-                        && <Navbar userType={userType} />
-                    }
-                </Row>
+                <Row>{!isMobile && <Navbar userType={userType} />}</Row>
                 <Row>
                     <ContentWrapper isMobile={isMobile}>
                         <Switch>
-
                             <Route
                                 path={
-                                    isGuest ?
-                                        process.env.PUBLIC_URL +
-                                        "/guest/stonk/:stonkname" :
-                                        "/stonk/:stonkname"
+                                    isGuest
+                                        ? process.env.PUBLIC_URL +
+                                          "/guest/stonk/:stonkname"
+                                        : "/stonk/:stonkname"
                                 }
                             >
-
-                                {isGuest ?
-                                    (
-                                        <Stonks
-                                            userType={userType}
-                                            stonkData={stonkData}
-                                            guestUserStats={guestUserStats}
-                                            guestUserStatsDispatch={guestUserStatsDispatch}
-                                            guestTotalShares={totalShares}
-                                            guestBalance={balance}
-                                            setRefetch={setRefetch}
-                                        />
-                                    ) :
-                                    (
-                                        <Stonks
-                                            userType={userType}
-                                            stonkData={stonkData}
-                                            totalShares={totalShares}
-                                            balance={balance}
-                                            setRefetch={setRefetch}
-                                            setRefetchUserSide={setRefetchUserSide}
-                                        />
-                                    )
-                                }
-
+                                {isGuest ? (
+                                    <Stonks
+                                        userType={userType}
+                                        stonkData={stonkData}
+                                        guestUserStats={guestUserStats}
+                                        guestUserStatsDispatch={
+                                            guestUserStatsDispatch
+                                        }
+                                        guestTotalShares={totalShares}
+                                        guestBalance={balance}
+                                        setRefetch={setRefetch}
+                                    />
+                                ) : (
+                                    <Stonks
+                                        userType={userType}
+                                        stonkData={stonkData}
+                                        totalShares={totalShares}
+                                        balance={balance}
+                                        setRefetch={setRefetch}
+                                        setRefetchUserSide={setRefetchUserSide}
+                                    />
+                                )}
                             </Route>
-                            <Route path={isGuest ? "/guest/leaderboard" : "/leaderboard"}>
+                            <Route
+                                path={
+                                    isGuest
+                                        ? "/guest/leaderboard"
+                                        : "/leaderboard"
+                                }
+                            >
                                 <Leaderboard />
                             </Route>
-                            <Route path={isGuest ? "/guest/account" : "/account"}>
-                                {isGuest ?
-                                    <GuestAccount guestAccountStats={guestAccountStats} />
-                                    :
+                            <Route
+                                path={isGuest ? "/guest/account" : "/account"}
+                            >
+                                {isGuest ? (
+                                    <GuestAccount
+                                        guestAccountStats={guestAccountStats}
+                                    />
+                                ) : (
                                     <Account accountStats={accountStats} />
-                                }
+                                )}
                             </Route>
-                            <Route path={isGuest ? "/guest/updates" : "/updates"}>
+                            <Route
+                                path={isGuest ? "/guest/updates" : "/updates"}
+                            >
                                 <Updates />
                             </Route>
                             <Route path={isGuest ? "/guest" : "/"}>
-                                <Card stonkData={stonkData} userType={userType} />
+                                <Card
+                                    stonkData={stonkData}
+                                    userType={userType}
+                                />
                             </Route>
                         </Switch>
                     </ContentWrapper>
@@ -142,19 +150,18 @@ const HomePage = ({ userType, context }) => {
             </StretchColumn>
         </Wrapper>
     );
-}
+};
 
 const Wrapper = styled.div`
     display: flex;
 `;
 
 const ContentWrapper = styled.div`
-    margin-top:  ${props => props.isMobile ? "70px" : "15px"};
+    margin-top: ${(props) => (props.isMobile ? "70px" : "15px")};
     display: flex;
     flex-direction: column;
     flex: 1;
     // width: 100%;
-    
 `;
 
 const Column = styled.div`
@@ -165,7 +172,7 @@ const Column = styled.div`
 const StretchColumn = styled.div`
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap
+    flex-wrap: nowrap;
     flex: 1;
     width: 100%;
 `;
@@ -214,7 +221,4 @@ const BurgerMenu = styled.div`
     }
 `;
 
-
-
-
-export default HomePage
+export default HomePage;
