@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import HomePage from './components/HomePage';
 import { Switch, Route, useHistory } from "react-router-dom";
 import { GuestUserContext } from "./components/guest/GuestUserContext";
