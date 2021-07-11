@@ -183,7 +183,6 @@ const getCommitCount = async (...args) => {
 };
 
 const ghStarsForksCommits = async (link) => {
-    console.log("fetched");
     const data = await fetch(`https://api.github.com/repos/${link}`, {
         headers: {
             Authorization: `token ${process.env.PERSONAL_ACCESS_TOKEN}`,
@@ -195,6 +194,7 @@ const ghStarsForksCommits = async (link) => {
             forks: json.forks,
         }));
     data.commits = await getCommitCount(link);
+    console.log("fetched", link);
     return data;
 };
 
@@ -225,7 +225,8 @@ const stonkData = async () => {
 
 setInterval(() => {
     cache = {};
-}, 1000 * 60 * 60);
+    console.log("cache cleared");
+}, 10000);
 
 module.exports = {
     stonkData,
