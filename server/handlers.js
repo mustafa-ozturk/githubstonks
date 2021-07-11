@@ -47,7 +47,11 @@ const insertStockData = async (stockDataArr) => {
         if (!result) {
             await collection.insertOne(e);
             console.log("inserted data");
-        } else if (result.initialPrice !== initialPrice) {
+        } else if (
+            result.stars !== e.stars ||
+            result.forks !== e.forks ||
+            result.commits !== e.commits
+        ) {
             const stockQuery = { name: e.name };
             const update = {
                 $set: {
@@ -55,6 +59,9 @@ const insertStockData = async (stockDataArr) => {
                     increasePrice: dollarIncrease,
                     increasePercent: (100 * dollarIncrease) / result.firstPrice,
                     initialPrice: initialPrice,
+                    stars: e.stars,
+                    forks: e.forks,
+                    commits: e.commits,
                 },
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
@@ -249,7 +256,6 @@ const handleUserBuy = async (req, res) => {
                     price: priceAfterMarket,
                     increasePrice: dollarIncrease,
                     increasePercent: (100 * dollarIncrease) / e.firstPrice,
-                    initialPrice: initialPrice,
                 },
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
@@ -365,7 +371,6 @@ const handleUserSell = async (req, res) => {
                     price: priceAfterMarket,
                     increasePrice: dollarIncrease,
                     increasePercent: (100 * dollarIncrease) / e.firstPrice,
-                    initialPrice: initialPrice,
                 },
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
