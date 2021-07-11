@@ -235,16 +235,12 @@ const handleUserBuy = async (req, res) => {
     let stockData = await stockCollection.find().toArray();
     stockData.forEach(async (e) => {
         if (e.name === stockname) {
-            const initialPrice =
-                e.stars * 0.0003 + e.forks * 0.0002 + e.commits * 0.0001;
-            const marketPrice = e.totalBoughtShares * 0.00001;
-            const priceAfterMarket = initialPrice + marketPrice;
-            const dollarIncrease = priceAfterMarket - initialPrice;
+            const { priceAfterMarket, dollarIncrease } = stonkValueCalc(e);
             const updateValues = {
                 $set: {
                     price: priceAfterMarket,
                     increasePrice: dollarIncrease,
-                    increasePercent: (100 * dollarIncrease) / initialPrice,
+                    increasePercent: (100 * dollarIncrease) / e.firstPrice,
                 },
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
