@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { abbreviateNumber } from "../utils";
+import { abbreviateNumber } from "../../utils";
 
 const GuestExchange = ({
     elem,

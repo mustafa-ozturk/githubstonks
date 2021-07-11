@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { StonkContext } from "../context/StonkContext";
+import { StonkContext } from "../../context/StonkContext";
 
 const initialguestUserStatsState = {
     startingguestBalance: 100000,
@@ -194,23 +194,23 @@ export const GuestUserProvider = ({ children }) => {
         return stonksAndCost;
     };
 
-    const guestBalance = getguestBalance();
-    const guestPortfolioValue = getguestPortfolioValue();
-    const guestNetWorth = getguestNetWorth();
-    const guestProfitLoss = getguestProfitLoss();
-    const guestTotalShares = getguestTotalShares();
-    const guestAccountStats = getAccountStat();
+    const balance = getguestBalance();
+    const portfolioValue = getguestPortfolioValue();
+    const netWorth = getguestNetWorth();
+    const profitLoss = getguestProfitLoss();
+    const totalShares = getguestTotalShares();
+    const   guestAccountStats = getAccountStat();
     return (
         <GuestUserContext.Provider
             value={{
                 guestUserStats,
                 guestUserStatsDispatch,
-                guestBalance,
-                guestPortfolioValue,
-                guestNetWorth,
-                guestProfitLoss,
-                guestTotalShares,
-                guestAccountStats,
+                balance,
+                portfolioValue,
+                netWorth,
+                profitLoss,
+                totalShares,
+                guestAccountStats
             }}
         >
             {children}

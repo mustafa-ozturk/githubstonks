@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 
-export const realUserContext = createContext();
+export const RealUserContext = createContext();
 
 export const RealUserProvider = ({ children }) => {
     const [userData, setUserData] = useState(null);
@@ -28,7 +28,7 @@ export const RealUserProvider = ({ children }) => {
     const totalShares = userData ? userData.data.totalShares : {};
     const accountStats = userData ? userData.data.accountStats : {};
     return (
-        <realUserContext.Provider
+        <RealUserContext.Provider
             value={{
                 balance,
                 portfolioValue,
@@ -40,6 +40,6 @@ export const RealUserProvider = ({ children }) => {
             }}
         >
             {children}
-        </realUserContext.Provider>
+        </RealUserContext.Provider>
     );
 };

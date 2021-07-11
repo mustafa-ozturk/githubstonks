@@ -5,15 +5,19 @@ import { RiStarSLine } from "react-icons/ri";
 import { AiOutlineBranches } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
 import { abbreviateNumber } from "../utils";
+import { useMediaQuery } from 'react-responsive';
+import { MOBILE_SIZE } from '../utils';
 
 const Card = ({ stonkData, userType }) => {
+    const isMobile = useMediaQuery({ query: MOBILE_SIZE });
+
     return (
         <CardWrapper>
             {stonkData
                 .sort((a, b) => b.increasePrice - a.increasePrice)
                 .map((elem, index) => {
                     return (
-                        <Wrapper key={index}>
+                        <Wrapper key={index} isMobile={isMobile}>
                             <Links
                                 to={
                                     userType === "guest"
@@ -47,20 +51,20 @@ const Card = ({ stonkData, userType }) => {
                                         <Past24>past 24h</Past24>
                                     </IncreaseWrapper>
                                 </PriceIncreasePast>
-                                <StatWrapper>
-                                    <Statbox title={elem.stars}>
+                                <StatWrapper >
+                                    <Statbox title={elem.stars} isMobile={isMobile}>
                                         {abbreviateNumber(elem.stars)}
                                         <StatIcons>
                                             <RiStarSLine />
                                         </StatIcons>
                                     </Statbox>
-                                    <Statbox title={elem.forks}>
+                                    <Statbox title={elem.forks} isMobile={isMobile}>
                                         {abbreviateNumber(elem.forks)}
                                         <StatIcons>
                                             <AiOutlineBranches />
                                         </StatIcons>
                                     </Statbox>
-                                    <Statbox title={elem.commits}>
+                                    <Statbox title={elem.commits} isMobile={isMobile}>
                                         {abbreviateNumber(elem.commits)}
                                         <StatIcons>
                                             <BiGitCommit />
@@ -76,7 +80,6 @@ const Card = ({ stonkData, userType }) => {
 };
 
 const CardWrapper = styled.div`
-    padding: 1.4rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -84,11 +87,11 @@ const CardWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-    margin: 1rem;
+    margin: 0.3rem;
     border-radius: 7px;
-    width: 300px;
+    width: ${props => props.isMobile ? "280px" : "300px"};
     height: 160px;
-    padding: 24px 32px;
+    padding: 24px ${props => props.isMobile ? "14px" : "32px"};
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
         0px 1px 3px rgba(0, 0, 0, 0.2);
     &:hover {
@@ -157,7 +160,7 @@ const StatWrapper = styled.div`
 
 const Statbox = styled.div`
     background-color: rgba(0, 0, 0, 0.1);
-    padding: 2px 10px;
+    padding: 2px ${props => props.isMobile ? "5px" : "10px"};
     border-radius: 5px;
     display: flex;
     justify-content: center;

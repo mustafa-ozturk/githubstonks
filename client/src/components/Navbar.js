@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { AiOutlineGithub } from "react-icons/ai";
 import { FiExternalLink } from "react-icons/fi";
-// uselocation
+import { useMediaQuery } from 'react-responsive';
+import { MOBILE_SIZE } from '../utils';
+
 const Navbar = ({ userType }) => {
+    const isMobile = useMediaQuery({ query: MOBILE_SIZE });
+
     const handleLogout = () => {
         fetch(
             `${process.env.REACT_APP_API_LINK}/api/${localStorage.getItem(
@@ -22,8 +26,8 @@ const Navbar = ({ userType }) => {
     };
 
     return (
-        <Wrapper>
-            <div>
+        <Wrapper isMobile={isMobile}>
+            <Column isMobile={isMobile}>
                 <NavBarItem
                     className="active"
                     exact
@@ -32,6 +36,7 @@ const Navbar = ({ userType }) => {
                         fontWeight: "bold",
                         color: "rgb(14, 184, 239)",
                     }}
+                    isMobile={isMobile}
                 >
                     Home
                 </NavBarItem>
@@ -42,6 +47,7 @@ const Navbar = ({ userType }) => {
                         fontWeight: "bold",
                         color: "rgb(14, 184, 239)",
                     }}
+                    isMobile={isMobile}
                 >
                     Account
                 </NavBarItem>
@@ -57,6 +63,7 @@ const Navbar = ({ userType }) => {
                         fontWeight: "bold",
                         color: "rgb(14, 184, 239)",
                     }}
+                    isMobile={isMobile}
                 >
                     Leaderboard
                 </NavBarItem>
@@ -67,21 +74,24 @@ const Navbar = ({ userType }) => {
                         fontWeight: "bold",
                         color: "rgb(14, 184, 239)",
                     }}
+                    isMobile={isMobile}
                 >
                     Updates
                 </NavBarItem>
                 <About
                     href="https://github.com/mustafa-ozturk/githubstonks/blob/main/README.md"
                     target="_blank"
+                    isMobile={isMobile}
                 >
                     About
                     <span>
                         <FiExternalLink />
                     </span>
                 </About>
-            </div>
+            </Column>
+
             {userType === "guest" ? (
-                <Login>
+                <Login isMobile={isMobile}>
                     <a
                         className="login"
                         href={`${process.env.REACT_APP_API_LINK}/api/user/signin`}
@@ -93,7 +103,7 @@ const Navbar = ({ userType }) => {
                     </a>
                 </Login>
             ) : (
-                <Login>
+                <Login isMobile={isMobile}>
                     <a
                         href={`${process.env.REACT_APP_CLIENT_LINK}/guest`}
                         onClick={handleLogout}
@@ -102,27 +112,51 @@ const Navbar = ({ userType }) => {
                     </a>
                 </Login>
             )}
+
         </Wrapper>
     );
 };
 //  navlink knows
 const Wrapper = styled.div`
-    padding: 10px 10px 10px 14px;
-    height: 21px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: white;
-    position: fixed;
-    min-width: calc(100% - 201px);
-    margin-left: 201px;
+    ${props => props.isMobile ?
+        (
+            `
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            z-index: 10;
+            justify-content: center;
+            align-items: flex-start;
+            `
+        ) :
+        (
+            `
+            padding: 10px 10px 10px 14px;
+            height: 21px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: white;
+            max-width: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex: 1;
+             `
+        )
+    }
+`;
 
-    z-index: 10;
+const Column = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: ${props => props.isMobile ? "column" : "row"};
+    flex-wrap: ${props => props.isMobile ? "wrap" : "no-wrap"};
     justify-content: space-between;
 `;
 
 const About = styled.a`
-    margin-right: 14px;
+    margin-right:  ${props => props.isMobile ? "0" : "14px"};
+    padding: ${props => props.isMobile ? "5px" : ""};
     text-decoration: none;
     color: black;
     &:active {
@@ -136,7 +170,8 @@ const About = styled.a`
 `;
 
 const NavBarItem = styled(NavLink)`
-    margin-right: 18px;
+    margin-right: ${props => props.isMobile ? "0" : "18px"};
+    padding: ${props => props.isMobile ? "5px" : ""};
     text-decoration: none;
     color: black;
     &:active {
@@ -145,7 +180,6 @@ const NavBarItem = styled(NavLink)`
 `;
 
 const Login = styled.div`
-    margin-right: 24px;
     & > a {
         margin-top: 0;
         color: black;
@@ -155,15 +189,17 @@ const Login = styled.div`
     & > .login {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         color: black;
         text-decoration: none;
         font-weight: 600;
-        margin-top: -10px;
+        font-size: ${props => props.isMobile ? "0.7rem" : ""};
+        margin-top: ${props => props.isMobile ? "1px" : "-10px"};
         &:active {
             color: rgb(14, 184, 239);
         }
         & > .logo {
-            font-size: 2rem;
+            font-size: ${props => props.isMobile ? "1.5rem" : "2rem"};
             margin-left: 4px;
         }
     }

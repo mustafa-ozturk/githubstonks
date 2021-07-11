@@ -9,7 +9,7 @@ import Card from "./components/Card";
 import Leaderboard from "./components/Leaderboard";
 import Updates from "./components/Updates";
 import { StonkContext } from "./context/StonkContext";
-import { realUserContext } from "./context/RealUserContext";
+import { RealUserContext } from "./context/RealUserContext";
 
 const App = ({ userType }) => {
     const { stonkData, setRefetch } = useContext(StonkContext);
@@ -21,7 +21,7 @@ const App = ({ userType }) => {
         totalShares,
         accountStats,
         setRefetchUserSide,
-    } = useContext(realUserContext);
+    } = useContext(RealUserContext);
 
     useEffect(() => {
         if (window.location.search) {
