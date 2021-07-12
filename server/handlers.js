@@ -22,7 +22,7 @@ const CLIENT_LINK = "https://githubstonks.com";
 // https://githubstonks.com
 
 // /api/stonkData
-const handleCards = async (req, res) => {
+const handleStonkData = async (req, res) => {
     const stonkDataArr = await stonkData();
     await insertStockData(stonkDataArr).then(async () => {
         let collection = await connectDb(STOCKDATA_COLLECTION);
@@ -362,7 +362,7 @@ const handleLeaderboard = async (req, res) => {
 };
 
 module.exports = {
-    handleCards,
+    handleStonkData,
     handleSigninRedirect,
     handleOauthCallback,
     handleUserAuth,

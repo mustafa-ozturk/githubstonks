@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 const {
-    handleCards,
+    handleStonkData,
     handleSigninRedirect,
     handleOauthCallback,
     handleUserAuth,
@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/api/stonkData", handleCards);
+app.get("/api/stonkData", handleStonkData);
 
 app.get("/api/leaderboard", handleLeaderboard);
 
