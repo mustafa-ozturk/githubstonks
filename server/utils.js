@@ -55,7 +55,7 @@ const insertStockData = async (stockDataArr) => {
                 $push: { priceHistory: { "Price: $": priceAfterMarket } },
             };
             await collection.updateOne(stockQuery, update);
-            console.log("updated");
+            console.log("updated", update);
         }
     });
 };
