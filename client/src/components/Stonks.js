@@ -157,6 +157,7 @@ const Container = styled.div`
             min-height: 300px;
             margin:   12px 0px 8px 0px;
             padding:   8px 0px;
+           
         `) :
         (`
             width: 700px;
@@ -248,8 +249,9 @@ const PriceIncreasePast = styled.div`
         (`
             width: 100%;
             position: relative;
-            margin-bottom: -60px;
+            margin-bottom: -5px;
             margin-right: 160px;
+            flex: 1;
     `)};
 `;
 
