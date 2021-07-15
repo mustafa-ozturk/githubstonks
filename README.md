@@ -51,12 +51,13 @@ go to `client/.env` and change localhost to `https://api.githubstonks.com/`
 
 Backend (Node, Express, MongoDB)
 
-1. create a `.env` file in `/server` and put your mongoURI, github client id, and github client secret
+1. create a `.env` file in `/server` and put your mongoURI, github client id, github client secret, and github personal access token.
 
 ```
-MONGO_URI=put your mongo uri here
-CLIENT_ID=put your github oauth client id here
-CLIENT_SECRET=put your github oauth client secret here
+MONGO_URI=
+CLIENT_ID=
+CLIENT_SECRET=
+PERSONAL_ACCESS_TOKEN=
 ```
 
 2. `cd server`
