@@ -8,6 +8,8 @@ import Chart from "./Chart";
 import GuestExchange from "./guest/GuestExchange";
 import RealExchange from "./RealExchange";
 import { abbreviateNumber } from "../utils";
+import { useMediaQuery } from "react-responsive";
+import { MOBILE_SIZE } from "../utils";
 
 const Stonks = ({
     userType,
@@ -21,35 +23,62 @@ const Stonks = ({
     balance,
 }) => {
     let { stonkname } = useParams();
+    const isMobile = useMediaQuery({ query: MOBILE_SIZE });
+
+    const stonkPrice = (elem) => {
+        return (
+            <PriceIncreasePast isMobile={isMobile}>
+                <Price title={elem.price} isMobile={isMobile}>
+                    ${abbreviateNumber(elem.price)}
+                </Price>
+                <IncreaseWrapper isMobile={isMobile}>
+                    <Increase isMobile={isMobile}>
+                        +$
+                        {abbreviateNumber(
+                            elem.increasePrice
+                        )}
+                        (
+                        {abbreviateNumber(
+                            elem.increasePercent
+                        )}
+                        %)
+                    </Increase>
+                    <Past24>past 24h</Past24>
+                </IncreaseWrapper>
+            </PriceIncreasePast>
+        )
+
+    }
+
     return (
         <>
             {stonkData.map((elem, index) => {
                 if (elem.name === stonkname) {
                     return (
-                        <Wrapper key={index}>
-                            <div>
-                                <TitleStatWrapper>
-                                    <IconNameSymbol>
-                                        <StockIcon src={elem.logo} />
+                        <Wrapper key={index} isMobile={isMobile}>
+                            <Stonk isMobile={isMobile}>
+                                <TitleStatWrapper isMobile={isMobile}>
+                                    <IconNameSymbol isMobile={isMobile}>
+                                        <StockIcon src={elem.logo} isMobile={isMobile} />
                                         <StockName>{elem.name}</StockName>
-                                        <StockSymbol>
+                                        <StockSymbol isMobile={isMobile}>
                                             ({elem.symbol})
                                         </StockSymbol>
                                     </IconNameSymbol>
-                                    <StatWrapper>
-                                        <Statbox title={elem.stars}>
+                                    <StatWrapper isMobile={isMobile}>
+                                        <Statbox title={elem.stars} isMobile={isMobile}>
                                             {abbreviateNumber(elem.stars)}
                                             <StatIcons>
                                                 <RiStarSLine />
                                             </StatIcons>
                                         </Statbox>
-                                        <Statbox title={elem.forks}>
+                                        <Statbox title={elem.forks} isMobile={isMobile}>
                                             {abbreviateNumber(elem.forks)}
                                             <StatIcons>
                                                 <AiOutlineBranches />
                                             </StatIcons>
                                         </Statbox>
-                                        <Statbox title={elem.commits}>
+                                        <Statbox title={elem.commits} isMobile={isMobile}>
                                             {abbreviateNumber(elem.commits)}
                                             <StatIcons>
                                                 <BiGitCommit />
@@ -57,40 +86,23 @@ const Stonks = ({
                                         </Statbox>
                                     </StatWrapper>
                                 </TitleStatWrapper>
-                                <Container>
-                                    <div>
-                                        <PriceIncreasePast>
-                                            <Price title={elem.price}>
-                                                ${abbreviateNumber(elem.price)}
-                                            </Price>
-                                            <IncreaseWrapper>
-                                                <Increase>
-                                                    +$
-                                                    {abbreviateNumber(
-                                                        elem.increasePrice
-                                                    )}
-                                                    (
-                                                    {abbreviateNumber(
-                                                        elem.increasePercent
-                                                    )}
-                                                    %)
-                                                </Increase>
-                                                <Past24>past 24h</Past24>
-                                            </IncreaseWrapper>
-                                        </PriceIncreasePast>
-                                    </div>
-                                    {/* chart */}
-                                    <Chart priceHistory={elem.priceHistory} />
-                                    <History>
-                                        <span className={"inactive"}>1H</span>
-                                        <span className={"inactive"}>24H</span>
-                                        <span className={"inactive"}>1W</span>
-                                        <span className={"inactive"}>1M</span>
-                                        <span className={"inactive"}>1Y</span>
-                                        <span className={"active"}>ALL</span>
-                                    </History>
-                                </Container>
-                            </div>
+                                <Graph isMobile={isMobile}>
+                                    {isMobile ? (stonkPrice(elem)) : ('')}
+                                    <Container isMobile={isMobile}>
+                                        {isMobile ? ('') : (stonkPrice(elem))}
+                                        <Chart priceHistory={elem.priceHistory} />
+                                        <History isMobile={isMobile}>
+                                            <span className={"inactive"}>1H</span>
+                                            <span className={"inactive"}>24H</span>
+                                            <span className={"inactive"}>1W</span>
+                                            <span className={"inactive"}>1M</span>
+                                            <span className={"inactive"}>1Y</span>
+                                            <span className={"active"}>ALL</span>
+                                        </History>
+                                    </Container>
+                                </Graph>
+                            </Stonk>
+
                             {userType === "guest" ? (
                                 <GuestExchange
                                     elem={elem}
@@ -120,26 +132,65 @@ const Stonks = ({
 };
 
 const Wrapper = styled.div`
-    padding: 1.4rem;
+    padding: ${props => props.isMobile ? "" : "1.4rem"};
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    flex-direction: ${props => props.isMobile ? "column" : "row"};
+    align-items: ${props => props.isMobile ? "center" : ""};
 `;
 
 const Container = styled.div`
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
         0px 1px 3px rgba(0, 0, 0, 0.2);
-    width: 700px;
-    height: 450px;
-    margin: 12px 16px 16px 16px;
-    padding: 24px 32px;
     border-radius: 8px;
+    ${props => props.isMobile ?
+        (`
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            width: 85vw; 
+            height:  35vh;
+            min-width: 250px;
+            min-height: 300px;
+            margin:   12px 0px 8px 0px;
+            padding:   8px 0px;
+        `) :
+        (`
+            width: 700px;
+            height: 450px;
+            margin: 12px 16px 16px 16px;
+            padding: 24px 32px;
+        `)}
 `;
+
+const Stonk = styled.div`
+    ${props => props.isMobile ? (`
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items:center;
+    `) :
+        (``)
+    }
+  
+`;
+
+const Graph = styled.div`
+    display: flex;
+    flex-direction:  column;
+    flex: 1;
+    align-items:center
+`;
+
 
 const IconNameSymbol = styled.div`
     display: flex;
+    flex-direction:  ${props => props.isMobile ? "column" : "row"};
     position: relative;
-    right: 10px;
+    right:  ${props => props.isMobile ? "" : "10px"};
     align-items: center;
 `;
 
@@ -147,8 +198,8 @@ const StockIcon = styled.img`
     width: 60px;
     height: 60px;
     object-fit: scale-down;
-    margin-right: 14px;
-    margin-left: 8px;
+    margin-right:  ${props => props.isMobile ? "" : "14px"};
+    margin-left:  ${props => props.isMobile ? "" : "8px"};
 `;
 const StockName = styled.span`
     font-size: 32px;
@@ -157,8 +208,8 @@ const StockName = styled.span`
 const StockSymbol = styled.span`
     font-size: 18px;
     position: relative;
-    top: 5px;
-    left: 5px;
+    top:  ${props => props.isMobile ? "" : "5px"};
+    left:  ${props => props.isMobile ? "" : "5px"};
     color: rgba(0, 0, 0, 0.5);
 `;
 
@@ -186,16 +237,42 @@ const Past24 = styled.span`
 
 const PriceIncreasePast = styled.div`
     z-index: 10;
-    width: 100%;
-    position: relative;
-    margin-bottom: -60px;
-    margin-right: 160px;
+    ${props => props.isMobile ?
+        (`
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        `) :
+        (`
+            width: 100%;
+            position: relative;
+            margin-bottom: -60px;
+            margin-right: 160px;
+    `)};
 `;
 
 const StatWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+     display: flex;  
+     
+     ${props => props.isMobile ?
+        (`
+        flex-direction: row;
+        flex-direction: column;
+        & > * {   
+            margin: 5px 0px; 
+        }
+        margin-top: 10px;
+     `) :
+        (`
+        width: 100%; 
+        justify-content: flex-end;
+     `)};
+     
+     
+ 
+  
 `;
 
 const Statbox = styled.div`
@@ -203,9 +280,9 @@ const Statbox = styled.div`
     padding: 2px 10px;
     border-radius: 8px;
     display: flex;
-    justify-content: center;
+    justify-content:  ${props => props.isMobile ? "space-between" : "center"};
     align-items: center;
-    margin-left: 24px;
+    margin-left: ${props => props.isMobile ? "" : "24px"};
 `;
 
 const StatIcons = styled.span`
@@ -218,11 +295,18 @@ const StatIcons = styled.span`
 const TitleStatWrapper = styled.div`
     display: flex;
     align-items: center;
-    width: 761px;
-    position: relative;
-    left: 20px;
-    margin: 0;
-    justify-content: space-between;
+    ${props => props.isMobile ?
+        (`
+            flex-direction: column;
+        `) :
+        (`
+            width: 761px;
+            position: relative;
+            left: 20px;
+            margin: 0;
+            justify-content: space-between;
+        `)}
+   
 `;
 
 const History = styled.div`
@@ -231,7 +315,7 @@ const History = styled.div`
 
     & > span {
         font-size: 12px;
-        margin-right: 1rem;
+        margin-right: ${props => props.isMobile ? "" : "1rem"};
         padding: 4px 10px;
     }
     & > .inactive {
