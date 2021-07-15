@@ -152,18 +152,18 @@ const Container = styled.div`
             align-items: center;
             justify-content: center;
             width: 85vw; 
-            height:  35vh;
+            height: 35vh;
             min-width: 250px;
             min-height: 300px;
-            margin:   12px 0px 8px 0px;
-            padding:   8px 0px;
-           
+            margin: 12px 0px 8px 0px;
+            padding: 8px 0px;
         `) :
         (`
             width: 700px;
             height: 450px;
             margin: 12px 16px 16px 16px;
-            padding: 24px 32px;
+            padding: 32px 36px;
+            padding-bottom: 52px;
         `)}
 `;
 
@@ -172,7 +172,7 @@ const Stonk = styled.div`
         display: flex;
         flex-direction: column;
         flex: 1;
-        align-items:center;
+        align-items: center;
     `) :
         (``)
     }
@@ -181,17 +181,17 @@ const Stonk = styled.div`
 
 const Graph = styled.div`
     display: flex;
-    flex-direction:  column;
+    flex-direction: column;
     flex: 1;
-    align-items:center
+    align-items: center;
 `;
 
 
 const IconNameSymbol = styled.div`
     display: flex;
-    flex-direction:  ${props => props.isMobile ? "column" : "row"};
+    flex-direction: ${props => props.isMobile ? "column" : "row"};
     position: relative;
-    right:  ${props => props.isMobile ? "" : "10px"};
+    right: ${props => props.isMobile ? "" : "10px"};
     align-items: center;
 `;
 
@@ -199,8 +199,8 @@ const StockIcon = styled.img`
     width: 60px;
     height: 60px;
     object-fit: scale-down;
-    margin-right:  ${props => props.isMobile ? "" : "14px"};
-    margin-left:  ${props => props.isMobile ? "" : "8px"};
+    margin-right: ${props => props.isMobile ? "" : "14px"};
+    margin-left: ${props => props.isMobile ? "" : "8px"};
 `;
 const StockName = styled.span`
     font-size: 32px;
@@ -209,8 +209,8 @@ const StockName = styled.span`
 const StockSymbol = styled.span`
     font-size: 18px;
     position: relative;
-    top:  ${props => props.isMobile ? "" : "5px"};
-    left:  ${props => props.isMobile ? "" : "5px"};
+    top: ${props => props.isMobile ? "" : "5px"};
+    left: ${props => props.isMobile ? "" : "5px"};
     color: rgba(0, 0, 0, 0.5);
 `;
 
@@ -257,7 +257,6 @@ const PriceIncreasePast = styled.div`
 
 const StatWrapper = styled.div`
      display: flex;  
-     
      ${props => props.isMobile ?
         (`
         flex-direction: row;
@@ -271,10 +270,6 @@ const StatWrapper = styled.div`
         width: 100%; 
         justify-content: flex-end;
      `)};
-     
-     
- 
-  
 `;
 
 const Statbox = styled.div`
@@ -308,7 +303,6 @@ const TitleStatWrapper = styled.div`
             margin: 0;
             justify-content: space-between;
         `)}
-   
 `;
 
 const History = styled.div`
