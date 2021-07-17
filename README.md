@@ -53,6 +53,8 @@ Backend (Node, Express, MongoDB)
 
 1. create a `.env` file in `/server` and put your mongoURI, github client id, github client secret, and github personal access token.
 
+> when generating a personal access token from github you need to enable the public_repo scope
+
 ```
 MONGO_URI=
 CLIENT_ID=
