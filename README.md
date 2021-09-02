@@ -1,3 +1,5 @@
+> Currently taking a break from this project, will be back in November :)
+
 <div align="center">
 <img align="center" width="100" height="100" src="client/public/ghs.png">
 <h1>GitHubStonks</h1>
