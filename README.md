@@ -1,4 +1,4 @@
-> Currently taking a break from this project, will be back in November :)
+> Currently taking a break from this project, will be back end of December :)
 
 <div align="center">
 <img align="center" width="100" height="100" src="client/public/ghs.png">
