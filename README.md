@@ -6,11 +6,7 @@
 
 </div>
 
-## What is githubstonks ?
-
-<a href="https://githubstonks.com/" target="_blank">githubstonks.com</a>
-
-Githubstonks is a stock market game where the stocks are popular GitHub repositories. You can buy and sell repo's like React, Node, and more.
+<a href="https://githubstonks.com/" target="_blank">githubstonks.com</a> is a stock market game where the stocks are popular GitHub repositories. You can buy and sell repo's like React, Node, and more.
 
 ---
 
@@ -98,4 +94,3 @@ api link: https://api.githubstonks.com/
 | POST   | /api/:id/buy  |
 | POST   | /api/:id/sell |
 
-proper api doc coming soon
