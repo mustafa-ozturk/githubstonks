@@ -1,4 +1,4 @@
-> GithubStonks is currently broken and I've been busy with work. Version 2.0 will be released end of January 2022 :)
+> GithubStonks is currently broken and I've been busy with work. I am planning on remaking the entire project in Angular/NestJS. early access will start around april probably :)
 
 <div align="center">
 <img align="center" width="100" height="100" src="client/public/ghs.png">
