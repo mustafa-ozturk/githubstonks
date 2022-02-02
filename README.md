@@ -1,1 +1,0 @@
-the plan is to rewrite + re-design this app entirely
