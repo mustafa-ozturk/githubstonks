@@ -8,6 +8,3 @@
 
 <a href="https://githubstonks.com/" target="_blank">githubstonks.com</a> is a stock market game where the stocks are popular GitHub repositories. You can buy and sell repo's like React, Node, and more.
 
----
-
-### [Discord Server](https://discord.gg/n7uR5CbM2u)
