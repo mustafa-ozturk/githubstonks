@@ -1,4 +1,4 @@
-> currently remaking githubstonks, early access should be out in april !
+> currently remaking githubstonks!
 
 <div align="center">
 <img align="center" width="100" height="100" src="client/public/ghs.png">
